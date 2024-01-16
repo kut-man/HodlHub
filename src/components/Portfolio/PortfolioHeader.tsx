@@ -9,7 +9,7 @@ import { BsThreeDots } from "react-icons/bs";
 
 export default function PortfolioHeader() {
   return (
-    <Flex className="px-6 flex-col sm:flex-row items-start">
+    <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
         <Flex flexDirection="row" alignItems="center" justifyContent="start">
           <Avatar className="h-8 w-8 m-2 ml-0">
