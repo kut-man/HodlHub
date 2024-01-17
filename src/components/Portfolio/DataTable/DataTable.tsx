@@ -1,5 +1,4 @@
-"use client";
-
+import { BsThreeDots } from "react-icons/bs";
 import * as React from "react";
 import {
   ColumnDef,
@@ -22,6 +21,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 const data: Payment[] = [
   {
     name: "Matyukon",
@@ -140,9 +144,7 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("name")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "price",
@@ -157,7 +159,9 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="ml-4 lowercase">{row.getValue("price")}</div>,
+    cell: ({ row }) => (
+      <div className="ml-4 lowercase">{row.getValue("price")}</div>
+    ),
   },
   {
     accessorKey: "hourChange",
@@ -208,28 +212,52 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "holdings",
     header: () => <div className="text-right">Holdings</div>,
     cell: ({ row }) => {
-      return <div className="text-right font-medium">{row.getValue("holdings")}</div>;
+      return (
+        <div className="text-right font-medium">{row.getValue("holdings")}</div>
+      );
     },
   },
   {
     accessorKey: "averageBuyPrice",
     header: () => <div className="text-right">Avg.Buy Price</div>,
     cell: ({ row }) => {
-      return <div className="text-right font-medium">{row.getValue("averageBuyPrice")}</div>;
+      return (
+        <div className="text-right font-medium">
+          {row.getValue("averageBuyPrice")}
+        </div>
+      );
     },
   },
   {
     accessorKey: "profitLoss",
     header: () => <div className="text-right">Proft/Loss</div>,
     cell: ({ row }) => {
-      return <div className="text-right font-medium">{row.getValue("profitLoss")}</div>;
+      return (
+        <div className="text-right font-medium">
+          {row.getValue("profitLoss")}
+        </div>
+      );
     },
   },
   {
     id: "actions",
     enableHiding: false,
+    header: () => <div>Actions</div>,
     cell: () => {
-      return <Button>...</Button>;
+      return (
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline">
+              <BsThreeDots />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 flex flex-col gap-2">
+            <Button>Add Transaction</Button>
+            <Button>View Transactions</Button>
+            <Button>Remove Asset</Button>
+          </PopoverContent>
+        </Popover>
+      );
     },
   },
 ];

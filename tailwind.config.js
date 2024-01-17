@@ -13,6 +13,9 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      'inter': ['inter', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",

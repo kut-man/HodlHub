@@ -7,7 +7,7 @@ import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
 
 export default function Home() {
   return (
-    <Flex alignItems="start" className="lg:flex-row flex-col">
+    <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
       <PortfolioList />
       <Flex className="mt-6 px-6 gap-8" alignItems="start" flexDirection="col">
         <PortfolioHeader />
