@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="border-b flex items-center p-2 lg:px-24 px-8">
       <div className="lg:flex-1"></div>
-      <Logo alt="CoinMarketCap" className="dark:fill-white" />
+      <Logo alt="CoinMarketCap" />
 
       <div className="flex-1 flex justify-end items-center">
         <Toggle

@@ -1,0 +1,102 @@
+[
+    {
+      "name": "Bitcoin",
+      "price": "$0.35",
+      "hourChange": 59,
+      "dayChange": 2,
+      "weekChange": 24,
+      "holdings": "$0.12",
+      "averageBuyPrice": "$0.20",
+      "profitLoss": "$5.64"
+    },
+    {
+      "name": "Solana",
+      "price": "$7.35",
+      "hourChange": 13,
+      "dayChange": 77,
+      "weekChange": 68,
+      "holdings": "$2.19",
+      "averageBuyPrice": "$4.60",
+      "profitLoss": "$3.55"
+    },
+    {
+      "name": "Cardano",
+      "price": "$1.81",
+      "hourChange": 31,
+      "dayChange": 23,
+      "weekChange": 72,
+      "holdings": "$7.63",
+      "averageBuyPrice": "$9.70",
+      "profitLoss": "$7.23"
+    },
+    {
+      "name": "Ethereum",
+      "price": "$4.86",
+      "hourChange": 30,
+      "dayChange": 5,
+      "weekChange": 74,
+      "holdings": "$9.73",
+      "averageBuyPrice": "$6.40",
+      "profitLoss": "$0.97"
+    },
+    {
+      "name": "Polkadot",
+      "price": "$3.89",
+      "hourChange": 22,
+      "dayChange": 66,
+      "weekChange": 36,
+      "holdings": "$8.13",
+      "averageBuyPrice": "$8.33",
+      "profitLoss": "$2.78"
+    },
+    {
+      "name": "XRP",
+      "price": "$7.97",
+      "hourChange": 55,
+      "dayChange": 28,
+      "weekChange": 18,
+      "holdings": "$4.82",
+      "averageBuyPrice": "$6.46",
+      "profitLoss": "$7.37"
+    },
+    {
+      "name": "Avalanche",
+      "price": "$6.85",
+      "hourChange": 62,
+      "dayChange": 23,
+      "weekChange": 25,
+      "holdings": "$8.84",
+      "averageBuyPrice": "$7.42",
+      "profitLoss": "$4.48"
+    },
+    {
+      "name": "BNB",
+      "price": "$1.97",
+      "hourChange": 94,
+      "dayChange": 73,
+      "weekChange": 87,
+      "holdings": "$2.08",
+      "averageBuyPrice": "$0.07",
+      "profitLoss": "$8.93"
+    },
+    {
+      "name": "Dogecoin",
+      "price": "$2.74",
+      "hourChange": 8,
+      "dayChange": 73,
+      "weekChange": 85,
+      "holdings": "$9.24",
+      "averageBuyPrice": "$3.07",
+      "profitLoss": "$7.65"
+    },
+    {
+      "name": "TRON",
+      "price": "$8.31",
+      "hourChange": 83,
+      "dayChange": 68,
+      "weekChange": 85,
+      "holdings": "$7.48",
+      "averageBuyPrice": "$1.29",
+      "profitLoss": "$5.16"
+    }
+]

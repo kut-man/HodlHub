@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
       <PortfolioList />
-      <Flex className="mt-6 px-6 gap-8" alignItems="start" flexDirection="col">
+      <Flex className="w-full overflow-auto mt-6 px-6 gap-8" alignItems="start" flexDirection="col">
         <PortfolioHeader />
         <PerformanceTiles />
         <Charts />

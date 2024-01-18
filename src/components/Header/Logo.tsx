@@ -1,6 +1,7 @@
-export default function Logo({...rest}) {
+export default function Logo({ ...rest }) {
   return (
     <svg
+      className="dark:fill-white"
       width="168"
       height="29"
       xmlns="http://www.w3.org/2000/svg"
