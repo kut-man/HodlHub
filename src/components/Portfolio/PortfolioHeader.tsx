@@ -48,7 +48,7 @@ export default function PortfolioHeader() {
           <Label className="text-lg">$0.45%</Label>
         </Flex>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4">
         <div className="items-center space-x-2 sm:inline-flex hidden">
           <Label htmlFor="show-charts">Show Charts</Label>
           <Switch id="show-charts" />
@@ -56,7 +56,7 @@ export default function PortfolioHeader() {
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button aria-label="Add Transaction">+ Add Transaction</Button>
+            <Button size="sm" aria-label="Add Transaction">+ Add Transaction</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -93,7 +93,7 @@ export default function PortfolioHeader() {
           </DialogContent>
         </Dialog>
 
-        <Button variant="secondary" size="icon" aria-label="Portfolio Settings">
+        <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
           <BsThreeDots />
         </Button>
       </div>

@@ -33,7 +33,7 @@ const valueFormatter = (number: number) =>
 
 export default function AllocationChart() {
   return (
-    <Card className="w-full dark:bg-white/20 border-none shadow-md">
+    <Card className="!shadow-charts w-full dark:bg-white/20 border-none">
       <CardHeader className="pb-2 pt-4">
         <CardTitle>Allocation</CardTitle>
       </CardHeader>

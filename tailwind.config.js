@@ -121,6 +121,7 @@ module.exports = {
         },
       },
       boxShadow: {
+        'charts': '0 1px 2px 0 rgba(88,102,126,.12), 0 4px 24px 0 rgba(88,102,126,.08)',
         // light
         "tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         "tremor-card": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",

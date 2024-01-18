@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
+import { HiSun } from "react-icons/hi";
 import { useTheme } from "./ThemeProvider";
 import { Toggle } from "@radix-ui/react-toggle";
 import Logo from "./Logo";
@@ -21,10 +22,10 @@ export default function Header() {
         <Toggle
           aria-label="Change Theme"
           asChild
-          className="h-6 w-6 m-2"
+          className="m-2"
           onPressedChange={() => setTheme(theme === "light" ? "dark" : "light")}
         >
-          {theme === "dark" ? <FaSun /> : <FaMoon />}
+          {theme === "dark" ? <HiSun size={25} /> : <FaMoon size={20} />}
         </Toggle>
 
         <HoverCard closeDelay={100} openDelay={0}>

@@ -284,7 +284,7 @@ export function DataTable() {
   });
 
   return (
-    <Card className="w-full border-none shadow-md">
+    <Card className="w-full border-none shadow-none">
       <CardHeader className="pb-2 pt-4">
         <CardTitle>Assets</CardTitle>
       </CardHeader>

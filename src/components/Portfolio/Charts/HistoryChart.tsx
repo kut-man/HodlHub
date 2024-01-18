@@ -40,7 +40,7 @@ const valueFormatter = function (number: number) {
 
 export default function HistoryChart() {
   return (
-    <Card className="w-full dark:bg-white/20 border-none shadow-md">
+    <Card className="w-full dark:bg-white/20 border-none !shadow-charts">
       <CardHeader className="pb-2 pt-4">
         <CardTitle>History</CardTitle>
       </CardHeader>
