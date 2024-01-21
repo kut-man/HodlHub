@@ -57,7 +57,7 @@ export default function AddTransaction() {
               <Input id="name" defaultValue="41122.12" className="col-span-3" />
             </div>
           </div>
-          <div className="flex justify-between">
+          <div className="flex flex-wrap justify-between">
             <DatePicker />
             <Button>
               <div className="flex gap-1">
