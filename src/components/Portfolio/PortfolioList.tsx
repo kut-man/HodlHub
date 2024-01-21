@@ -9,7 +9,7 @@ import { Flex } from "@tremor/react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { FiPlus } from "react-icons/fi";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export default function Portfolio() {
   return (
@@ -22,7 +22,6 @@ export default function Portfolio() {
           <Flex justifyContent="start">
             <Avatar className="h-10 w-10 m-2">
               <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <Flex justifyContent="start" alignItems="start" flexDirection="col">
               <Label className="text-left leading-2 text-base">Binance</Label>

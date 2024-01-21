@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { FaMoon } from "react-icons/fa";
 import { HiSun } from "react-icons/hi";
 import { useTheme } from "./ThemeProvider";
@@ -32,14 +32,12 @@ export default function Header() {
           <HoverCardTrigger asChild>
             <Avatar className="h-8 w-8 m-2">
               <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </HoverCardTrigger>
           <HoverCardContent className="w-80">
             <div className="flex justify-between space-x-4">
               <Avatar>
                 <AvatarImage src="https://github.com/vercel.png" />
-                <AvatarFallback>VC</AvatarFallback>
               </Avatar>
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">@nextjs</h4>
