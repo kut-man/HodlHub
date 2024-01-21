@@ -29,7 +29,7 @@ export default function PortfolioHeader() {
           <Label className="text-lg">Binance</Label>
         </Flex>
         <Flex flexDirection="row" justifyContent="start">
-          <Label className="font-bold text-4xl">$1,047.69</Label>
+          <Label className="font-bold text-3xl">$1,047.69</Label>
           <Button
             aria-label="Toggle number's visibility"
             size="icon"
@@ -39,13 +39,13 @@ export default function PortfolioHeader() {
           </Button>
         </Flex>
         <Flex
-          className="my-4 text-green-500 items-end"
+          className="my-1 text-green-500 items-end"
           flexDirection="row"
           justifyContent="start"
         >
-          <Label className="text-lg">+ $4.7324</Label>
+          <Label className="text-base">+ $4.7324</Label>
           <TiArrowSortedUp className="ml-2 mr-1 mb-0.5" />
-          <Label className="text-lg">$0.45%</Label>
+          <Label className="text-base">$0.45%</Label>
         </Flex>
       </div>
       <div className="flex items-center space-x-4">

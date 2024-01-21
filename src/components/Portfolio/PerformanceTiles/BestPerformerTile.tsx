@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
   CardContent,
@@ -10,16 +11,25 @@ import { TiArrowSortedUp } from "react-icons/ti";
 
 export default function BestPerformerTile() {
   return (
-    <Card className="dark:bg-white/20 border-none !shadow-charts">
-      <CardHeader className="pb-1 pt-4">
+    <Card className="md:rounded-lg rounded-none md:block flex justify-between md:w-fit w-full dark:bg-white/20 md:border-none border-x-0 border-t-0 md:!shadow-charts">
+      <CardHeader className="pb-1 max-md:pl-1 pt-4">
         <CardDescription className="text-sm font-medium">
           Best Performer
         </CardDescription>
-        <CardTitle className="font-bold text-lg !m-0">+ $421.06</CardTitle>
       </CardHeader>
-      <CardContent className="pb-4 text-green-500 flex items-end flex-row">
-        <TiArrowSortedUp className=" mr-1 mb-0.5" />
-        <Label className="text-sm">$0.45%</Label>
+      <CardContent className="max-md:items-end max-md:p-4 pb-4 flex flex-col">
+        <div className="flex items-center !m-0">
+          <Avatar className="h-6 w-6 m-2 ml-0 my-0 rounded-none">
+            <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <CardTitle className="flex-row text-lg font-bold">SOL</CardTitle>
+        </div>
+        <div className="flex text-green-500">
+          <Label className="text-sm"> + $0.45%</Label>
+          <TiArrowSortedUp className="ml-2" />
+          <Label className="text-sm">$0.45%</Label>
+        </div>
       </CardContent>
     </Card>
   );

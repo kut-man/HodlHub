@@ -5,7 +5,7 @@ import AllTimeProfitTile from "./AllTimeProfitTile";
 
 export default function PerformanceTiles() {
   return (
-    <Flex className="gap-6" justifyContent="start">
+    <Flex className="md:gap-6 flex-col md:flex-row" justifyContent="start">
       <AllTimeProfitTile />
       <BestPerformerTile />
       <WorstPerformerTile />

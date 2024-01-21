@@ -41,7 +41,7 @@ export function DataTable() {
   });
 
   return (
-    <Card className="w-full border-none shadow-none">
+    <Card className="mb-6 w-full border-none shadow-none">
       <CardHeader className="px-4 pb-2 pt-4">
         <CardTitle>Assets</CardTitle>
       </CardHeader>

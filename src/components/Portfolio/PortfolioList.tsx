@@ -13,11 +13,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Portfolio() {
   return (
-    <Card className="border-none shadow-none  min-w-[350px]">
+    <Card className="border-none shadow-none  min-w-[340px]">
       <CardHeader>
         <CardTitle className="text-lg">My portfolio</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="py-2">
         <Button aria-label="Select Portfolio" variant="secondary" className="w-full h-14 p-0 mb-1">
           <Flex justifyContent="start">
             <Avatar className="h-10 w-10 m-2">
