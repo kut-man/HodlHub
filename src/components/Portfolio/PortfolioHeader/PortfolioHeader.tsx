@@ -44,7 +44,7 @@ export default function PortfolioHeader({
           <Label className="text-base">$0.45%</Label>
         </Flex>
       </div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-4">
         <div className="items-center space-x-2 sm:inline-flex hidden">
           <Label htmlFor="show-charts">Show Charts</Label>
           <Switch
