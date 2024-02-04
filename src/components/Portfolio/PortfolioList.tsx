@@ -13,7 +13,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export default function Portfolio() {
   return (
-    <Card className="border-none shadow-none  min-w-[340px]">
+    <Card className="border-none shadow-none max-lg:w-full min-w-[340px]">
       <CardHeader>
         <CardTitle className="text-lg">My portfolio</CardTitle>
       </CardHeader>

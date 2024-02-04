@@ -1,12 +1,11 @@
 import { Flex } from "@tremor/react";
-import HistoryChart from "./HistoryChart";
-import AllocationChart from "./AllocationChart";
+import Chart from "./Chart";
 
 export default function Charts() {
   return (
     <Flex className="gap-6">
-      <HistoryChart />
-      <AllocationChart />
+      <Chart variant="area" />
+      <Chart className="max-md:hidden" variant="donut" />
     </Flex>
   );
 }
