@@ -10,23 +10,36 @@ const valueFormatter = function (number: number) {
 };
 
 interface ChartProps {
-  variant: "area" | "donut",
-  className?: string
+  variant: "area" | "donut";
+  className?: string;
 }
+
+const titles: Record<ChartProps["variant"], string> = {
+  area: "History",
+  donut: "Allocation",
+};
 
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
   return (
-    <Card className={"w-full dark:bg-white/20 border-none !shadow-charts " + props?.className}>
+    <Card
+      className={
+        "w-full dark:bg-white/20 border-none !shadow-charts " + props?.className
+      }
+    >
       <CardHeader className="pb-2 pt-4">
-        <CardTitle className="max-md:hidden">History</CardTitle>
+        <CardTitle className="max-md:hidden">{titles[chart]}</CardTitle>
         <Card className="md:hidden p-1">
-          <Button onClick={() => setChart("area")} variant="ghost" size="sm" className="w-1/2">
-            History
-          </Button>
-          <Button onClick={() => setChart("donut")} variant="ghost" size="sm" className="w-1/2">
-            Allocation
-          </Button>
+          {Object.keys(titles).map((title) => (
+            <Button
+              onClick={() => setChart(title as ChartProps["variant"])}
+              variant="ghost"
+              size="sm"
+              className="w-1/2"
+            >
+              {titles[title as ChartProps["variant"]]}
+            </Button>
+          ))}
         </Card>
       </CardHeader>
       <CardContent className="pb-4 text-green-500 flex items-end flex-row">

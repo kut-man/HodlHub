@@ -7,7 +7,7 @@ export default function Footer() {
     <Flex className="border-t py-10 lg:px-32 md:px-12 px-6">
       <Logo />
       <Flex className="hidden sm:flex w-1/2">
-        <a href="" className="text-base font-semibold">
+        <a href="https://www.linkedin.com/in/kutman-eshenkulov/" className="text-base font-semibold">
           LinkedIn
         </a>
         <a href="" className="text-base font-semibold">
