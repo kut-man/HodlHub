@@ -3,7 +3,7 @@ import Tile from "./Tile";
 
 const mock1 = {
   description: "All-time profit",
-  title: "345.23",
+  title: 345.23,
   performance: 2.43,
 }
 
@@ -19,8 +19,8 @@ const mock3 = {
   description: "Worst Performer",
   avatarSrc: "https://github.com/shadcn.png",
   title: "ADA",
-  performance: 2.43,
-  profitLoss: 5.32
+  performance: -2.43,
+  profitLoss: -5.32
 }
 
 export default function PerformanceTiles() {

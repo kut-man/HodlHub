@@ -2,19 +2,33 @@ import { Flex } from "@tremor/react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { TiArrowSortedUp } from "react-icons/ti";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { BsThreeDots } from "react-icons/bs";
 import AddTransaction from "./AddTransaction";
+import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
+import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
+import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
+import { VisibilityContext } from "@/pages/Home";
+import { useContext } from "react";
+import { PiEyeClosed } from "react-icons/pi";
 
 interface PortfolioHeaderProps {
   setShowCharts: React.Dispatch<React.SetStateAction<boolean>>;
+  changeVisibility: () => void;
+  balance: number;
+  performance: number;
+  profitLoss: number;
 }
 
 export default function PortfolioHeader({
   setShowCharts,
+  changeVisibility,
+  balance,
+  performance,
+  profitLoss,
 }: PortfolioHeaderProps) {
+  const visibility = useContext(VisibilityContext);
   return (
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
@@ -25,13 +39,18 @@ export default function PortfolioHeader({
           <Label className="text-lg">Binance</Label>
         </Flex>
         <Flex flexDirection="row" justifyContent="start">
-          <Label className="font-bold text-3xl">$1,047.69</Label>
+          <BalanceLabel balance={balance} className="font-bold text-3xl" />
           <Button
             aria-label="Toggle number's visibility"
             size="icon"
             variant="ghost"
+            onClick={changeVisibility}
           >
-            <MdOutlineRemoveRedEye className="mx-2 mt-1" size={27} />
+            {visibility ? (
+              <MdOutlineRemoveRedEye color="gray" className="mx-2 mt-1" size={27} />
+            ) : (
+              <PiEyeClosed color="gray" size={27}  />
+            )}
           </Button>
         </Flex>
         <Flex
@@ -39,9 +58,8 @@ export default function PortfolioHeader({
           flexDirection="row"
           justifyContent="start"
         >
-          <Label className="text-base">+ $4.7324</Label>
-          <TiArrowSortedUp className="ml-2 mr-1 mb-0.5" />
-          <Label className="text-base">$0.45%</Label>
+          <ProfitLossLabel className="text-base mr-2" profitLoss={profitLoss} />
+          <PerformanceLabel text="base" performance={performance} />
         </Flex>
       </div>
       <div className="flex items-center gap-4">

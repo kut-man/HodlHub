@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
-import { Label } from "../../ui/label";
-import { TiArrowSortedUp } from "react-icons/ti";
+import PerformanceLabel from "./Labels/PerformanceLabel";
+import ProfitLossLabel from "./Labels/ProfitLossLabel";
 
 interface PortfolioHeaderProps {
   description: string;
@@ -24,14 +24,6 @@ export default function PerformerTile({
   performance,
   profitLoss,
 }: PortfolioHeaderProps) {
-  function formatCurrency(number: number): string {
-    const formattedNumber = number.toLocaleString(undefined, {
-      style: "currency",
-      currency: "USD",
-    });
-
-    return formattedNumber;
-  }
   return (
     <Card
       className="max-md:rounded-none max-md:flex justify-between max-md:w-full 
@@ -49,14 +41,19 @@ export default function PerformerTile({
               <AvatarImage alt="Avatar" src={avatarSrc} />
             </Avatar>
           ) : null}
-          <CardTitle className="flex-row text-lg font-bold">{title}</CardTitle>
+          <CardTitle className="flex-row text-lg font-bold">
+            {typeof title === "number" ? (
+              <ProfitLossLabel className="font-bold text-lg" profitLoss={title} />
+            ) : (
+              title
+            )}
+          </CardTitle>
         </div>
-        <div className="flex items-end text-green-500">
+        <div className="flex items-end">
           {profitLoss ? (
-            <Label className="text-sm mr-2">{formatCurrency(profitLoss)}</Label>
+            <ProfitLossLabel className="text-sm mr-2" profitLoss={profitLoss} />
           ) : null}
-          <TiArrowSortedUp />
-          <Label className="text-sm">{performance + "%"}</Label>
+          <PerformanceLabel performance={performance} />
         </div>
       </CardContent>
     </Card>
