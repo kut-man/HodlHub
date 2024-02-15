@@ -4,6 +4,8 @@ import { DonutChart } from "@tremor/react";
 import { cities, chartdata } from "./MockData";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { VisibilityContext } from "@/pages/Home";
+import { useContext, useEffect } from "react";
 
 const valueFormatter = function (number: number) {
   return "$ " + new Intl.NumberFormat("us").format(number).toString();
@@ -21,6 +23,16 @@ const titles: Record<ChartProps["variant"], string> = {
 
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
+  const visibility = useContext(VisibilityContext);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 768) setChart(props.variant);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <Card
       className={
@@ -32,6 +44,7 @@ export default function Chart(props: ChartProps) {
         <Card className="md:hidden p-1">
           {Object.keys(titles).map((title) => (
             <Button
+              key={title}
               onClick={() => setChart(title as ChartProps["variant"])}
               variant="ghost"
               size="sm"
@@ -52,6 +65,9 @@ export default function Chart(props: ChartProps) {
             categories={["SemiAnalysis", "The Pragmatic Engineer"]}
             colors={["indigo", "cyan"]}
             valueFormatter={valueFormatter}
+            showXAxis={visibility}
+            showYAxis={visibility}
+            showTooltip={visibility}
           />
         ) : (
           <DonutChart
