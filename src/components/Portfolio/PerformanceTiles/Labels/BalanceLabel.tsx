@@ -7,10 +7,7 @@ interface BalanceProps {
   className?: string;
 }
 
-export default function BalanceLabel({
-  balance,
-  className,
-}: BalanceProps) {
+export default function BalanceLabel({ balance, className }: BalanceProps) {
   const visibility = useContext(VisibilityContext);
   function formatCurrency(number = balance): string {
     if (!visibility) return "*********";
@@ -21,11 +18,5 @@ export default function BalanceLabel({
 
     return formattedNumber;
   }
-  return (
-    <Label
-      className={className}
-    >
-      {formatCurrency()}
-    </Label>
-  );
+  return <Label className={className}>{formatCurrency()}</Label>;
 }

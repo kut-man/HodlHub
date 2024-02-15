@@ -31,7 +31,7 @@ export default function Chart(props: ChartProps) {
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [props.variant]);
 
   return (
     <Card

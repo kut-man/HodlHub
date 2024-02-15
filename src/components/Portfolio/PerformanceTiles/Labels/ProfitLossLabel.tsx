@@ -14,14 +14,15 @@ export default function ProfitLossLabel({
   const visibility = useContext(VisibilityContext);
   function formatCurrency(number = profitLoss): string {
     if (!visibility) return `${profitLoss >= 0 ? "+ " : "- "}****`;
-  
+
     const formattedNumber = number.toLocaleString(undefined, {
       style: "currency",
       currency: "USD",
     });
 
-    if(formattedNumber.includes('+')) return `+ ${formattedNumber.slice(1)}`;
-    else if(formattedNumber.includes('-')) return `- ${formattedNumber.slice(1)}`
+    if (formattedNumber.includes("+")) return `+ ${formattedNumber.slice(1)}`;
+    else if (formattedNumber.includes("-"))
+      return `- ${formattedNumber.slice(1)}`;
     return "+ " + formattedNumber;
   }
   return (

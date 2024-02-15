@@ -43,7 +43,10 @@ export default function PerformerTile({
           ) : null}
           <CardTitle className="flex-row text-lg font-bold">
             {typeof title === "number" ? (
-              <ProfitLossLabel className="font-bold text-lg" profitLoss={title} />
+              <ProfitLossLabel
+                className="font-bold text-lg"
+                profitLoss={title}
+              />
             ) : (
               title
             )}
