@@ -47,9 +47,13 @@ export default function PortfolioHeader({
             onClick={changeVisibility}
           >
             {visibility ? (
-              <MdOutlineRemoveRedEye color="gray" className="mx-2 mt-1" size={27} />
+              <MdOutlineRemoveRedEye
+                color="gray"
+                className="mx-2 mt-1"
+                size={27}
+              />
             ) : (
-              <PiEyeClosed color="gray" size={27}  />
+              <PiEyeClosed color="gray" size={27} />
             )}
           </Button>
         </Flex>

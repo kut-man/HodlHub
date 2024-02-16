@@ -14,9 +14,9 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 
 export interface Coin {
-  name: string,
-  ticker: string,
-  iconURL: string,
+  name: string;
+  ticker: string;
+  iconURL: string;
 }
 
 export type AssetsInfo = {
@@ -56,10 +56,19 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     cell: ({ row }) => (
       <div className="flex gap-2 items-center">
         <Avatar className="h-6 w-6">
-          <AvatarImage alt="Avatar" src={(row.getValue("name") as Coin).iconURL} />
+          <AvatarImage
+            alt={`${(row.getValue("name") as Coin).name}'s Icon`}
+            src={(row.getValue("name") as Coin).iconURL}
+          />
         </Avatar>
-        <Label>{(row.getValue("name") as Coin).name}</Label>
-        <Label className="text-gray-500" >{(row.getValue("name") as Coin).ticker}</Label>
+        <div className="flex max-md:flex-col gap-2 md:items-center">
+          <Label className="font-semibold">
+            {(row.getValue("name") as Coin).name}
+          </Label>
+          <Label className="text-gray-500">
+            {(row.getValue("name") as Coin).ticker}
+          </Label>
+        </div>
       </div>
     ),
   },

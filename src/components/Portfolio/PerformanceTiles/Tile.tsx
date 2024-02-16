@@ -38,7 +38,7 @@ export default function PerformerTile({
         <div className="flex items-center !m-0">
           {avatarSrc ? (
             <Avatar className="h-6 w-6 m-2 ml-0 my-0 rounded-none">
-              <AvatarImage alt="Avatar" src={avatarSrc} />
+              <AvatarImage alt={`${description}'s Icon`} src={avatarSrc} />
             </Avatar>
           ) : null}
           <CardTitle className="flex-row text-lg font-bold">
