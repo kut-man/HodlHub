@@ -1,8 +1,5 @@
 import { BsThreeDots } from "react-icons/bs";
-import {
-  CellContext,
-  ColumnDef,
-} from "@tanstack/react-table";
+import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -13,9 +10,17 @@ import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Label } from "@/components/ui/label";
+
+export interface Coin {
+  name: string,
+  ticker: string,
+  iconURL: string,
+}
 
 export type AssetsInfo = {
-  name: string;
+  name: Coin;
   price: number;
   hourChange: number;
   dayChange: number;
@@ -48,7 +53,15 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     meta: {
       left: true,
     },
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+    cell: ({ row }) => (
+      <div className="flex gap-2 items-center">
+        <Avatar className="h-6 w-6">
+          <AvatarImage alt="Avatar" src={(row.getValue("name") as Coin).iconURL} />
+        </Avatar>
+        <Label>{(row.getValue("name") as Coin).name}</Label>
+        <Label className="text-gray-500" >{(row.getValue("name") as Coin).ticker}</Label>
+      </div>
+    ),
   },
   {
     accessorKey: "price",
