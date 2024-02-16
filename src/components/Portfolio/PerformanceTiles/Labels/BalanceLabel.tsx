@@ -5,12 +5,17 @@ import { useContext } from "react";
 interface BalanceProps {
   balance: number;
   className?: string;
+  hideable?: boolean;
 }
 
-export default function BalanceLabel({ balance, className }: BalanceProps) {
+export default function BalanceLabel({
+  balance,
+  className,
+  hideable = true,
+}: BalanceProps) {
   const visibility = useContext(VisibilityContext);
   function formatCurrency(number = balance): string {
-    if (!visibility) return "*********";
+    if (!visibility && hideable) return "*********";
     const formattedNumber = number.toLocaleString(undefined, {
       style: "currency",
       currency: "USD",

@@ -39,7 +39,6 @@ export function DataTable() {
       rowSelection,
     },
   });
-
   return (
     <Card className="mb-6 w-full border-none shadow-none">
       <CardHeader className="px-4 pb-2 pt-4">
@@ -52,7 +51,15 @@ export function DataTable() {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      className={`${
+                        (header.column.columnDef.meta as {left: boolean})
+                          ?.left
+                          ? "text-left"
+                          : "text-right"
+                      }`}
+                      key={header.id}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

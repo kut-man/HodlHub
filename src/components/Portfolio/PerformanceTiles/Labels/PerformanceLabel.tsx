@@ -6,15 +6,17 @@ import { useContext } from "react";
 interface PerformanceLabelProps {
   performance: number;
   text?: "sm" | "base";
+  hideable?: boolean;
 }
 
 export default function PerformanceLabel({
   performance,
   text = "sm",
+  hideable = true,
 }: PerformanceLabelProps) {
   const visibility = useContext(VisibilityContext);
   function formatAsPercentage(number = performance): string {
-    if (!visibility) return "****";
+    if (!visibility && hideable) return "****";
     const absoluteNumber = Math.abs(number);
     const result = `${absoluteNumber}%`;
 

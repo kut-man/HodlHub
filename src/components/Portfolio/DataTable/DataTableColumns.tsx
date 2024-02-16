@@ -1,119 +1,101 @@
 import { BsThreeDots } from "react-icons/bs";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import {
+  CellContext,
+  ColumnDef,
+} from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
+import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
+import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
+import SortableHeaderHOF from "./SortButton";
 
-export type Payment = {
+export type AssetsInfo = {
   name: string;
-  price: string;
+  price: number;
   hourChange: number;
   dayChange: number;
   weekChange: number;
-  holdings: string;
-  averageBuyPrice: string;
-  profitLoss: string;
+  holdings: number;
+  averageBuyPrice: number;
+  profitLoss: number;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+const createChangeColumn = (
+  accessorKey: keyof AssetsInfo,
+  label: string
+): ColumnDef<AssetsInfo> => ({
+  accessorKey,
+  header: SortableHeaderHOF(label),
+  cell: ({ row }: CellContext<AssetsInfo, unknown>) => (
+    <div className="flex items-center justify-end">
+      <PerformanceLabel
+        hideable={false}
+        performance={row.getValue(accessorKey)}
+      />
+    </div>
+  ),
+});
+
+export const columns: ColumnDef<AssetsInfo>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: SortableHeaderHOF("Name"),
+    meta: {
+      left: true,
+    },
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "price",
-    header: ({ column }) => {
+    header: SortableHeaderHOF("Price"),
+    cell: ({ row }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Price
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="text-right lowercase">
+          <BalanceLabel hideable={false} balance={row.getValue("price")} />
+        </div>
       );
     },
-    cell: ({ row }) => (
-      <div className="ml-4 lowercase">{row.getValue("price")}</div>
-    ),
   },
-  {
-    accessorKey: "hourChange",
-    header: () => <div className="text-right">1h%</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("hourChange"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
-  },
-  {
-    accessorKey: "dayChange",
-    header: () => <div className="text-right">24h%</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("dayChange"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
-  },
-  {
-    accessorKey: "weekChange",
-    header: () => <div className="text-right">7d%</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("weekChange"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
-  },
+  createChangeColumn("hourChange", "1h%"),
+  createChangeColumn("dayChange", "24h%"),
+  createChangeColumn("weekChange", "7d%"),
   {
     accessorKey: "holdings",
-    header: () => <div className="text-right">Holdings</div>,
+    header: SortableHeaderHOF("Holdings"),
     cell: ({ row }) => {
       return (
-        <div className="text-right font-medium">{row.getValue("holdings")}</div>
+        <div className="text-right font-medium">
+          <BalanceLabel balance={row.getValue("holdings")} />
+        </div>
       );
     },
   },
   {
     accessorKey: "averageBuyPrice",
-    header: () => <div className="text-right">Avg.Buy Price</div>,
+    header: SortableHeaderHOF("Avg.Buy Price"),
     cell: ({ row }) => {
       return (
         <div className="text-right font-medium">
-          {row.getValue("averageBuyPrice")}
+          <BalanceLabel balance={row.getValue("averageBuyPrice")} />
         </div>
       );
     },
   },
   {
     accessorKey: "profitLoss",
-    header: () => <div className="text-right">Proft/Loss</div>,
+    header: SortableHeaderHOF("Profit/Loss"),
     cell: ({ row }) => {
       return (
         <div className="text-right font-medium">
-          {row.getValue("profitLoss")}
+          <ProfitLossLabel
+            className="text-right text-black-500"
+            profitLoss={row.getValue("profitLoss")}
+          />
         </div>
       );
     },
@@ -121,7 +103,7 @@ export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
     enableHiding: false,
-    header: () => <div>Actions</div>,
+    header: () => <div className="text-left">Actions</div>,
     cell: () => {
       return (
         <Popover>
