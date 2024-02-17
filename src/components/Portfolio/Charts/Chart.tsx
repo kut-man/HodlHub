@@ -24,6 +24,10 @@ const titles: Record<ChartProps["variant"], string> = {
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
   const visibility = useContext(VisibilityContext);
+  const areaChartColor =
+    chartdata[0].rate_open - chartdata[chartdata.length - 1].rate_open < 0
+      ? "indigo"
+      : "red";
 
   useEffect(() => {
     function handleResize() {
@@ -60,14 +64,16 @@ export default function Chart(props: ChartProps) {
           <AreaChart
             className="h-72 mt-4"
             data={chartdata}
-            index="date"
+            index="time_open"
             yAxisWidth={65}
-            categories={["SemiAnalysis", "The Pragmatic Engineer"]}
-            colors={["indigo", "cyan"]}
+            categories={["rate_open"]}
+            colors={[areaChartColor]}
             valueFormatter={valueFormatter}
             showXAxis={visibility}
             showYAxis={visibility}
             showTooltip={visibility}
+            minValue={100000}
+            curveType="natural"
           />
         ) : (
           <DonutChart
