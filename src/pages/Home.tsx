@@ -16,10 +16,17 @@ const mockData = {
 
 export default function Home() {
   const [showCharts, setShowCharts] = useState(true);
-  const [visibility, setVisibility] = useState(true);
+  const [visibility, setVisibility] = useState(
+    localStorage.getItem("privacyMode")
+      ? (localStorage.getItem("privacyMode") === "true")
+      : true
+  );
 
   function changeVisibility() {
-    setVisibility((prev) => !prev);
+    setVisibility((prev) => {
+      localStorage.setItem("privacyMode", (!prev).toString());
+      return !prev;
+    });
   }
   return (
     <VisibilityContext.Provider value={visibility}>
