@@ -8,8 +8,14 @@ import { VisibilityContext } from "@/pages/Home";
 import { useContext, useEffect } from "react";
 
 const valueFormatter = function (number: number) {
-  return "$ " + new Intl.NumberFormat("us").format(number).toString();
+  if (number >= 1000) {
+    const formattedNumber = (number / 1000);
+    return "$ " + formattedNumber + "k";
+  } else {
+    return "$ " + new Intl.NumberFormat("us").format(number).toString();
+  }
 };
+
 
 interface ChartProps {
   variant: "area" | "donut";
@@ -65,14 +71,14 @@ export default function Chart(props: ChartProps) {
             className="h-72 mt-4"
             data={chartdata}
             index="time_open"
-            yAxisWidth={65}
+            yAxisWidth={40}
             categories={["rate_open"]}
             colors={[areaChartColor]}
             valueFormatter={valueFormatter}
             showXAxis={visibility}
             showYAxis={visibility}
             showTooltip={visibility}
-            minValue={100000}
+            autoMinValue
             curveType="natural"
           />
         ) : (

@@ -21,7 +21,6 @@ export default function Header() {
       <div className="flex-1 flex justify-end items-center">
         <Toggle
           aria-label="Change Theme"
-          asChild
           className="m-2"
           onPressedChange={() => setTheme(theme === "light" ? "dark" : "light")}
         >

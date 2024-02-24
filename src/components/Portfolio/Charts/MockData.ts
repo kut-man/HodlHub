@@ -1018,7 +1018,7 @@ function transformData(): { time_open: string; rate_open: number }[] {
 function formatTimestampToReadableDay(timestamp: string): string {
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
-    month: 'short' // Use 'short' for abbreviated month names
+    month: 'short'
   };
 
   const date = new Date(timestamp);
