@@ -21,12 +21,12 @@ import { DatePicker } from "./DatePicker";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import FeeIcon from "./FeeIcon";
 
-export default function AddTransaction() {
+export default function AddTransaction({children}: {children: string}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button size="sm" aria-label="Add Transaction">
-          + Add Transaction
+          {children}
         </Button>
       </DialogTrigger>
       <DialogContent>

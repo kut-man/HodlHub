@@ -76,7 +76,7 @@ export default function PortfolioHeader({
           />
         </div>
 
-        <AddTransaction />
+        <AddTransaction>+ Add Transaction</AddTransaction>
 
         <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
           <BsThreeDots />

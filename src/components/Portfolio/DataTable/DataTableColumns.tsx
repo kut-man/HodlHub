@@ -12,6 +12,7 @@ import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
+import AddTransaction from "../PortfolioHeader/AddTransaction";
 
 export interface Coin {
   name: string;
@@ -135,7 +136,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80 flex flex-col gap-2">
-            <Button>Add Transaction</Button>
+            <AddTransaction>Add Transaction</AddTransaction>
             <Button>View Transactions</Button>
             <Button>Remove Asset</Button>
           </PopoverContent>
