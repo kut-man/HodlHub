@@ -1,5 +1,5 @@
 import { Flex } from "@tremor/react";
-import PortfolioList from "@/components/Portfolio/PortfolioList";
+import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
 import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
 import PerformanceTiles from "@/components/Portfolio/PerformanceTiles/PerformanceTiles";
 import Charts from "@/components/Portfolio/Charts/Charts";
