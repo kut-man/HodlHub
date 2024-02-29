@@ -1,21 +1,21 @@
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-  } from "@/components/ui/dialog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-  import { FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { ChangeAvatar } from "./PortfolioDialog/ChangeAvatar";
 import { CreatePortfolio } from "./PortfolioDialog/CreatePortfolio";
 import { useState } from "react";
 
 export default function PortfolioDialog() {
-    const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
-    const changeCurrentDialogPage = () => {
-      setIsAvatarDialogPage((prev) => !prev);
-    };
+  const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
+  const changeCurrentDialogPage = () => {
+    setIsAvatarDialogPage((prev) => !prev);
+  };
   return (
     <Dialog onOpenChange={(open) => setIsAvatarDialogPage(!open)}>
       <DialogTrigger asChild>
