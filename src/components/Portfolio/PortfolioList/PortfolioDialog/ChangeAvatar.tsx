@@ -1,56 +1,67 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { PortfolioDialogProps } from "./CreatePortfolio";
 import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { emojis, avatarBackground } from "./AvatarAssets";
-import { useState } from "react";
+import { useReducer } from "react";
+import {
+  ACTIONS,
+  Action,
+  ChanageAvatarProps,
+  State,
+} from "./PortfolioDialogInterfaces";
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case ACTIONS.SELECTED_COLOR:
+      return { ...state, selectedColor: action.payload };
+    case ACTIONS.SELECTED_LOGO:
+      return { ...state, selectedLogo: action.payload };
+    case ACTIONS.HOVERED_COLOR:
+      return { ...state, hoveredColor: action.payload };
+    case ACTIONS.HOVERED_LOGO:
+      return { ...state, hoveredLogo: action.payload };
+    default:
+      return state;
+  }
+};
 
 export function ChangeAvatar({
-  changeCurrentDialogPage,
-}: PortfolioDialogProps) {
-  const [selectedAvatartProperties, setSelectedAvatarProperties] = useState({
-    color:
-      avatarBackground[Math.floor(Math.random() * avatarBackground.length)],
-    logo: emojis[Math.floor(Math.random() * emojis.length)],
-  });
-  const [hoveredAvatarProperties, setHoveredAvatarProperties] = useState({
-    color: "",
-    logo: "",
-  });
+  changeProfileAvatar,
+  avatarProperties,
+}: ChanageAvatarProps) {
+  const initialState: State = {
+    selectedColor: avatarProperties.color,
+    selectedLogo: avatarProperties.logo,
+    hoveredColor: avatarProperties.color,
+    hoveredLogo: avatarProperties.logo,
+  };
 
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       <Flex className="gap-2" flexDirection="col">
         <div
-          className={`rounded-full flex justify-center items-center h-16 w-16 bg-${
-            hoveredAvatarProperties.color
-              ? hoveredAvatarProperties.color
-              : selectedAvatartProperties.color
-          }-500`}
+          className={`rounded-full flex justify-center items-center h-16 w-16 bg-${state.hoveredColor}-500`}
         >
-          <span className="text-4xl">
-            {hoveredAvatarProperties.logo
-              ? hoveredAvatarProperties.logo
-              : selectedAvatartProperties.logo}
-          </span>
+          <span className="mb-1 text-4xl">{state.hoveredLogo}</span>
         </div>
         <Flex className="max-w-72">
           {avatarBackground.map((color) => (
             <div
               onClick={() =>
-                setSelectedAvatarProperties((prev) => ({
-                  ...prev,
-                  color,
-                }))
+                dispatch({ type: ACTIONS.SELECTED_COLOR, payload: color })
               }
               onMouseEnter={() =>
-                setHoveredAvatarProperties((prev) => ({ ...prev, color }))
+                dispatch({ type: ACTIONS.HOVERED_COLOR, payload: color })
               }
               onMouseLeave={() =>
-                setHoveredAvatarProperties((prev) => ({ ...prev, color: "" }))
+                dispatch({
+                  type: ACTIONS.HOVERED_COLOR,
+                  payload: state.selectedColor,
+                })
               }
-              data-selected={selectedAvatartProperties.color === color}
+              data-selected={state.selectedColor === color}
               className={`w-5 h-5 bg-${color}-600 hover:outline hover:border-2 hover:outline-blue-500 border-white rounded-full 
               data-[selected=true]:outline data-[selected=true]:border-2 data-[selected=true]:outline-blue-500`}
             ></div>
@@ -64,19 +75,16 @@ export function ChangeAvatar({
             {emojis.map((emoji) => (
               <span
                 onClick={() =>
-                  setSelectedAvatarProperties((prev) => ({
-                    ...prev,
-                    logo: emoji,
-                  }))
+                  dispatch({ type: ACTIONS.SELECTED_LOGO, payload: emoji })
                 }
                 onMouseEnter={() =>
-                  setHoveredAvatarProperties((prev) => ({
-                    ...prev,
-                    logo: emoji,
-                  }))
+                  dispatch({ type: ACTIONS.HOVERED_LOGO, payload: emoji })
                 }
                 onMouseLeave={() =>
-                  setHoveredAvatarProperties((prev) => ({ ...prev, logo: "" }))
+                  dispatch({
+                    type: ACTIONS.HOVERED_LOGO,
+                    payload: state.selectedLogo,
+                  })
                 }
                 key={emoji}
                 className="cursor-pointer hover:scale-110 text-4xl"
@@ -88,10 +96,19 @@ export function ChangeAvatar({
         </div>
       </Flex>
       <DialogFooter>
-        <Button variant="secondary" onClick={changeCurrentDialogPage}>
-          Cancel
+        <Button
+          onClick={() =>
+            changeProfileAvatar({
+              color: state.selectedColor,
+              logo: state.selectedLogo,
+            })
+          }
+          className="w-full"
+          size="lg"
+          type="submit"
+        >
+          Save
         </Button>
-        <Button type="submit">Save changes</Button>
       </DialogFooter>
     </>
   );
