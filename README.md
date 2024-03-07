@@ -89,9 +89,8 @@
         * [new branch]      test       -> origin/test
         Already up to date.
         ```
-    * **Key Difference:** `git pull` directly merges changes into your working directory, while `git fetch` only downloads them.
 
-diference fetch(merge) and pull = Git pull copies changes from a remote repository directly into your working directory, while git fetch does not.
+* **fetch+merge vs pull**: Git pull copies changes from a remote repository directly into your working directory, while git fetch does not.
 
 * **`git stash`**: The changes are temporarily removed from the files and you can choose to restore or discard the changes later.
     not done yet
