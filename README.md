@@ -15,7 +15,7 @@
 
 * **`git checkout`**:
     * **Purpose:** Allows you to move between created git branches by branch or look in witch branch are you.
-    * **LOOK IN WITCH BRANCH WE ARE:**
+    * **LOOK IN WHICH BRANCH WE ARE:**
         ```bash
         (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO> git checkout
 
@@ -77,7 +77,7 @@
         ```
 * **`git pull`**:
     * **Purpose:** It downloads content from a repository and immediately update the local repository to match that content.
-    * **DOWNLOADING THE INFORMATION OF THE REPOSITORY OF GITHUB IN MY LOCAL REPOSITORY:**
+    * **DOWNLOADING THE INFORMATION OF THE REPOSITORY OF GITHUB TO MY LOCAL REPOSITORY:**
         ```bash
         (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO>git pull
         remote: Enumerating objects: 5, done.
