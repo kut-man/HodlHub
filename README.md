@@ -15,20 +15,20 @@
 
 * **`git checkout`**:
     * **Purpose:** Allows you to move between created git branches by branch or look in witch branch are you.
-    * **LOOK IN WITCH BRANCH ARE:**
+    * **LOOK IN WITCH BRANCH WE ARE:**
         ```bash
         (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO> git checkout
 
         Your branch is up to date with 'origin/master'.
         ```
-    * **CHANGE THE BRANCH WE ARE YOU**
+    * **CHANGE THE BRANCH**
         ```bash
         (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO> git checkout test
 
         Switched to branch 'test'
         Your branch is up to date with 'origin/test'.
         ```
-    * **RONG EXAMPLE OF A BAD MERGE COMMAND:**
+    * **WRONG EXAMPLE OF A BAD MERGE COMMAND:**
         ```bash
         (Git_Bi) C:\Users\PC-PEPE\Documents\BI_Pedro\GIT-PROYECTO>git merge origin --> thats not the good way to make it
         ```
@@ -66,14 +66,14 @@
     * **Purpose:** Downloads commits, refs and files from a remote repository into your locoal repo.
     * **Example:**
         ```bash
-        (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO>git fetch 
-    remote: Enumerating objects: 5, done.
-    remote: Counting objects: 100% (5/5), done.
-    remote: Compressing objects: 100% (2/2), done.
-    remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
-    Unpacking objects: 100% (3/3), 383 bytes | 54.00 KiB/s, done.
-    From https://github.com/Pedro97198/GIT-PROYECTO
-        bac0634..103f99b  master     -> origin/master
+          (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO>git fetch 
+          remote: Enumerating objects: 5, done.
+          remote: Counting objects: 100% (5/5), done.
+          remote: Compressing objects: 100% (2/2), done.
+          remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+          Unpacking objects: 100% (3/3), 383 bytes | 54.00 KiB/s, done.
+          From https://github.com/Pedro97198/GIT-PROYECTO
+          bac0634..103f99b  master     -> origin/master
         ```
 * **`git pull`**:
     * **Purpose:** It downloads content from a repository and immediately update the local repository to match that content.
