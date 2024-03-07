@@ -90,7 +90,7 @@
         Already up to date.
         ```
 
-* **fetch+merge vs pull**: Git pull copies changes from a remote repository directly into your working directory, while git fetch does not.
+* **`git fetch`+`git merge` vs `git pull`**: Git pull copies changes from a remote repository directly into your working directory, while git fetch does not.
 
 * **`git stash`**: The changes are temporarily removed from the files and you can choose to restore or discard the changes later.
     not done yet
