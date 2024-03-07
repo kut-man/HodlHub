@@ -21,7 +21,7 @@
 
         Your branch is up to date with 'origin/master'.
         ```
-    * **CHANGE THE BRANCH**
+    * **CHANGE THE BRANCH:**
         ```bash
         (GIT) C:\Users\Pedro\Desktop\GIT PROYECTO> git checkout test
 
