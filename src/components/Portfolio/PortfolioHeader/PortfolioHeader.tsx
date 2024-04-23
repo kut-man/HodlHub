@@ -9,7 +9,7 @@ import AddTransaction from "./AddTransaction";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
-import { VisibilityContext } from "@/pages/Home";
+import { VisibilityContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
 

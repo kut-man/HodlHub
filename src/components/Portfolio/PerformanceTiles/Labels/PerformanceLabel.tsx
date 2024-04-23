@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import { VisibilityContext } from "@/pages/Home";
+import { VisibilityContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
 interface PerformanceLabelProps {

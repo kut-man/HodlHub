@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label";
-import { VisibilityContext } from "@/pages/Home";
+import { VisibilityContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
 interface BalanceProps {

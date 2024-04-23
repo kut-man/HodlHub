@@ -4,7 +4,7 @@ import { DonutChart } from "@tremor/react";
 import { cities, chartdata } from "./MockData";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { VisibilityContext } from "@/pages/Home";
+import { VisibilityContext } from "@/pages/Portfolio";
 import { useContext, useEffect } from "react";
 
 const valueFormatter = function (number: number) {
