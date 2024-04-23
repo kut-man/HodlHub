@@ -31,7 +31,7 @@
     "name": {
       "name": "Cardano",
       "ticker": "ADA",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/ada"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/ada-cardano.png"
     },
     "price": 1.81,
     "hourChange": 31,
@@ -45,7 +45,7 @@
     "name": {
       "name": "Ethereum",
       "ticker": "ETH",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/eth"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/eth-ethereum.png"
     },
     "price": 4.86,
     "hourChange": 30,
@@ -59,7 +59,7 @@
     "name": {
       "name": "Polkadot",
       "ticker": "DOT",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/dot"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/dot-polkadot.png"
     },
     "price": 3.89,
     "hourChange": 22,
@@ -73,7 +73,7 @@
     "name": {
       "name": "XRP",
       "ticker": "XRP",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/xrp"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/xrp-xrp.png"
     },
     "price": 7.97,
     "hourChange": 55,
@@ -87,7 +87,7 @@
     "name": {
       "name": "Avalanche",
       "ticker": "AVAX",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/avax"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/avax-avalanche.png"
     },
     "price": 6.85,
     "hourChange": 62,
@@ -101,7 +101,7 @@
     "name": {
       "name": "BNB",
       "ticker": "BNB",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/bnb"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/bnb-binance-coin.png"
     },
     "price": 1.97,
     "hourChange": 94,
@@ -115,7 +115,7 @@
     "name": {
       "name": "Dogecoin",
       "ticker": "DOGE",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/doge"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/doge-dogecoin.png"
     },
     "price": 2.74,
     "hourChange": 8,
@@ -129,7 +129,7 @@
     "name": {
       "name": "TRON",
       "ticker": "TRX",
-      "iconURL": "https://coinicons-api.vercel.app/api/icon/trx"
+      "iconURL": "https://cryptocurrencyliveprices.com/img/trx-tron.png"
     },
     "price": 8.31,
     "hourChange": 83,

@@ -37,7 +37,7 @@ export default function PortfolioDialog() {
           </Label>
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className={`sm:max-w-[425px] duration-500 h-${isAvatarDialogPage ? '80' : '96'}`}>
         <DialogHeader>
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
