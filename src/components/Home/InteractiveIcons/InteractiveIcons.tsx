@@ -32,12 +32,10 @@ export default function InteractiveIcons() {
         {interactiveCoinIconData.map((obj, idx) =>
           obj.coinIcon({
             key: idx,
-            size: obj.size,
-            className: "absolute",
+            className: "absolute " + obj.size ,
             style: {
               ...calculateTranslate(obj.position, scrollPosition, idx),
               transformOrigin: idx > 4 ? "left" : "right",
-
               transform: `rotate(${scrollPosition}deg) translateX(${
                 idx > 4 ? "-" : ""
               }50%)`,
