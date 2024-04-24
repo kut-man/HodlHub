@@ -4,10 +4,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import { Flex } from "@tremor/react";
-import { Label } from "../../ui/label";
-import { Separator } from "../../ui/separator";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 export default function AccountActions() {
   return (
