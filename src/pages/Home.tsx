@@ -1,5 +1,4 @@
 import InteractiveIcons from "@/components/Home/InteractiveIcons/InteractiveIcons";
-import dashboard from "../assets/hodl.png";
 import { Button } from "@/components/ui/button";
 import { Flex } from "@tremor/react";
 
@@ -29,13 +28,16 @@ export default function Home() {
         </Button>
       </Flex>
       <div
-        className="relative -top-36 w-[97%] max-w-[1200px] rounded-lg m-auto p-4"
+        className="relative -top-36 w-[70%] max-w-[1200px] rounded-lg m-auto p-2 md:p-4"
         style={{
           backgroundImage:
             "linear-gradient(249deg, #0066fe 0%, rgba(205, 4, 255, .34) 131.14%)",
         }}
       >
-        <img src={dashboard} alt="" />
+        <div
+          className="md:aspect-[1920/1283] aspect-[625/1681] w-full h-full bg-no-repeat bg-contain bg-[url('https://github.com/kut-man/HodlHub/assets/73386100/02581b8c-3c1d-46e8-81ee-54d736378e2e')] 
+        md:bg-[url('https://github.com/kut-man/HodlHub/assets/73386100/8d15a905-4f80-447b-8b11-a377ee85e650')]"
+        ></div>
       </div>
     </div>
   );
