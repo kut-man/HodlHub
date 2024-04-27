@@ -7,11 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Flex } from "@tremor/react";
 import { useState } from "react";
 import Register from "./Register";
+import { AuthAction } from "./HeaderTypes";
 
-enum AuthAction {
-  LOGIN = "login",
-  SIGNUP = "signup",
-}
 
 export default function Login() {
   const [dialog, setDialog] = useState<{
@@ -76,7 +73,7 @@ export default function Login() {
               </Card>
             </TabsContent>
             <TabsContent value={AuthAction.SIGNUP}>
-              <Register/>
+              <Register onRegister={() => setDialog({...dialog, isOpen: false})}/>
             </TabsContent>
           </Tabs>
         </DialogContent>

@@ -3,15 +3,12 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
+import { ReactNode, useState } from "react";
+import { ErrorResponse, FormFields } from "./HeaderTypes";
 
-type FormFields = {
-  name: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-};
-
-export default function Register() {
+export default function Register({ onRegister }: { onRegister: () => void }) {
   const {
     register,
     handleSubmit,
@@ -19,26 +16,45 @@ export default function Register() {
     formState: { errors },
   } = useForm<FormFields>();
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
-    fetch("http://localhost:8080/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
+  const [registrationError, setRegistrationError] = useState<ReactNode[]>([]);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data: FormFields) => {
+      try {
+        const response = await fetch("http://localhost:8080/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
         if (response.ok) {
-          console.log("Registration successful");
+          onRegister();
         } else {
+          response.json().then(({ errors }: ErrorResponse) =>
+            errors.map((obj, idx) =>
+              setRegistrationError([
+                <Label key={idx} className="font-normal text-red-600">
+                  *{obj.value}
+                </Label>,
+              ])
+            )
+          );
           console.error("Registration failed");
         }
-      })
-      .catch((error) => {
+      } catch (error) {
+        setRegistrationError([
+          <Label className="font-normal text-red-600">
+            Something went wrong!
+          </Label>,
+        ]);
         console.error("Error during registration:", error);
-      });
+      }
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    mutate(data);
   };
 
   return (
@@ -122,8 +138,18 @@ export default function Register() {
             )}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">Create an account</Button>
+        <CardFooter className="flex flex-col gap-4">
+          {registrationError && [...registrationError]}
+          <Button disabled={isPending} className="w-full">
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Create an account"
+            )}
+          </Button>
         </CardFooter>
       </form>
     </Card>
