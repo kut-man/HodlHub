@@ -5,55 +5,30 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { ReactNode, useState } from "react";
-import { ErrorResponse, FormFields } from "./HeaderTypes";
+import { useState } from "react";
+import { RegisterFields } from "../HeaderTypes";
+import { registerUser } from "./AuthenticationFunctions";
 
-export default function Register({ onRegister }: { onRegister: () => void }) {
+export default function Register({
+  onRegister,
+}: {
+  onRegister: () => void;
+}) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormFields>();
+  } = useForm<RegisterFields>();
 
-  const [registrationError, setRegistrationError] = useState<ReactNode[]>([]);
+  const [registrationError, setRegistrationError] = useState("");
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: FormFields) => {
-      try {
-        const response = await fetch("http://localhost:8080/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        if (response.ok) {
-          onRegister();
-        } else {
-          response.json().then(({ errors }: ErrorResponse) =>
-            errors.map((obj, idx) =>
-              setRegistrationError([
-                <Label key={idx} className="font-normal text-red-600">
-                  *{obj.value}
-                </Label>,
-              ])
-            )
-          );
-          console.error("Registration failed");
-        }
-      } catch (error) {
-        setRegistrationError([
-          <Label className="font-normal text-red-600">
-            Something went wrong!
-          </Label>,
-        ]);
-        console.error("Error during registration:", error);
-      }
-    },
+    mutationFn: (data: RegisterFields) =>
+      registerUser(data, onRegister, setRegistrationError),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
+  const onSubmit: SubmitHandler<RegisterFields> = (data) => {
     mutate(data);
   };
 
@@ -139,7 +114,11 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          {registrationError && [...registrationError]}
+          {registrationError && (
+            <Label className="font-normal text-red-600">
+              *{registrationError}
+            </Label>
+          )}
           <Button disabled={isPending} className="w-full">
             {isPending ? (
               <>

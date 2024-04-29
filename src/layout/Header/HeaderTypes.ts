@@ -1,8 +1,24 @@
-export type FormFields = {
+export type RegisterFields = {
   name: string;
   email: string;
   password: string;
   repeatPassword: string;
+};
+
+export type LoginFields = {
+  email: string;
+  password: string;
+};
+
+export type AuthenticationMethodsProps = (
+  data: LoginFields | RegisterFields,
+  onSuccess?: () => void,
+  onError?: React.Dispatch<React.SetStateAction<string>>
+) => Promise<void>;
+
+export type LoginResponse = {
+  status: string;
+  message: string;
 };
 
 export type ErrorResponse = {

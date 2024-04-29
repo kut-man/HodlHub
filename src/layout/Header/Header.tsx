@@ -1,26 +1,33 @@
 import { FaMoon } from "react-icons/fa";
 import { HiSun } from "react-icons/hi";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "./Theme";
 import { Toggle } from "@radix-ui/react-toggle";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
-import { useEffect, useState } from "react";
-import Login from "./Login";
+import Authentication from "./Authentication/Authentication";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      fetch("http://localhost:8080/user", {
+        method: "GET",
+        credentials: "include",
+      }).then((res) => res.json()),
+  });
+  
   useEffect(() => {
-    const isLoggedIn = document.cookie.includes("JSESSIONID=");
-    setIsLoggedIn(isLoggedIn);
-  }, []);
+    console.log(user);
+  }, [user]);
 
   return (
     <header className="border-b flex items-center p-2 lg:px-24 px-8">
       <div className="lg:flex-1"></div>
       <Logo alt="CoinMarketCap" />
-
       <div className="flex-1 flex justify-end items-center">
         <Toggle
           aria-label="Change Theme"
@@ -30,7 +37,7 @@ export default function Header() {
           {theme === "dark" ? <HiSun size={25} /> : <FaMoon size={20} />}
         </Toggle>
 
-        {isLoggedIn ? <AccountActions /> : <Login />}
+        {user && user.email ? <AccountActions /> : <Authentication />}
       </div>
     </header>
   );
