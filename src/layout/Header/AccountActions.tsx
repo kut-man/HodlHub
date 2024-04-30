@@ -3,25 +3,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
 
 export default function AccountActions() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Avatar className="h-8 w-8 m-2">
-          <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
-        </Avatar>
+        <AvatarWithSceleton
+          className="h-8 w-8 m-2"
+          alt="Avatar"
+          src="https://github.com/shadcn.png"
+        />
       </PopoverTrigger>
-      <PopoverContent onOpenAutoFocus={e => e.preventDefault()}>
+      <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <Flex justifyContent="start">
-          <Avatar className="h-10 w-10 m-2">
-            <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
-          </Avatar>
+          <AvatarWithSceleton
+            className="h-10 w-10 m-2"
+            alt="Avatar"
+            src="https://github.com/shadcn.png"
+          />
           <Flex justifyContent="start" alignItems="start" flexDirection="col">
             <Label className="cursor-pointer text-left leading-2 text-base">
               Hi, Kutman
@@ -29,10 +33,14 @@ export default function AccountActions() {
             <Label>kutman.stel@gmail.com</Label>
           </Flex>
         </Flex>
-        <Separator/>
+        <Separator />
         <Flex flexDirection="col">
-          <Button variant="ghost" className="justify-start w-full">Settings</Button>
-          <Button variant="ghost" className="justify-start w-full">Log out</Button>
+          <Button variant="ghost" className="justify-start w-full">
+            Settings
+          </Button>
+          <Button variant="ghost" className="justify-start w-full">
+            Log out
+          </Button>
         </Flex>
       </PopoverContent>
     </Popover>

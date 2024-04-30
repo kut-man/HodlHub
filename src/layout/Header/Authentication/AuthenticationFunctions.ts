@@ -45,8 +45,7 @@ export const registerUser: AuthenticationMethodsProps = async (
       body: JSON.stringify(data),
     });
     if (response.ok) {
-      onSuccess && onSuccess();
-      loginUser(data)
+      loginUser(data).then(() => onSuccess && onSuccess());
     } else {
       onError &&
         response.json().then(({ errors }: ErrorResponse) => {

@@ -10,9 +10,9 @@ import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import AddTransaction from "../PortfolioHeader/AddTransaction";
+import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
 
 export interface Coin {
   name: string;
@@ -56,12 +56,11 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     },
     cell: ({ row }) => (
       <div className="flex gap-2 items-center">
-        <Avatar className="h-6 w-6">
-          <AvatarImage
-            alt={`${(row.getValue("name") as Coin).name}'s Icon`}
-            src={(row.getValue("name") as Coin).iconURL}
-          />
-        </Avatar>
+        <AvatarWithSceleton
+          className="h-6 w-6"
+          alt={`${(row.getValue("name") as Coin).name}'s Icon`}
+          src={(row.getValue("name") as Coin).iconURL}
+        />
         <div className="flex max-md:flex-col gap-2 md:items-center">
           <Label className="font-semibold">
             {(row.getValue("name") as Coin).name}

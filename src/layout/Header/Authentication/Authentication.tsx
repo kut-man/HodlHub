@@ -7,22 +7,21 @@ import Register from "./Register";
 import { AuthAction } from "../HeaderTypes";
 import Login from "./Login";
 
-export default function Authentication() {
+export default function Authentication({
+  refetchUser,
+}: {
+  refetchUser: () => void;
+}) {
   const [dialog, setDialog] = useState<{
     isOpen: boolean;
     tab: AuthAction;
   }>({ isOpen: false, tab: AuthAction.LOGIN });
 
-  const onSuccessfulRegisterHandler = () => {
+  const onSuccessfulAuthorizationHandler = () => {
+    refetchUser();
     setTimeout(() => {
       setDialog({ ...dialog, isOpen: false });
-    }, 350);
-  };
-
-  const onSuccessfulLoginHandler = () => {
-    setTimeout(() => {
-      setDialog({ ...dialog, isOpen: false });
-    }, 350);
+    }, 300);
   };
 
   return (
@@ -65,10 +64,10 @@ export default function Authentication() {
               <TabsTrigger value={AuthAction.SIGNUP}>Sign Up</TabsTrigger>
             </TabsList>
             <TabsContent value={AuthAction.LOGIN}>
-              <Login onLogin={onSuccessfulLoginHandler} />
+              <Login onLogin={onSuccessfulAuthorizationHandler} />
             </TabsContent>
             <TabsContent value={AuthAction.SIGNUP}>
-              <Register onRegister={onSuccessfulRegisterHandler} />
+              <Register onRegister={onSuccessfulAuthorizationHandler} />
             </TabsContent>
           </Tabs>
         </DialogContent>

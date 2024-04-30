@@ -1,4 +1,3 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
   CardContent,
@@ -8,6 +7,7 @@ import {
 } from "../../ui/card";
 import PerformanceLabel from "./Labels/PerformanceLabel";
 import ProfitLossLabel from "./Labels/ProfitLossLabel";
+import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
 
 interface PortfolioHeaderProps {
   description: string;
@@ -37,9 +37,11 @@ export default function PerformerTile({
       <CardContent className="max-md:items-end max-md:p-4 pb-4 flex flex-col">
         <div className="flex items-center !m-0">
           {avatarSrc ? (
-            <Avatar className="h-6 w-6 m-2 ml-0 my-0 rounded-none">
-              <AvatarImage alt={`${description}'s Icon`} src={avatarSrc} />
-            </Avatar>
+            <AvatarWithSceleton
+              className="h-6 w-6 m-2 ml-0 my-0 rounded-none"
+              alt={`${description}'s Icon`}
+              src={avatarSrc}
+            />
           ) : null}
           <CardTitle className="flex-row text-lg font-bold">
             {typeof title === "number" ? (

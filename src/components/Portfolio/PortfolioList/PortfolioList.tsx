@@ -8,9 +8,9 @@ import {
 import { Flex } from "@tremor/react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioDialog from "./PortfolioDialog";
+import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
 
 export default function Portfolio() {
   return (
@@ -25,9 +25,11 @@ export default function Portfolio() {
           className="w-full h-14 p-0 mb-1"
         >
           <Flex justifyContent="start">
-            <Avatar className="h-10 w-10 m-2">
-              <AvatarImage alt="Avatar" src="https://github.com/shadcn.png" />
-            </Avatar>
+            <AvatarWithSceleton
+              className="h-10 w-10 m-2"
+              alt="Avatar"
+              src="https://github.com/shadcn.png"
+            />
             <Flex justifyContent="start" alignItems="start" flexDirection="col">
               <Label className="cursor-pointer text-left leading-2 text-base">
                 Binance

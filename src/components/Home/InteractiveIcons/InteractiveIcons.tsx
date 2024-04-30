@@ -5,7 +5,7 @@ const SCROLL_LIMIT = 600;
 
 const calculateTranslate = (position: number[], scrollX: number, idx:number) => {
   const percent = scrollX / SCROLL_LIMIT;
-  const moveY = position[0] + (230 - position[0]) * percent;
+  const moveY = position[0] + (200 - position[0]) * percent;
   const moveX = position[1] + (50 - position[1]) * percent;
   return { top: `${moveY}%`, [idx > 4 ? "left" : "right"]: `${moveX}%` };
 };
