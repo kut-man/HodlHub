@@ -6,19 +6,18 @@ import { useState } from "react";
 import Register from "./Register";
 import { AuthAction } from "../HeaderTypes";
 import Login from "./Login";
+import { useAuth } from "@/AuthProvider";
 
-export default function Authentication({
-  refetchUser,
-}: {
-  refetchUser: () => void;
-}) {
+export default function Authentication() {
   const [dialog, setDialog] = useState<{
     isOpen: boolean;
     tab: AuthAction;
   }>({ isOpen: false, tab: AuthAction.LOGIN });
 
+  const { refetchUser } = useAuth();
+
   const onSuccessfulAuthorizationHandler = () => {
-    refetchUser();
+    refetchUser && refetchUser();
     setTimeout(() => {
       setDialog({ ...dialog, isOpen: false });
     }, 300);

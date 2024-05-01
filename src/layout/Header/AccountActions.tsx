@@ -9,12 +9,11 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
 import { LOGOUT_URL } from "@/api";
+import { useAuth } from "@/AuthProvider";
 
-export default function AccountActions({
-  refetchUser,
-}: {
-  refetchUser: () => void;
-}) {
+export default function AccountActions() {
+  const { refetchUser } = useAuth();
+
   const logout = async () => {
     try {
       const response = await fetch(LOGOUT_URL, {
@@ -22,7 +21,7 @@ export default function AccountActions({
         credentials: "include",
       });
       if (response.ok) {
-        refetchUser();
+        refetchUser && refetchUser();
       } else {
         console.error("Login failed");
       }

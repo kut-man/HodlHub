@@ -1,11 +1,10 @@
 import InteractiveIcons from "@/components/Home/InteractiveIcons/InteractiveIcons";
 import { Button } from "@/components/ui/button";
 import { Flex } from "@tremor/react";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  useEffect(() => {console.log(isLoaded)}, [isLoaded])
+
   return (
     <div>
       <InteractiveIcons />
@@ -27,11 +26,11 @@ export default function Home() {
           enhanced returns
         </p>
         <Button className="text-xl p-6" size="lg">
-          Get Started
+          <Link to="/portfolio">Get Started</Link>
         </Button>
       </Flex>
       <div
-      id="your-element-id"
+        id="your-element-id"
         className="relative -top-36 w-[70%] max-w-[1200px] rounded-lg m-auto p-2 md:p-4"
         style={{
           backgroundImage:
@@ -39,7 +38,6 @@ export default function Home() {
         }}
       >
         <div
-        onLoad={()=>setIsLoaded(true)}
           className="md:aspect-[1920/1283] aspect-[625/1681] w-full h-full bg-no-repeat bg-contain bg-[url('https://github.com/kut-man/HodlHub/assets/73386100/02581b8c-3c1d-46e8-81ee-54d736378e2e')] 
         md:bg-[url('https://github.com/kut-man/HodlHub/assets/73386100/8d15a905-4f80-447b-8b11-a377ee85e650')]"
         ></div>
