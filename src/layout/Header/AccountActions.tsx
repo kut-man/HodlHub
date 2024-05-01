@@ -8,11 +8,32 @@ import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import { LOGOUT_URL } from "@/api";
 
-export default function AccountActions() {
+export default function AccountActions({
+  refetchUser,
+}: {
+  refetchUser: () => void;
+}) {
+  const logout = async () => {
+    try {
+      const response = await fetch(LOGOUT_URL, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok) {
+        refetchUser();
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
+
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger>
         <AvatarWithSceleton
           className="h-8 w-8 m-2"
           alt="Avatar"
@@ -38,7 +59,11 @@ export default function AccountActions() {
           <Button variant="ghost" className="justify-start w-full">
             Settings
           </Button>
-          <Button variant="ghost" className="justify-start w-full">
+          <Button
+            onClick={logout}
+            variant="ghost"
+            className="justify-start w-full"
+          >
             Log out
           </Button>
         </Flex>

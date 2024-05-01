@@ -3,6 +3,7 @@ import {
   ErrorResponse,
   LoginResponse,
 } from "../HeaderTypes";
+import { LOGIN_URL, REGISTER_URL } from "@/api";
 
 export const loginUser: AuthenticationMethodsProps = async (
   data,
@@ -11,7 +12,7 @@ export const loginUser: AuthenticationMethodsProps = async (
 ) => {
   try {
     const response = await fetch(
-      `http://localhost:8080/login?username=${data.email}&password=${data.password}`,
+      `${LOGIN_URL}?username=${data.email}&password=${data.password}`,
       {
         method: "POST",
         credentials: "include",
@@ -36,7 +37,7 @@ export const registerUser: AuthenticationMethodsProps = async (
   onError
 ) => {
   try {
-    const response = await fetch("http://localhost:8080/auth/register", {
+    const response = await fetch(REGISTER_URL, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -49,7 +50,7 @@ export const registerUser: AuthenticationMethodsProps = async (
     } else {
       onError &&
         response.json().then(({ errors }: ErrorResponse) => {
-          onError(errors[0].value);
+          errors ? onError(errors[0].value) : onError("Something went wrong!");
           console.error("Registration failed");
         });
     }

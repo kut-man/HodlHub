@@ -6,6 +6,8 @@ import Logo from "./Logo";
 import AccountActions from "./AccountActions";
 import Authentication from "./Authentication/Authentication";
 import { useQuery } from "@tanstack/react-query";
+import { USER_URL } from "@/api";
+
 export default function Header() {
   const { theme, setTheme } = useTheme();
 
@@ -16,7 +18,7 @@ export default function Header() {
   } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      fetch("http://localhost:8080/user", {
+      fetch(USER_URL, {
         method: "GET",
         credentials: "include",
       }).then((res) => res.json()),
@@ -41,7 +43,7 @@ export default function Header() {
             </Toggle>
 
             {user && user.email ? (
-              <AccountActions />
+              <AccountActions refetchUser={refetch} />
             ) : (
               <Authentication refetchUser={refetch} />
             )}
