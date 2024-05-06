@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { HeaderContext } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { AssetsInfo } from "./DataTableColumns";
+import { AssetsInfo } from "./DataTableInterfaces";
+
 
 export default function sortableHeaderHOF(label: string) {
   return ({ column }: HeaderContext<AssetsInfo, unknown>) => (
