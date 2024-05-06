@@ -10,7 +10,7 @@ export type colors =
 
 export interface avatarValues {
   color: colors,
-  logo: string
+  avatar: string
 }
 
 export const avatarBackground: colors[] = [

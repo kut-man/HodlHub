@@ -11,24 +11,37 @@ import { ChangeAvatar } from "./PortfolioDialog/ChangeAvatar";
 import { CreatePortfolio } from "./PortfolioDialog/CreatePortfolio";
 import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
-import { avatarBackground, avatarValues, emojis } from "./PortfolioDialog/AvatarAssets";
+import {
+  avatarBackground,
+  avatarValues,
+  emojis,
+} from "./PortfolioDialog/AvatarAssets";
 
 export default function PortfolioDialog() {
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
-  const [portfolioAvatar, setPortfolioAvatar] = useState({
+  const [portfolioIcon, setPortfolioIcon] = useState({
     color:
       avatarBackground[Math.floor(Math.random() * avatarBackground.length)],
-    logo: emojis[Math.floor(Math.random() * emojis.length)],
+    avatar: emojis[Math.floor(Math.random() * emojis.length)],
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const changeProfileAvatar = (avatarProperties: avatarValues) => {
-    setPortfolioAvatar(avatarProperties);
+    setPortfolioIcon(avatarProperties);
     changeCurrentDialogPage();
   };
+
+  const toogleDialog = (open: boolean) => {
+    if (open) setIsAvatarDialogPage(!open);
+    setIsDialogOpen(open);
+  };
+
   const changeCurrentDialogPage = () => {
     setIsAvatarDialogPage((prev) => !prev);
   };
+
   return (
-    <Dialog onOpenChange={(open) => setIsAvatarDialogPage(!open)}>
+    <Dialog onOpenChange={toogleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
         <button className="flex items-center">
           <FiPlus size={20} />
@@ -37,7 +50,7 @@ export default function PortfolioDialog() {
           </Label>
         </button>
       </DialogTrigger>
-      <DialogContent className={`sm:max-w-[425px] duration-500 h-${isAvatarDialogPage ? '80' : '96'}`}>
+      <DialogContent className={"sm:max-w-[425px] duration-500"}>
         <DialogHeader>
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
@@ -52,12 +65,13 @@ export default function PortfolioDialog() {
         </DialogHeader>
         {isAvatarDialogPage ? (
           <ChangeAvatar
-            avatarProperties={portfolioAvatar}
+            iconProperties={portfolioIcon}
             changeProfileAvatar={changeProfileAvatar}
           />
         ) : (
           <CreatePortfolio
-            avatarProperties={portfolioAvatar}
+            onPortfolioCreate={() => setIsDialogOpen(false)}
+            iconProperties={portfolioIcon}
             changeCurrentDialogPage={changeCurrentDialogPage}
           />
         )}

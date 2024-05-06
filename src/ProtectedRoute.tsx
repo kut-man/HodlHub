@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "./AuthProvider";
@@ -6,14 +6,16 @@ import { useAuth } from "./AuthProvider";
 type ProtectedRouteProps = PropsWithChildren;
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user } = useAuth();
+  const { user, isPending } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user || !user.email) {
-      navigate("/", { replace: true });
+  useLayoutEffect(() => {
+    if (!isPending) {
+      if (!user || !user.email) {
+        navigate("/", { replace: true });
+      }
     }
-  }, [navigate, user]);
+  }, [navigate, user, isPending]);
 
   return children;
 }

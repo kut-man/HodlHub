@@ -28,13 +28,13 @@ const reducer = (state: State, action: Action): State => {
 
 export function ChangeAvatar({
   changeProfileAvatar,
-  avatarProperties,
+  iconProperties,
 }: ChanageAvatarProps) {
   const initialState: State = {
-    selectedColor: avatarProperties.color,
-    selectedLogo: avatarProperties.logo,
-    hoveredColor: avatarProperties.color,
-    hoveredLogo: avatarProperties.logo,
+    selectedColor: iconProperties.color,
+    selectedLogo: iconProperties.avatar,
+    hoveredColor: iconProperties.color,
+    hoveredLogo: iconProperties.avatar,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -100,7 +100,7 @@ export function ChangeAvatar({
           onClick={() =>
             changeProfileAvatar({
               color: state.selectedColor,
-              logo: state.selectedLogo,
+              avatar: state.selectedLogo,
             })
           }
           className="w-full"

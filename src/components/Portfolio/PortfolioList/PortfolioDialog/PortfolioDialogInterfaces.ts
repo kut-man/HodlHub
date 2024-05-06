@@ -7,7 +7,7 @@ type SelectColorAction = {
 
 type SelectLogoAction = {
   type: typeof ACTIONS.SELECTED_LOGO;
-  payload: avatarValues["logo"];
+  payload: avatarValues["avatar"];
 };
 
 type HoverColorAction = {
@@ -17,7 +17,7 @@ type HoverColorAction = {
 
 type HoverLogoAction = {
   type: typeof ACTIONS.HOVERED_LOGO;
-  payload: avatarValues["logo"];
+  payload: avatarValues["avatar"];
 };
 
 export type Action =
@@ -27,20 +27,21 @@ export type Action =
   | HoverLogoAction;
 
 export interface ChanageAvatarProps {
-  avatarProperties: avatarValues;
+  iconProperties: avatarValues;
   changeProfileAvatar: (avatarProperties: avatarValues) => void;
 }
 
 export interface State {
   selectedColor: avatarValues["color"];
-  selectedLogo: avatarValues["logo"];
+  selectedLogo: avatarValues["avatar"];
   hoveredColor: avatarValues["color"];
-  hoveredLogo: avatarValues["logo"];
+  hoveredLogo: avatarValues["avatar"];
 }
 
 export interface PortfolioDialogProps {
-  avatarProperties: avatarValues;
+  iconProperties: avatarValues;
   changeCurrentDialogPage: () => void;
+  onPortfolioCreate: () => void;
 }
 
 export enum ACTIONS {
@@ -49,3 +50,11 @@ export enum ACTIONS {
   HOVERED_COLOR = "changeHoveredColor",
   HOVERED_LOGO = "changeHovereLogo",
 }
+
+export type PortfolioFields = avatarValues | { name: string };
+
+export type CreatePortfolioProps = (
+  data: PortfolioFields,
+  onSuccess: () => void,
+  onError: React.Dispatch<React.SetStateAction<string>>
+) => Promise<void>;

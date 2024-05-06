@@ -16,7 +16,6 @@ const valueFormatter = function (number: number) {
   }
 };
 
-
 interface ChartProps {
   variant: "area" | "donut";
   className?: string;
