@@ -46,7 +46,7 @@ export default function AddTransaction({children}: {children: string}) {
           <div className="flex gap-2">
             <div className="w-1/2">
               <Label htmlFor="name" className="text-right">
-                Quantitiy
+                Quantity
               </Label>
               <Input id="name" placeholder="0.00" className="col-span-3" />
             </div>

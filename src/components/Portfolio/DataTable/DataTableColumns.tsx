@@ -12,7 +12,7 @@ import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
 import { Label } from "@/components/ui/label";
 import AddTransaction from "../PortfolioHeader/AddTransaction";
-import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
 
 const createChangeColumn = (
@@ -24,7 +24,7 @@ const createChangeColumn = (
   cell: ({ row }: CellContext<AssetsInfo, unknown>) => (
     <div className="flex items-center justify-end">
       <PerformanceLabel
-        hideable={false}
+        hidable={false}
         performance={row.getValue(accessorKey)}
       />
     </div>
@@ -40,7 +40,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     },
     cell: ({ row }) => (
       <div className="flex gap-2 items-center">
-        <AvatarWithSceleton
+        <AvatarWithSkeleton
           className="h-6 w-6"
           alt={`${(row.getValue("name") as Coin).name}'s Icon`}
           src={(row.getValue("name") as Coin).iconURL}
@@ -62,7 +62,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-right lowercase">
-          <BalanceLabel hideable={false} balance={row.getValue("price")} />
+          <BalanceLabel hidable={false} balance={row.getValue("price")} />
         </div>
       );
     },

@@ -11,7 +11,7 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { VisibilityContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
-import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 interface PortfolioHeaderProps {
   setShowCharts: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +33,7 @@ export default function PortfolioHeader({
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
         <Flex flexDirection="row" alignItems="center" justifyContent="start">
-          <AvatarWithSceleton
+          <AvatarWithSkeleton
             className="h-8 w-8 m-2 ml-0"
             alt="Avatar"
             src="https://github.com/shadcn.png"

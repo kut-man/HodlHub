@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Avatar, AvatarImage } from "./avatar";
 import { Skeleton } from "./skeleton";
 
-type AvatarWithSceletonProps = {
+type AvatarWithSkeletonProps = {
   className: string;
   alt: string;
   src: string;
 };
 
-export default function AvatarWithSceleton({
+export default function AvatarWithSkeleton({
   className,
   alt,
   src,
-}: AvatarWithSceletonProps) {
+}: AvatarWithSkeletonProps) {
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(false);
   return (
     <Avatar onLoad={() => setIsAvatarLoaded(true)} className={className}>

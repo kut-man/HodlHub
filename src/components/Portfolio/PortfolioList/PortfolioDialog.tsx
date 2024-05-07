@@ -31,7 +31,7 @@ export default function PortfolioDialog() {
     changeCurrentDialogPage();
   };
 
-  const toogleDialog = (open: boolean) => {
+  const toggleDialog = (open: boolean) => {
     if (open) setIsAvatarDialogPage(!open);
     setIsDialogOpen(open);
   };
@@ -41,7 +41,7 @@ export default function PortfolioDialog() {
   };
 
   return (
-    <Dialog onOpenChange={toogleDialog} open={isDialogOpen}>
+    <Dialog onOpenChange={toggleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
         <button className="flex items-center">
           <FiPlus size={20} />

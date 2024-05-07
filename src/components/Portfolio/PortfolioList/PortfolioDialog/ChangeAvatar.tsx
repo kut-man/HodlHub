@@ -7,7 +7,7 @@ import { useReducer } from "react";
 import {
   ACTIONS,
   Action,
-  ChanageAvatarProps,
+  ChangeAvatarProps,
   State,
 } from "./PortfolioDialogInterfaces";
 import PortfolioIcon from "../PortfolioIcon";
@@ -30,7 +30,7 @@ const reducer = (state: State, action: Action): State => {
 export function ChangeAvatar({
   changeProfileAvatar,
   iconProperties,
-}: ChanageAvatarProps) {
+}: ChangeAvatarProps) {
   const initialState: State = {
     selectedColor: iconProperties.color,
     selectedLogo: iconProperties.avatar,

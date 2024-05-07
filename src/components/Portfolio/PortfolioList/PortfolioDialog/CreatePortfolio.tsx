@@ -14,33 +14,22 @@ import { Loader2 } from "lucide-react";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import PortfolioIcon from "../PortfolioIcon";
 
-const createPortfolio: CreatePortfolioProps = (data, onSuccess, onError) =>
-  fetch(PORTFOLIO_URL, {
+const createPortfolio: CreatePortfolioProps = async (data) => {
+  const response = await fetch(PORTFOLIO_URL, {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.ok) {
-        onSuccess();
-      } else {
-        response.json().then(({ errors }: ErrorResponse) => {
-          const errorMessage = errors
-            ? errors[0].value
-            : "Something went wrong!";
-          onError(errorMessage);
-          console.error("Portfolio creating failed!");
-        });
-      }
-    })
-    .catch((error) => {
-      const errorMessage = "Something went wrong!";
-      onError(errorMessage);
-      console.error("Error during portfolio creation:", error);
-    });
+  });
+  if (!response.ok) {
+    const { errors }: ErrorResponse = await response.json();
+    const errorMessage = errors ? errors[0].value : "Something went wrong!";
+    console.error("Portfolio creating failed!");
+    throw Error(errorMessage);
+  }
+};
 
 export function CreatePortfolio({
   changeCurrentDialogPage,
@@ -48,22 +37,19 @@ export function CreatePortfolio({
   iconProperties,
 }: PortfolioDialogProps) {
   const [portfolioName, setPortfolioName] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, error } = useMutation({
+  const { mutate, isPending, error, isError } = useMutation({
     mutationFn: (data: Omit<PortfolioFields, "balance" | "id">) =>
-      createPortfolio(data, onPortfolioCreate, setErrorMessage),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["portfolio"] }),
+      createPortfolio(data),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+    },
+    onSuccess: onPortfolioCreate,
   });
 
-  console.log(error);
-
-  const onSubmit = () => {
-    const data = { ...iconProperties, name: portfolioName };
-    mutate(data);
-  };
+  const onSubmit = () => mutate({ ...iconProperties, name: portfolioName });
 
   return (
     <>
@@ -84,9 +70,9 @@ export function CreatePortfolio({
           className="col-span-3"
         />
       </div>
-      <DialogFooter className="flex flex-col gap-6">
-        {errorMessage && (
-          <Label className="font-normal text-red-600">*{errorMessage}</Label>
+      <DialogFooter className="sm:space-x-0 sm:flex-col flex flex-col gap-6">
+        {isError && (
+          <Label className="font-normal text-red-600">*{error.message}</Label>
         )}
         <Button onClick={onSubmit} className="w-full" size="lg">
           {isPending ? (

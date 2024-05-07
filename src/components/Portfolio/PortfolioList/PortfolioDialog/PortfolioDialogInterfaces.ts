@@ -26,7 +26,7 @@ export type Action =
   | HoverColorAction
   | HoverLogoAction;
 
-export interface ChanageAvatarProps {
+export interface ChangeAvatarProps {
   iconProperties: avatarValues;
   changeProfileAvatar: (avatarProperties: avatarValues) => void;
 }
@@ -48,13 +48,11 @@ export enum ACTIONS {
   SELECTED_COLOR = "changeSelectedColor",
   SELECTED_LOGO = "changeSelectedLogo",
   HOVERED_COLOR = "changeHoveredColor",
-  HOVERED_LOGO = "changeHovereLogo",
+  HOVERED_LOGO = "changeHoverLogo",
 }
 
 export type PortfolioFields = avatarValues & { id:number, name: string, balance: number };
 
 export type CreatePortfolioProps = (
   data: Omit<PortfolioFields, "balance" | "id">,
-  onSuccess: () => void,
-  onError: React.Dispatch<React.SetStateAction<string>>
 ) => Promise<void>;

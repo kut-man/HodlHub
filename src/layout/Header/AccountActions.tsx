@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { LOGOUT_URL } from "@/api";
 import { useAuth } from "@/AuthProvider";
 
@@ -33,7 +33,7 @@ export default function AccountActions() {
   return (
     <Popover>
       <PopoverTrigger>
-        <AvatarWithSceleton
+        <AvatarWithSkeleton
           className="h-8 w-8 m-2"
           alt="Avatar"
           src="https://github.com/shadcn.png"
@@ -41,7 +41,7 @@ export default function AccountActions() {
       </PopoverTrigger>
       <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <Flex justifyContent="start">
-          <AvatarWithSceleton
+          <AvatarWithSkeleton
             className="h-10 w-10 m-2"
             alt="Avatar"
             src="https://github.com/shadcn.png"

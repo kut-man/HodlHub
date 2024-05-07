@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext } from "react";
 import { USER_URL } from "./api";
 import { useQuery } from "@tanstack/react-query";
 
-const AuthContext = createContext<ContexValue>({});
+const AuthContext = createContext<ContextValue>({});
 
 export type Holder = {
   name: string;
@@ -10,7 +10,7 @@ export type Holder = {
   avatar: string;
 };
 
-type ContexValue = {
+type ContextValue = {
   user?: Holder;
   refetchUser?: () => void;
   isPending?: boolean;

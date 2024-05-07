@@ -7,7 +7,7 @@ import {
 } from "../../ui/card";
 import PerformanceLabel from "./Labels/PerformanceLabel";
 import ProfitLossLabel from "./Labels/ProfitLossLabel";
-import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 interface PortfolioHeaderProps {
   description: string;
@@ -37,7 +37,7 @@ export default function PerformerTile({
       <CardContent className="max-md:items-end max-md:p-4 pb-4 flex flex-col">
         <div className="flex items-center !m-0">
           {avatarSrc ? (
-            <AvatarWithSceleton
+            <AvatarWithSkeleton
               className="h-6 w-6 m-2 ml-0 my-0 rounded-none"
               alt={`${description}'s Icon`}
               src={avatarSrc}

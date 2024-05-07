@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import interactiveCoinIconData from "./asstest";
+import interactiveCoinIconData from "./assets";
 
 const SCROLL_LIMIT = 600;
 
