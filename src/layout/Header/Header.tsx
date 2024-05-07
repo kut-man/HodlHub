@@ -5,7 +5,7 @@ import { Toggle } from "@radix-ui/react-toggle";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
 import Authentication from "./Authentication/Authentication";
-import { useAuth } from "@/AuthProvider";
+import { useAuth } from "@/lib/useAuth";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();

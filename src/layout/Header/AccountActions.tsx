@@ -8,8 +8,8 @@ import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
-import { LOGOUT_URL } from "@/api";
-import { useAuth } from "@/AuthProvider";
+import { LOGOUT_URL } from "@/lib/api";
+import { useAuth } from "@/lib/useAuth";
 
 export default function AccountActions() {
   const { refetchUser } = useAuth();

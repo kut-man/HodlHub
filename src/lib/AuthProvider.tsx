@@ -1,8 +1,8 @@
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode, createContext } from "react";
 import { USER_URL } from "./api";
 import { useQuery } from "@tanstack/react-query";
 
-const AuthContext = createContext<ContextValue>({});
+export const AuthContext = createContext<ContextValue>({});
 
 export type Holder = {
   name: string;
@@ -36,13 +36,3 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-
-  return context;
-};

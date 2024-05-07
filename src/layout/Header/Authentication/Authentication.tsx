@@ -6,7 +6,7 @@ import { useState } from "react";
 import Register from "./Register";
 import { AuthAction } from "../HeaderTypes";
 import Login from "./Login";
-import { useAuth } from "@/AuthProvider";
+import { useAuth } from "@/lib/useAuth";
 
 export default function Authentication() {
   const [dialog, setDialog] = useState<{

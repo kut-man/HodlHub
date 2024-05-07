@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import PortfolioDialog from "./PortfolioDialog";
 import { useQuery } from "@tanstack/react-query";
-import { PORTFOLIO_URL } from "@/api";
+import { PORTFOLIO_URL } from "@/lib/api";
 import PortfolioItem from "./PortfolioItem";
 import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import { Skeleton } from "@/components/ui/skeleton";

@@ -1,7 +1,7 @@
 import { PropsWithChildren, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "./useAuth";
 
 type ProtectedRouteProps = PropsWithChildren;
 

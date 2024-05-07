@@ -8,7 +8,7 @@ import {
   PortfolioFields,
 } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { PORTFOLIO_URL } from "@/api";
+import { PORTFOLIO_URL } from "@/lib/api";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";

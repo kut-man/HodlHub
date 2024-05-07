@@ -3,7 +3,7 @@ import {
   ErrorResponse,
   LoginResponse,
 } from "../HeaderTypes";
-import { LOGIN_URL, REGISTER_URL } from "@/api";
+import { LOGIN_URL, REGISTER_URL } from "@/lib/api";
 
 export const loginUser: AuthenticationMethodsProps = async (
   data,
