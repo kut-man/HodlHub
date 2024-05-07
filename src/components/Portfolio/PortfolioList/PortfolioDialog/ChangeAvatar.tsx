@@ -10,6 +10,7 @@ import {
   ChanageAvatarProps,
   State,
 } from "./PortfolioDialogInterfaces";
+import PortfolioIcon from "../PortfolioIcon";
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -41,11 +42,7 @@ export function ChangeAvatar({
   return (
     <>
       <Flex className="gap-2" flexDirection="col">
-        <div
-          className={`rounded-full flex justify-center items-center h-16 w-16 bg-${state.hoveredColor}-500`}
-        >
-          <span className="mb-1 text-4xl">{state.hoveredLogo}</span>
-        </div>
+        <PortfolioIcon color={state.hoveredColor} avatar={state.hoveredLogo} />
         <Flex className="max-w-72">
           {avatarBackground.map((color) => (
             <div

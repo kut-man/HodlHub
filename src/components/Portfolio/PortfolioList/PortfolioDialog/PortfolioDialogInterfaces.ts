@@ -51,10 +51,10 @@ export enum ACTIONS {
   HOVERED_LOGO = "changeHovereLogo",
 }
 
-export type PortfolioFields = avatarValues | { name: string };
+export type PortfolioFields = avatarValues & { id:number, name: string, balance: number };
 
 export type CreatePortfolioProps = (
-  data: PortfolioFields,
+  data: Omit<PortfolioFields, "balance" | "id">,
   onSuccess: () => void,
   onError: React.Dispatch<React.SetStateAction<string>>
 ) => Promise<void>;

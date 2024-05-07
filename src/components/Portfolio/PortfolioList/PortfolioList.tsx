@@ -5,43 +5,44 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Flex } from "@tremor/react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioDialog from "./PortfolioDialog";
-import AvatarWithSceleton from "@/components/ui/AvatarWithSceleton";
+import { useQuery } from "@tanstack/react-query";
+import { PORTFOLIO_URL } from "@/api";
+import PortfolioItem from "./PortfolioItem";
+import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Portfolio() {
+  const {
+    data: portfolios,
+    isPending,
+  } = useQuery<PortfolioFields[]>({
+    queryKey: ["portfolio"],
+    queryFn: async () => {
+      const response = await fetch(PORTFOLIO_URL, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) throw Error("Portfolio list fetch failed!");
+      return await response.json();
+    },
+  });
+
   return (
     <Card className="border-none shadow-none max-lg:w-full lg:min-w-[340px]">
       <CardHeader>
         <CardTitle className="text-lg">My portfolio</CardTitle>
       </CardHeader>
-      <CardContent className="py-2">
-        <Button
-          aria-label="Select Portfolio"
-          variant="secondary"
-          className="w-full h-14 p-0 mb-1"
-        >
-          <Flex justifyContent="start">
-            <AvatarWithSceleton
-              className="h-10 w-10 m-2"
-              alt="Avatar"
-              src="https://github.com/shadcn.png"
-            />
-            <Flex justifyContent="start" alignItems="start" flexDirection="col">
-              <Label className="cursor-pointer text-left leading-2 text-base">
-                Binance
-              </Label>
-              <BalanceLabel
-                className="cursor-pointer text-left leading-2 font-normal text-gray-500"
-                balance={1052.78}
-              />
-            </Flex>
-          </Flex>
-        </Button>
+      <CardContent className="flex flex-col py-2">
+        {isPending ? (
+          <Skeleton className="w-full h-14 rounded-md" />
+        ) : (
+          portfolios?.map((portfolio) => (
+            <PortfolioItem key={portfolio.id} {...portfolio} />
+          ))
+        )}
       </CardContent>
+
       <CardFooter className="text-blue-600">
         <PortfolioDialog />
       </CardFooter>

@@ -7,11 +7,12 @@ import {
   PortfolioDialogProps,
   PortfolioFields,
 } from "./PortfolioDialogInterfaces";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/api";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
+import PortfolioIcon from "../PortfolioIcon";
 
 const createPortfolio: CreatePortfolioProps = (data, onSuccess, onError) =>
   fetch(PORTFOLIO_URL, {
@@ -49,9 +50,12 @@ export function CreatePortfolio({
   const [portfolioName, setPortfolioName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending, error } = useMutation({
-    mutationFn: (data: PortfolioFields) =>
+    mutationFn: (data: Omit<PortfolioFields, "balance" | "id">) =>
       createPortfolio(data, onPortfolioCreate, setErrorMessage),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["portfolio"] }),
   });
 
   console.log(error);
@@ -66,11 +70,10 @@ export function CreatePortfolio({
       <div className="flex flex-col gap-4 py-4">
         <Label>Portfolio Avatar</Label>
         <div className="flex items-center justify-between">
-          <div
-            className={`rounded-full flex justify-center items-center h-16 w-16 bg-${iconProperties.color}-500`}
-          >
-            <span className="mb-1 text-4xl">{iconProperties.avatar}</span>
-          </div>
+          <PortfolioIcon
+            color={iconProperties.color}
+            avatar={iconProperties.avatar}
+          />
           <Button onClick={changeCurrentDialogPage}>Change</Button>
         </div>
         <Label htmlFor="name">Portfolio Name</Label>
