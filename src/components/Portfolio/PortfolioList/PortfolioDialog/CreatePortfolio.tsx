@@ -9,10 +9,10 @@ import {
 } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
-import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import PortfolioIcon from "../PortfolioIcon";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const createPortfolio: CreatePortfolioProps = async (data) => {
   const response = await fetch(PORTFOLIO_URL, {
@@ -31,12 +31,20 @@ const createPortfolio: CreatePortfolioProps = async (data) => {
   }
 };
 
+type FormValues = {
+  name: string;
+};
+
 export function CreatePortfolio({
   changeCurrentDialogPage,
   onPortfolioCreate,
   iconProperties,
 }: PortfolioDialogProps) {
-  const [portfolioName, setPortfolioName] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
   const queryClient = useQueryClient();
 
@@ -49,7 +57,8 @@ export function CreatePortfolio({
     onSuccess: onPortfolioCreate,
   });
 
-  const onSubmit = () => mutate({ ...iconProperties, name: portfolioName });
+  const onSubmit: SubmitHandler<FormValues> = (portfolioName) =>
+    mutate({ ...iconProperties, name: portfolioName.name });
 
   return (
     <>
@@ -64,9 +73,13 @@ export function CreatePortfolio({
         </div>
         <Label htmlFor="name">Portfolio Name</Label>
         <Input
-          value={portfolioName}
-          onChange={(e) => setPortfolioName(e.target.value)}
-          id="name"
+          {...register("name", {
+            required: "Portfolio name is empty!",
+            maxLength: {
+              value: 24,
+              message: "Portfolio name can not be longer that 24 characters!",
+            },
+          })}
           className="col-span-3"
         />
       </div>
@@ -74,7 +87,17 @@ export function CreatePortfolio({
         {isError && (
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}
-        <Button onClick={onSubmit} className="w-full" size="lg">
+        {errors.name && (
+          <Label className="font-normal text-red-600">
+            *{errors.name.message}
+          </Label>
+        )}
+        <Button
+          disabled={isPending || errors.name ? true : false}
+          onClick={handleSubmit(onSubmit)}
+          className="w-full"
+          size="lg"
+        >
           {isPending ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
