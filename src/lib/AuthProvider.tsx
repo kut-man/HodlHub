@@ -10,18 +10,28 @@ export type Holder = {
   avatar: string;
 };
 
+export type ApiResponse<T = unknown> = {
+  status: number;
+  code: string;
+  message: string;
+  data?: T;
+  timestamp: string;
+  path: string;
+};
+
+
 type ContextValue = {
-  user?: Holder;
+  isLoggedIn?: boolean;
   refetchUser?: () => void;
   isPending?: boolean;
 };
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const {
-    data: user,
+    data: data,
     refetch,
     isPending,
-  } = useQuery({
+  } = useQuery<ApiResponse>({
     queryKey: ["user"],
     queryFn: () =>
       fetch(USER_URL, {
@@ -30,8 +40,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       }).then((res) => res.json()),
   });
 
+  const isLoggedIn = data?.status == 200;
+
   return (
-    <AuthContext.Provider value={{ user, refetchUser: refetch, isPending }}>
+    <AuthContext.Provider value={{ isLoggedIn, refetchUser: refetch, isPending }}>
       {children}
     </AuthContext.Provider>
   );

@@ -24,8 +24,10 @@ export default function Register({
   const [registrationError, setRegistrationError] = useState("");
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: RegisterFields) =>
-      registerUser(data, onRegister, setRegistrationError),
+    mutationFn: (data: RegisterFields) => {
+      delete (data as {repeatPassword?: string}).repeatPassword; 
+      return registerUser(data, onRegister, setRegistrationError)
+    }
   });
 
   const onSubmit: SubmitHandler<RegisterFields> = (data) => {

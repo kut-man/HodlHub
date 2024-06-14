@@ -11,12 +11,13 @@ import { PORTFOLIO_URL } from "@/lib/api";
 import PortfolioItem from "./PortfolioItem";
 import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ApiResponse } from "@/lib/AuthProvider";
 
 export default function Portfolio() {
   const {
-    data: portfolios,
+    data: response,
     isPending,
-  } = useQuery<PortfolioFields[]>({
+  } = useQuery<ApiResponse<PortfolioFields[]>>({
     queryKey: ["portfolio"],
     queryFn: async () => {
       const response = await fetch(PORTFOLIO_URL, {
@@ -37,7 +38,7 @@ export default function Portfolio() {
         {isPending ? (
           <Skeleton className="w-full h-14 rounded-md" />
         ) : (
-          portfolios?.map((portfolio) => (
+          response?.data?.map((portfolio) => (
             <PortfolioItem key={portfolio.id} {...portfolio} />
           ))
         )}
