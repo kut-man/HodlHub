@@ -11,7 +11,7 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
 import { Label } from "@/components/ui/label";
-import AddTransaction from "../PortfolioHeader/AddTransaction";
+import AddTransaction from "../PortfolioHeader/TransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
 

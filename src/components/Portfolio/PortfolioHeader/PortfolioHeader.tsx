@@ -4,7 +4,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { BsThreeDots } from "react-icons/bs";
-import AddTransaction from "./AddTransaction";
+import TransactionDialog from "./TransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
@@ -78,7 +78,7 @@ export default function PortfolioHeader({
           />
         </div>
 
-        <AddTransaction>+ Add Transaction</AddTransaction>
+        <TransactionDialog>+ Add Transaction</TransactionDialog>
 
         <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
           <BsThreeDots />
