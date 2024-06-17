@@ -8,7 +8,7 @@ import TransactionDialog from "./TransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
-import { VisibilityContext } from "@/pages/Portfolio";
+import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
@@ -28,7 +28,7 @@ export default function PortfolioHeader({
   performance,
   profitLoss,
 }: PortfolioHeaderProps) {
-  const visibility = useContext(VisibilityContext);
+  const { privacy } = useContext(GlobalContext);
   return (
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
@@ -48,7 +48,7 @@ export default function PortfolioHeader({
             variant="ghost"
             onClick={changeVisibility}
           >
-            {visibility ? (
+            {privacy ? (
               <MdOutlineRemoveRedEye
                 color="gray"
                 className="mx-2 mt-1"

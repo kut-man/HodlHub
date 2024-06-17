@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import { VisibilityContext } from "@/pages/Portfolio";
+import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
 interface PerformanceLabelProps {
@@ -14,9 +14,9 @@ export default function PerformanceLabel({
   text = "sm",
   hidable = true,
 }: PerformanceLabelProps) {
-  const visibility = useContext(VisibilityContext);
+  const { privacy } = useContext(GlobalContext);
   function formatAsPercentage(number = performance): string {
-    if (!visibility && hidable) return "****";
+    if (!privacy && hidable) return "****";
     const absoluteNumber = Math.abs(number);
     const result = `${absoluteNumber}%`;
 

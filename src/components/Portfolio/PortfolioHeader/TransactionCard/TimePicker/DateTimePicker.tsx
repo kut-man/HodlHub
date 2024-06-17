@@ -1,7 +1,6 @@
-import * as React from "react";
 import { add, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
- 
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,10 +10,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { TimePickerDemo } from "./time-picker-demo";
- 
-export function DateTimePicker() {
-  const [date, setDate] = React.useState<Date>();
- 
+
+export function DateTimePicker({
+  date,
+  setDate,
+}: {
+  date: Date;
+  setDate: (date?: Date) => void;
+}) {
   /**
    * carry over the current time when a user clicks a new day
    * instead of resetting to 00:00
@@ -30,7 +33,7 @@ export function DateTimePicker() {
     const newDateFull = add(date, { days: Math.ceil(diffInDays) });
     setDate(newDateFull);
   };
- 
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -45,7 +48,7 @@ export function DateTimePicker() {
           {date ? format(date, "PPP HH:mm") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent  sideOffset={-250} side="right" className="w-auto p-0">
+      <PopoverContent sideOffset={-250} side="right" className="w-auto p-0">
         <Calendar
           mode="single"
           selected={date}

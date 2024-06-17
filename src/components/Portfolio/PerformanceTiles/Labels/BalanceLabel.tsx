@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label";
-import { VisibilityContext } from "@/pages/Portfolio";
+import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
 interface BalanceProps {
@@ -13,9 +13,9 @@ export default function BalanceLabel({
   className,
   hidable = true,
 }: BalanceProps) {
-  const visibility = useContext(VisibilityContext);
+  const { privacy } = useContext(GlobalContext);
   function formatCurrency(number = balance): string {
-    if (!visibility && hidable) return "*********";
+    if (!privacy && hidable) return "*********";
     const formattedNumber = number.toLocaleString(undefined, {
       style: "currency",
       currency: "USD",

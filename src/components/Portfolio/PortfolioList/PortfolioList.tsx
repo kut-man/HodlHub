@@ -13,11 +13,14 @@ import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ApiResponse } from "@/lib/AuthProvider";
 
-export default function Portfolio() {
-  const {
-    data: response,
-    isPending,
-  } = useQuery<ApiResponse<PortfolioFields[]>>({
+export default function Portfolio({
+  changePortfolio,
+}: {
+  changePortfolio: (portfolioId: number) => void;
+}) {
+  const { data: response, isPending } = useQuery<
+    ApiResponse<PortfolioFields[]>
+  >({
     queryKey: ["portfolio"],
     queryFn: async () => {
       const response = await fetch(PORTFOLIO_URL, {
@@ -39,7 +42,11 @@ export default function Portfolio() {
           <Skeleton className="w-full h-14 rounded-md" />
         ) : (
           response?.data?.map((portfolio) => (
-            <PortfolioItem key={portfolio.id} {...portfolio} />
+            <PortfolioItem
+              onClick={changePortfolio}
+              key={portfolio.id}
+              {...portfolio}
+            />
           ))
         )}
       </CardContent>

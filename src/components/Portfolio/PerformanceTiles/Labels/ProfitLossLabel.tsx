@@ -1,5 +1,5 @@
 import { Label } from "@/components/ui/label";
-import { VisibilityContext } from "@/pages/Portfolio";
+import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
 interface ProfitLossLabelProps {
@@ -11,9 +11,9 @@ export default function ProfitLossLabel({
   profitLoss,
   className,
 }: ProfitLossLabelProps) {
-  const visibility = useContext(VisibilityContext);
+  const { privacy } = useContext(GlobalContext);
   function formatCurrency(number = profitLoss): string {
-    if (!visibility) return `${profitLoss >= 0 ? "+ " : "- "}****`;
+    if (!privacy) return `${profitLoss >= 0 ? "+ " : "- "}****`;
 
     const formattedNumber = number.toLocaleString(undefined, {
       style: "currency",

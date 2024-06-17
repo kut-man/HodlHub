@@ -4,12 +4,12 @@ import { DonutChart } from "@tremor/react";
 import { cities, chartdata } from "./MockData";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { VisibilityContext } from "@/pages/Portfolio";
+import { GlobalContext } from "@/pages/Portfolio";
 import { useContext, useEffect } from "react";
 
 const valueFormatter = function (number: number) {
   if (number >= 1000) {
-    const formattedNumber = (number / 1000);
+    const formattedNumber = number / 1000;
     return "$ " + formattedNumber + "k";
   } else {
     return "$ " + new Intl.NumberFormat("us").format(number).toString();
@@ -28,7 +28,7 @@ const titles: Record<ChartProps["variant"], string> = {
 
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
-  const visibility = useContext(VisibilityContext);
+  const { privacy } = useContext(GlobalContext);
   const areaChartColor =
     chartdata[0].rate_open - chartdata[chartdata.length - 1].rate_open < 0
       ? "indigo"
@@ -74,9 +74,9 @@ export default function Chart(props: ChartProps) {
             categories={["rate_open"]}
             colors={[areaChartColor]}
             valueFormatter={valueFormatter}
-            showXAxis={visibility}
-            showYAxis={visibility}
-            showTooltip={visibility}
+            showXAxis={privacy}
+            showYAxis={privacy}
+            showTooltip={privacy}
             autoMinValue
             curveType="natural"
           />

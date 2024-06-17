@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import TransactionCard, { TransactionTypes } from "./TransactionCard";
+import TransactionCard from "./TransactionCard/TransactionCard";
+import TransactionTypes from "./TransactionTypesEnum";
 
 export default function TransactionDialog({ children }: { children: string }) {
   return (

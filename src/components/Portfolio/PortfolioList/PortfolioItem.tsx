@@ -4,25 +4,31 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
 import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { GlobalContext } from "@/pages/Portfolio";
 
 export default function PortfolioItem({
+  id,
   color,
   avatar,
   name,
   balance,
-}: PortfolioFields) {
+  onClick,
+}: PortfolioFields & { onClick: (id: number) => void }) {
+  const { portfolioId } = useContext(GlobalContext);
   return (
     <Button
       aria-label="Select Portfolio"
-      variant="secondary"
+      variant={id === portfolioId ? "secondary" : "ghost"}
       className="w-full h-14 p-0 mb-1"
+      onClick={() => onClick(id)}
     >
       <Flex justifyContent="start">
         <PortfolioIcon
           color={color}
           avatar={avatar}
           size="small"
-          style={{ width: "40px", height: "40px" }}
+          style={{ width: "50px", height: "40px" }}
         />
         <Flex justifyContent="start" alignItems="start" flexDirection="col">
           <Label className="cursor-pointer text-left leading-2 text-base">
