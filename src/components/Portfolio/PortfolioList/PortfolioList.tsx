@@ -6,49 +6,29 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import PortfolioDialog from "./PortfolioDialog";
-import { useQuery } from "@tanstack/react-query";
-import { PORTFOLIO_URL } from "@/lib/api";
 import PortfolioItem from "./PortfolioItem";
 import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ApiResponse } from "@/lib/AuthProvider";
 
 export default function Portfolio({
   changePortfolio,
+  data,
 }: {
   changePortfolio: (portfolioId: number) => void;
+  data: PortfolioFields[];
 }) {
-  const { data: response, isPending } = useQuery<
-    ApiResponse<PortfolioFields[]>
-  >({
-    queryKey: ["portfolio"],
-    queryFn: async () => {
-      const response = await fetch(PORTFOLIO_URL, {
-        method: "GET",
-        credentials: "include",
-      });
-      if (!response.ok) throw Error("Portfolio list fetch failed!");
-      return await response.json();
-    },
-  });
-
   return (
     <Card className="border-none shadow-none max-lg:w-full lg:min-w-[340px]">
       <CardHeader>
         <CardTitle className="text-lg">My portfolio</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col py-2">
-        {isPending ? (
-          <Skeleton className="w-full h-14 rounded-md" />
-        ) : (
-          response?.data?.map((portfolio) => (
-            <PortfolioItem
-              onClick={changePortfolio}
-              key={portfolio.id}
-              {...portfolio}
-            />
-          ))
-        )}
+        {data.map((portfolio) => (
+          <PortfolioItem
+            onClick={changePortfolio}
+            key={portfolio.id}
+            {...portfolio}
+          />
+        ))}
       </CardContent>
 
       <CardFooter className="text-blue-600">

@@ -16,6 +16,8 @@ import { useContext, useState } from "react";
 import TransactionCardInputs from "./TransactionCardInputs";
 import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
+import { TRANSACTION_URL } from "@/lib/api";
+import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 
 type TransactionCardProps = {
   type: TransactionTypes;
@@ -27,6 +29,25 @@ export type Transaction = {
   coin: string;
   pricePerCoin: string;
   portfolioId: number;
+  date: string;
+};
+
+const addTransaction = async (data: Transaction) => {
+  console.log(data);
+  const response = await fetch(TRANSACTION_URL, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    const { errors }: ErrorResponse = await response.json();
+    const errorMessage = errors ? errors[0].message : "Something went wrong!";
+    console.error("Failed to add transaction!");
+    throw Error(errorMessage);
+  }
 };
 
 export default function TransactionCard({ type }: TransactionCardProps) {
@@ -40,13 +61,13 @@ export default function TransactionCard({ type }: TransactionCardProps) {
   const { portfolioId } = useContext(GlobalContext);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: Transaction) => {
-      console.log({
-        id: portfolioId,
+    mutationFn: async (data: Pick<Transaction, "pricePerCoin" | "amount">) => {
+      addTransaction({
+        portfolioId: portfolioId as number,
         ...data,
         transactionType: type,
         coin: selectedCoin,
-        date: selectedTime,
+        date: selectedTime.toString(),
       });
     },
   });
@@ -65,7 +86,7 @@ export default function TransactionCard({ type }: TransactionCardProps) {
         <DateTimePicker
           date={selectedTime}
           setDate={(date) => {
-            date && setSelectedTime((prev) => ({ ...prev, time: date }));
+            date && setSelectedTime(date);
           }}
         />
         <Card>

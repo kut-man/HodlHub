@@ -22,13 +22,17 @@ export type LoginResponse = {
 };
 
 export type ErrorResponse = {
-  errors: FieldError[];
-  date: string;
+  errors?: FieldError[];
+  timestamp: string;
+  path: string;
+  status: number;
+  code: string;
+  message?: string;
 };
 
 export type FieldError = {
   field: string;
-  value: string;
+  message: string;
 };
 
 export enum AuthAction {

@@ -17,7 +17,7 @@ import {
   emojis,
 } from "./PortfolioDialog/AvatarAssets";
 
-export default function PortfolioDialog() {
+export default function PortfolioDialog({ className }: { className?: string }) {
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
   const [portfolioIcon, setPortfolioIcon] = useState({
     color:
@@ -43,7 +43,7 @@ export default function PortfolioDialog() {
   return (
     <Dialog onOpenChange={toggleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <button className="flex items-center">
+        <button className={"flex items-center " + className}>
           <FiPlus size={20} />
           <Label className="cursor-pointer text-base ml-1">
             Create Portfolio

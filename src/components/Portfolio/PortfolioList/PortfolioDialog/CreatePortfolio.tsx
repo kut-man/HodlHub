@@ -25,7 +25,7 @@ const createPortfolio: CreatePortfolioProps = async (data) => {
   });
   if (!response.ok) {
     const { errors }: ErrorResponse = await response.json();
-    const errorMessage = errors ? errors[0].value : "Something went wrong!";
+    const errorMessage = errors ? errors[0].message : "Something went wrong!";
     console.error("Portfolio creating failed!");
     throw Error(errorMessage);
   }
@@ -75,10 +75,10 @@ export function CreatePortfolio({
         <Input
           {...register("name", {
             required: "Portfolio name is empty!",
-            maxLength: {
-              value: 24,
-              message: "Portfolio name can not be longer that 24 characters!",
-            },
+            // maxLength: {
+            //   value: 24,
+            //   message: "Portfolio name can not be longer that 24 characters!",
+            // },
           })}
           className="col-span-3"
         />
