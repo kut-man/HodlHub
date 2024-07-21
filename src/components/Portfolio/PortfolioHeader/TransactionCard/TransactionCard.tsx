@@ -12,15 +12,17 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useRef } from "react";
 import TransactionCardInputs from "./TransactionCardInputs";
 import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
 import { TRANSACTION_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
+import { Label } from "@/components/ui/label";
 
 type TransactionCardProps = {
   type: TransactionTypes;
+  onSuccess: () => void;
 };
 
 export type Transaction = {
@@ -33,7 +35,6 @@ export type Transaction = {
 };
 
 const addTransaction = async (data: Transaction) => {
-  console.log(data);
   const response = await fetch(TRANSACTION_URL, {
     method: "POST",
     credentials: "include",
@@ -43,33 +44,36 @@ const addTransaction = async (data: Transaction) => {
     body: JSON.stringify(data),
   });
   if (!response.ok) {
-    const { errors }: ErrorResponse = await response.json();
-    const errorMessage = errors ? errors[0].message : "Something went wrong!";
+    const { message }: ErrorResponse = await response.json();
+    const errorMessage = message;
     console.error("Failed to add transaction!");
     throw Error(errorMessage);
   }
 };
 
-export default function TransactionCard({ type }: TransactionCardProps) {
+export default function TransactionCard({
+  type,
+  onSuccess,
+}: TransactionCardProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Transaction>();
-  const [selectedCoin, setSelectedCoin] = useState("");
-  const [selectedTime, setSelectedTime] = useState(new Date());
+  const selectedCoin = useRef("");
+  const selectedTime = useRef(new Date());
   const { portfolioId } = useContext(GlobalContext);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (data: Pick<Transaction, "pricePerCoin" | "amount">) => {
+  const { mutate, isPending, error, isError } = useMutation({
+    mutationFn: (data: Pick<Transaction, "pricePerCoin" | "amount">) =>
       addTransaction({
         portfolioId: portfolioId as number,
         ...data,
         transactionType: type,
-        coin: selectedCoin,
-        date: selectedTime.toString(),
-      });
-    },
+        coin: selectedCoin.current,
+        date: selectedTime.current.toString(),
+      }),
+    onSuccess,
   });
 
   return (
@@ -79,14 +83,13 @@ export default function TransactionCard({ type }: TransactionCardProps) {
       </CardHeader>
       <CardContent className="space-y-2">
         <CoinSelect
-          selected={selectedCoin}
-          onSelectedChange={(coin) => setSelectedCoin(coin)}
+          onSelectedChange={(coin) => (selectedCoin.current = coin)}
         />
         <TransactionCardInputs register={register} errors={errors} />
         <DateTimePicker
-          date={selectedTime}
+          date={selectedTime.current}
           setDate={(date) => {
-            date && setSelectedTime(date);
+            if (date) selectedTime.current = date;
           }}
         />
         <Card>
@@ -100,7 +103,10 @@ export default function TransactionCard({ type }: TransactionCardProps) {
           </CardContent>
         </Card>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-4">
+        {isError && (
+          <Label className="font-normal text-red-600">*{error.message}</Label>
+        )}
         <Button
           onClick={handleSubmit((data) => mutate(data))}
           className="w-full"

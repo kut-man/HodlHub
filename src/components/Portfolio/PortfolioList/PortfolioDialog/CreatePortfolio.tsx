@@ -75,10 +75,10 @@ export function CreatePortfolio({
         <Input
           {...register("name", {
             required: "Portfolio name is empty!",
-            // maxLength: {
-            //   value: 24,
-            //   message: "Portfolio name can not be longer that 24 characters!",
-            // },
+            maxLength: {
+              value: 24,
+              message: "Portfolio name can not be longer that 24 characters!",
+            },
           })}
           className="col-span-3"
         />

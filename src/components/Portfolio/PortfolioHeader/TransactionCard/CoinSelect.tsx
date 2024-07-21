@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +20,7 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
 
 type Coin = {
   id: number;
@@ -30,13 +30,11 @@ type Coin = {
 };
 
 export function CoinSelect({
-  selected,
   onSelectedChange,
 }: {
-  selected: string;
   onSelectedChange: (coin: string) => void;
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const { data: response, isPending } = useQuery<ApiResponse<Coin[]>>({
     queryKey: ["coin"],
@@ -52,6 +50,13 @@ export function CoinSelect({
 
   const coins = response?.data;
 
+  const [selectedCoin, setSelectedCoin] = useState("");
+
+  if (coins && !selectedCoin) {
+    onSelectedChange(coins[0].ticker);
+    setSelectedCoin(coins[0].name.toLowerCase());
+  }
+
   return (
     <Popover modal={true} open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -61,22 +66,22 @@ export function CoinSelect({
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {selected
+          {selectedCoin
             ? (() => {
-                const selectedCoin = coins?.find(
-                  (coin) => coin.name.toLowerCase() === selected
+                const selectedItem = coins?.find(
+                  (coin) => coin.name.toLowerCase() === selectedCoin
                 );
-                if (selectedCoin) {
+                if (selectedItem) {
                   return (
                     <div className="flex items-center">
                       <AvatarWithSkeleton
-                        alt={selectedCoin.name + "'s icon"}
-                        src={selectedCoin.logo}
+                        alt={selectedItem.name + "'s icon"}
+                        src={selectedItem.logo}
                         className="mr-2 h-6 w-6"
                       />
-                      {selectedCoin.name}
+                      {selectedItem.name}
                       <Label className="ml-2 text-slate-400">
-                        {selectedCoin.ticker}
+                        {selectedItem.ticker}
                       </Label>
                     </div>
                   );
@@ -96,7 +101,10 @@ export function CoinSelect({
             <CommandGroup>
               {isPending
                 ? Array.from({ length: 10 }).map((_, index) => (
-                    <div key={index} className="flex px-2 py-1.5 items-center gap-2">
+                    <div
+                      key={index}
+                      className="flex px-2 py-1.5 items-center gap-2"
+                    >
                       <Skeleton className="w-8 h-8 rounded-full" />
                       <Skeleton className="w-32 h-4 rounded-medium" />
                     </div>
@@ -106,14 +114,20 @@ export function CoinSelect({
                       key={coin.id}
                       value={coin.name}
                       onSelect={(currentValue) => {
-                        onSelectedChange(
-                          currentValue === selected ? "" : currentValue
+                        const coin = coins.find(
+                          (coin) => coin.name.toLowerCase() === currentValue
+                        );
+                        if (coin) {
+                          onSelectedChange(coin?.ticker);
+                        }
+                        setSelectedCoin(
+                          currentValue === selectedCoin ? "" : currentValue
                         );
                         setOpen(false);
                       }}
                       className={cn(
                         "font-medium ",
-                        selected === coin.name.toLowerCase()
+                        selectedCoin === coin.name.toLowerCase()
                           ? "bg-accent text-accent-foreground"
                           : "opacity-100"
                       )}

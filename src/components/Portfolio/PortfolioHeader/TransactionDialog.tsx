@@ -3,10 +3,12 @@ import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionTypes from "./TransactionTypesEnum";
+import { useState } from "react";
 
 export default function TransactionDialog({ children }: { children: string }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => setIsDialogOpen(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
         <Button size="sm" aria-label="Add Transaction">
           {children}
@@ -19,10 +21,16 @@ export default function TransactionDialog({ children }: { children: string }) {
             <TabsTrigger value="sell">Sell</TabsTrigger>
           </TabsList>
           <TabsContent value="buy">
-            <TransactionCard type={TransactionTypes.BUY} />
+            <TransactionCard
+              onSuccess={() => setIsDialogOpen(false)}
+              type={TransactionTypes.BUY}
+            />
           </TabsContent>
           <TabsContent value="sell">
-            <TransactionCard type={TransactionTypes.SELL} />
+            <TransactionCard
+              onSuccess={() => setIsDialogOpen(false)}
+              type={TransactionTypes.SELL}
+            />
           </TabsContent>
         </Tabs>
       </DialogContent>
