@@ -80,7 +80,7 @@ export default function Portfolio() {
                   data={activePortfolio}
                   changeVisibility={changeVisibility}
                 />
-                <DataTable />
+                <DataTable data={activePortfolio.holdings} />
               </Flex>
             ) : (
               <h1>NOTHING TO SHOW</h1>

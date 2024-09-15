@@ -55,7 +55,7 @@ export type CreatePortfolioProps = (
   data: Pick<PortfolioFields, "name" | "avatar" | "color">,
 ) => Promise<void>;
 
-type Holding = {
+export type Holding = {
   ticker: string;
   name: string;
   quantity: number;

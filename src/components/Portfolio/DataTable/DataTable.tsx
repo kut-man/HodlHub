@@ -1,5 +1,4 @@
 import * as React from "react";
-import data from "./MockDataTableData.json";
 import { columns } from "./DataTableColumns";
 import {
   SortingState,
@@ -18,15 +17,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Holding } from "../PortfolioList/PortfolioDialog/PortfolioDialogInterfaces";
+import { mapHoldingsToAssetsInfo } from "./mapHoldingsToAssetsInfo";
 
-export function DataTable() {
+export function DataTable({ data }: { data: Holding[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: mapHoldingsToAssetsInfo(data),
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -53,7 +54,7 @@ export function DataTable() {
                   return (
                     <TableHead
                       className={`${
-                        (header.column.columnDef.meta as {left: boolean})
+                        (header.column.columnDef.meta as { left: boolean })
                           ?.left
                           ? "text-left"
                           : "text-right"
