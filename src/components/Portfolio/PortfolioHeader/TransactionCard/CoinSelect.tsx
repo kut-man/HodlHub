@@ -21,11 +21,11 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
+import { cryptoLogos } from "./coinIconUrl";
 
 type Coin = {
   id: number;
   name: string;
-  logo: string;
   ticker: string;
 };
 
@@ -76,7 +76,7 @@ export function CoinSelect({
                     <div className="flex items-center">
                       <AvatarWithSkeleton
                         alt={selectedItem.name + "'s icon"}
-                        src={selectedItem.logo}
+                        src={cryptoLogos[selectedItem.ticker]}
                         className="mr-2 h-6 w-6"
                       />
                       {selectedItem.name}
@@ -134,7 +134,7 @@ export function CoinSelect({
                     >
                       <AvatarWithSkeleton
                         alt={coin.name + "'s icon"}
-                        src={coin.logo}
+                        src={cryptoLogos[coin.ticker]}
                         className="mr-2 h-8 w-8"
                       ></AvatarWithSkeleton>
                       {coin.name}

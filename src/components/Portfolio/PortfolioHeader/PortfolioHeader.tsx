@@ -16,17 +16,17 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 interface PortfolioHeaderProps {
   setShowCharts: React.Dispatch<React.SetStateAction<boolean>>;
   changeVisibility: () => void;
-  balance: number;
-  performance: number;
-  profitLoss: number;
+  totalAmount: number;
+  valueChange24h: number;
+  valueChangePercentage24h: number;
 }
 
 export default function PortfolioHeader({
   setShowCharts,
   changeVisibility,
-  balance,
-  performance,
-  profitLoss,
+  totalAmount,
+  valueChange24h,
+  valueChangePercentage24h,
 }: PortfolioHeaderProps) {
   const { privacy } = useContext(GlobalContext);
   return (
@@ -41,7 +41,7 @@ export default function PortfolioHeader({
           <Label className="text-lg">Binance</Label>
         </Flex>
         <Flex flexDirection="row" justifyContent="start">
-          <BalanceLabel balance={balance} className="font-bold text-3xl" />
+          <BalanceLabel balance={totalAmount} className="font-bold text-3xl" />
           <Button
             aria-label="Toggle number's visibility"
             size="icon"
@@ -64,8 +64,8 @@ export default function PortfolioHeader({
           flexDirection="row"
           justifyContent="start"
         >
-          <ProfitLossLabel className="text-base mr-2" profitLoss={profitLoss} />
-          <PerformanceLabel text="base" performance={performance} />
+          <ProfitLossLabel className="text-base mr-2" profitLoss={valueChange24h} />
+          <PerformanceLabel text="base" performance={valueChangePercentage24h} />
         </Flex>
       </div>
       <div className="flex items-center gap-4">

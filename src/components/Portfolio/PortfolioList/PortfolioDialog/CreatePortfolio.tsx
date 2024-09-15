@@ -49,7 +49,7 @@ export function CreatePortfolio({
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error, isError } = useMutation({
-    mutationFn: (data: Omit<PortfolioFields, "balance" | "id">) =>
+    mutationFn: (data: Pick<PortfolioFields, "name" | "avatar" | "color">) =>
       createPortfolio(data),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });

@@ -51,8 +51,45 @@ export enum ACTIONS {
   HOVERED_LOGO = "changeHoverLogo",
 }
 
-export type PortfolioFields = avatarValues & { id:number, name: string, balance: number };
-
 export type CreatePortfolioProps = (
-  data: Omit<PortfolioFields, "balance" | "id">,
+  data: Pick<PortfolioFields, "name" | "avatar" | "color">,
 ) => Promise<void>;
+
+type Holding = {
+  ticker: string;
+  name: string;
+  quantity: number;
+  averagePurchasePrice: number;
+  currentPrice: number;
+  totalValue: number;
+  oneHourChangePercent: number;
+  yesterdayChangePercent: number;
+  sevenDaysChangePercent: number;
+  plValue: number;
+  plPercentValue: number;
+};
+
+type Statistics = {
+  totalPlValue: number;
+  totalPlPercentValue: number;
+  allTotalBuySpent: number;
+  bestPlValue: number;
+  bestPlPercentValue: number;
+  bestName: string;
+  bestTicker: string;
+  worstPlValue: number;
+  worstPlPercentValue: number;
+  worstName: string;
+  worstTicker: string;
+};
+
+export type PortfolioFields = avatarValues & {
+  id: number;
+  name: string;
+  totalAmount: number;
+  valueChange24h: number;
+  valueChangePercentage24h: number;
+  holdings: Holding[];
+  statistics: Statistics;
+};
+

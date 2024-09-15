@@ -17,7 +17,7 @@ interface PortfolioHeaderProps {
   profitLoss?: number;
 }
 
-export default function PerformerTile({
+export default function Tile({
   description,
   avatarSrc,
   title,

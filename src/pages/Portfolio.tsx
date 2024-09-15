@@ -1,7 +1,7 @@
 import { Flex } from "@tremor/react";
 import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
 import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
-import { useState, createContext, useLayoutEffect } from "react";
+import { useState, createContext, useEffect } from "react";
 import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
 import { ApiResponse } from "@/lib/AuthProvider";
 import { PortfolioFields } from "@/components/Portfolio/PortfolioList/PortfolioDialog/PortfolioDialogInterfaces";
@@ -22,6 +22,7 @@ export default function Portfolio() {
       : true
   );
   const [portfolioId, setPortfolioId] = useState<number>();
+  const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
 
   function changeVisibility() {
     setVisibility((prev) => {
@@ -44,11 +45,17 @@ export default function Portfolio() {
     },
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (response && response.data && response.data.length > 0) {
       setPortfolioId(response.data[0].id);
+      setActivePortfolio(response.data[0]);
     }
   }, [response]);
+
+  const changePortfolio = (id: number) => {
+    setPortfolioId(id);
+    setActivePortfolio(response?.data?.find((portfolio) => portfolio.id == id));
+  };
 
   return (
     <GlobalContext.Provider value={{ privacy: visibility, portfolioId }}>
@@ -57,20 +64,27 @@ export default function Portfolio() {
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
-        ) : portfolioId && response?.data ? (
+        ) : activePortfolio && response?.data ? (
           <>
             <PortfolioList
-              data={response?.data}
-              changePortfolio={(id: number) => setPortfolioId(id)}
+              data={response.data}
+              changePortfolio={changePortfolio}
             />
-            <Flex
-              className="w-full overflow-auto mt-6 px-6 gap-8"
-              alignItems="start"
-              flexDirection="col"
-            >
-              <PortfolioInsights changeVisibility={changeVisibility} />
-              <DataTable />
-            </Flex>
+            {activePortfolio.statistics ? (
+              <Flex
+                className="w-full overflow-auto mt-6 px-6 gap-8"
+                alignItems="start"
+                flexDirection="col"
+              >
+                <PortfolioInsights
+                  data={activePortfolio}
+                  changeVisibility={changeVisibility}
+                />
+                <DataTable />
+              </Flex>
+            ) : (
+              <h1>NOTHING TO SHOW</h1>
+            )}
           </>
         ) : (
           <EmptyDashboard />

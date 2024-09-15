@@ -17,7 +17,7 @@ export default function PerformanceLabel({
   const { privacy } = useContext(GlobalContext);
   function formatAsPercentage(number = performance): string {
     if (!privacy && hidable) return "****";
-    const absoluteNumber = Math.abs(number);
+    const absoluteNumber = Math.abs(number).toFixed(2);
     const result = `${absoluteNumber}%`;
 
     return result;

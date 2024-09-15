@@ -12,7 +12,7 @@ export default function PortfolioItem({
   color,
   avatar,
   name,
-  balance,
+  totalAmount,
   onClick,
 }: PortfolioFields & { onClick: (id: number) => void }) {
   const { portfolioId } = useContext(GlobalContext);
@@ -36,7 +36,7 @@ export default function PortfolioItem({
           </Label>
           <BalanceLabel
             className="cursor-pointer text-left leading-2 font-normal text-gray-500"
-            balance={balance}
+            balance={totalAmount}
           />
         </Flex>
       </Flex>
