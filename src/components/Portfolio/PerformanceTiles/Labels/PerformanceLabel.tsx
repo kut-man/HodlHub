@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 interface PerformanceLabelProps {
   performance: number;
-  text?: "sm" | "base";
+  text?: "sm" | "base" | "xs";
   hidable?: boolean;
 }
 
@@ -23,17 +23,17 @@ export default function PerformanceLabel({
     return result;
   }
   return (
-    <>
+    <div className="flex items-end">
       {performance > 0 ? (
-        <TiArrowSortedUp className="text-green-500" />
+        <TiArrowSortedUp className="mb-px text-green-500" />
       ) : (
-        <TiArrowSortedDown className="text-red-500" />
+        <TiArrowSortedDown className="mb-px text-red-500" />
       )}
       <Label
         className={`text-${text} text-${performance > 0 ? "green" : "red"}-500`}
       >
         {formatAsPercentage()}
       </Label>
-    </>
+    </div>
   );
 }

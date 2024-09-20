@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useMemo } from "react";
 import { columns } from "./DataTableColumns";
 import {
   SortingState,
@@ -21,13 +21,13 @@ import { Holding } from "../PortfolioList/PortfolioDialog/PortfolioDialogInterfa
 import { mapHoldingsToAssetsInfo } from "./mapHoldingsToAssetsInfo";
 
 export function DataTable({ data }: { data: Holding[] }) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+  const tableData = useMemo(() => mapHoldingsToAssetsInfo(data), [data]);
 
   const table = useReactTable({
-    data: mapHoldingsToAssetsInfo(data),
+    data: tableData,
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),

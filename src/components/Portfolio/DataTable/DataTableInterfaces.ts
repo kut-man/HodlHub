@@ -10,7 +10,13 @@ export type AssetsInfo = {
   hourChange: number;
   dayChange: number;
   weekChange: number;
-  holdings: number;
+  holdings: {
+    amount: string;
+    value: number;
+  };
   averageBuyPrice: number;
-  profitLoss: number;
+  profitLoss: {
+    value: number;
+    percent: number;
+  };
 };

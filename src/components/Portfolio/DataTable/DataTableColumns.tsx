@@ -75,8 +75,13 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     header: SortableHeaderHOF("Holdings"),
     cell: ({ row }) => {
       return (
-        <div className="text-right font-medium">
-          <BalanceLabel balance={row.getValue("holdings")} />
+        <div className="flex flex-col items-end gap-1 text-right font-medium">
+          <BalanceLabel
+            balance={(row.getValue("holdings") as AssetsInfo["holdings"]).value}
+          />
+          <Label className="text-xs text-slate-500">
+            {(row.getValue("holdings") as AssetsInfo["holdings"]).amount}
+          </Label>
         </div>
       );
     },
@@ -97,10 +102,18 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     header: SortableHeaderHOF("Profit/Loss"),
     cell: ({ row }) => {
       return (
-        <div className="text-right font-medium">
+        <div className="flex flex-col items-end gap-1 text-right font-medium">
           <ProfitLossLabel
             className="text-right text-black-500"
-            profitLoss={row.getValue("profitLoss")}
+            profitLoss={
+              (row.getValue("profitLoss") as AssetsInfo["profitLoss"]).value
+            }
+          />
+          <PerformanceLabel
+            text="xs"
+            performance={
+              (row.getValue("profitLoss") as AssetsInfo["profitLoss"]).percent
+            }
           />
         </div>
       );
