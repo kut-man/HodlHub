@@ -1,8 +1,9 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { USER_URL } from "./api";
 import { useQuery } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
 
-export const AuthContext = createContext<ContextValue>({});
+export const AuthContext = createContext<ContextValue>({} as ContextValue);
 
 export type Holder = {
   name: string;
@@ -19,11 +20,10 @@ export type ApiResponse<T = unknown> = {
   path: string;
 };
 
-
 type ContextValue = {
   isLoggedIn?: boolean;
-  refetchUser?: () => void;
-  isPending?: boolean;
+  refetchUser: () => void;
+  isPending: boolean;
 };
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
@@ -31,6 +31,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     data: data,
     refetch,
     isPending,
+    isLoading,
+    isError,
+    isSuccess,
   } = useQuery<ApiResponse>({
     queryKey: ["user"],
     queryFn: () =>
@@ -39,11 +42,36 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         credentials: "include",
       }).then((res) => res.json()),
   });
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>();
 
-  const isLoggedIn = data?.status == 200;
+  useEffect(() => {
+    if (isSuccess && data && data.status === 200) {
+      setIsLoggedIn(true);
+    } else if ((isSuccess && data) || isError) {
+      setIsLoggedIn(false);
+    }
+  }, [data, isError, isSuccess]);
+
+  if (isError) {
+    return (
+      <div className="h-screen flex justify-center items-center w-full">
+        <h1>SOME TERRIBLE ERROR HAPPENED, SORRY :\</h1>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex justify-center items-center w-full">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, refetchUser: refetch, isPending }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, refetchUser: refetch, isPending }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -6,16 +6,14 @@ import { useAuth } from "./useAuth";
 type ProtectedRouteProps = PropsWithChildren;
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const {isLoggedIn, isPending } = useAuth();
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    if (!isPending) {
-      if (!isLoggedIn) {
-        navigate("/", { replace: true });
-      }
+    if (isLoggedIn === false) {
+      navigate("/", { replace: true });
     }
-  }, [navigate, isLoggedIn, isPending]);
+  }, [navigate, isLoggedIn]);
 
   return children;
 }

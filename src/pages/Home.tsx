@@ -1,9 +1,20 @@
 import InteractiveIcons from "@/components/Home/InteractiveIcons/InteractiveIcons";
 import { Button } from "@/components/ui/button";
+import AuthenticationDialog from "@/layout/Header/Authentication/AuthenticationDialog";
+import { AuthAction } from "@/layout/Header/HeaderTypes";
+import { useAuth } from "@/lib/useAuth";
 import { Flex } from "@tremor/react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const [dialog, setDialog] = useState<{
+    isOpen: boolean;
+    tab: AuthAction;
+  }>({ isOpen: false, tab: AuthAction.LOGIN });
+
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -25,8 +36,16 @@ export default function Home() {
           Gain valuable crypto insights for streamlined portfolio management and
           enhanced returns
         </p>
-        <Button className="text-xl p-6" size="lg">
-          <Link to="/portfolio">Get Started</Link>
+        <Button
+          onClick={() => {
+            isLoggedIn
+              ? navigate("/portfolio")
+              : setDialog({ tab: AuthAction.LOGIN, isOpen: true });
+          }}
+          className="text-xl p-6"
+          size="lg"
+        >
+          Get Started
         </Button>
       </Flex>
       <div
@@ -42,6 +61,7 @@ export default function Home() {
         md:bg-[url('https://github.com/kut-man/HodlHub/assets/73386100/8d15a905-4f80-447b-8b11-a377ee85e650')]"
         ></div>
       </div>
+      <AuthenticationDialog setDialog={setDialog} dialog={dialog} />
     </div>
   );
 }

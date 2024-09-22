@@ -32,8 +32,8 @@ function App() {
         <AuthProvider>
           <Header />
           <RouterProvider router={router} />
+          <Footer />
         </AuthProvider>
-        <Footer />
       </QueryClientProvider>
     </ThemeProvider>
   );

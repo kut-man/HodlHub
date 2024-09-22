@@ -21,7 +21,7 @@ export default function AccountActions() {
         credentials: "include",
       });
       if (response.ok) {
-        refetchUser && refetchUser();
+        refetchUser();
       } else {
         console.error("Login failed");
       }
