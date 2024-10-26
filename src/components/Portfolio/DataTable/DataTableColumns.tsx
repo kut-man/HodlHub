@@ -132,7 +132,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80 flex flex-col gap-2">
-            <AddTransaction>Add Transaction</AddTransaction>
+            <AddTransaction />
             <Button>View Transactions</Button>
             <Button>Remove Asset</Button>
           </PopoverContent>

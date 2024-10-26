@@ -1,12 +1,12 @@
 import { Flex } from "@tremor/react";
-import PortfolioDialog from "./PortfolioList/PortfolioDialog";
+import AddTransaction from "./PortfolioHeader/TransactionDialog";
 
-export default function EmptyDashboard() {
+export default function EmptyTransaction() {
   return (
-    <Flex className="gap-4 h-[calc(100vh-173.8px)] m-auto" flexDirection="col">
+    <Flex className="gap-4 h-fit m-auto" flexDirection="col">
       <img
         className="h-60"
-        src="https://s2.coinmarketcap.com/static/cloud/img/portfolio/no-portfolio.png?_=dce0834"
+        src="https://s2.coinmarketcap.com/static/cloud/img/portfolio/no-manual-portfolio.png?_=3350d4d"
         alt="portfolio"
       />
       <Flex flexDirection="col" className="gap-4">
@@ -17,7 +17,7 @@ export default function EmptyDashboard() {
           Track profits, losses and valuation all in one place.
         </p>
       </Flex>
-      <PortfolioDialog className="mb-28 h-11 rounded-md px-8 bg-primary text-primary-foreground hover:bg-primary/90" />
+      <AddTransaction label="+ Add Transaction" className="mb-20" size="lg" />
     </Flex>
   );
 }

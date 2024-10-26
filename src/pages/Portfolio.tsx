@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
 import EmptyDashboard from "@/components/Portfolio/EmptyDashboard";
 import { Loader2 } from "lucide-react";
+import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
+import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
 
 export const GlobalContext = createContext<{
   privacy: boolean;
@@ -70,21 +72,33 @@ export default function Portfolio() {
               data={response.data}
               changePortfolio={changePortfolio}
             />
-            {activePortfolio.statistics ? (
-              <Flex
-                className="w-full overflow-auto mt-6 px-6 gap-8"
-                alignItems="start"
-                flexDirection="col"
-              >
-                <PortfolioInsights
-                  data={activePortfolio}
-                  changeVisibility={changeVisibility}
-                />
-                <DataTable data={activePortfolio.holdings} />
-              </Flex>
-            ) : (
-              <h1>NOTHING TO SHOW</h1>
-            )}
+
+            <Flex
+              className="w-full overflow-auto mt-6 px-6 gap-8"
+              alignItems="start"
+              flexDirection="col"
+            >
+              {activePortfolio.statistics ? (
+                <>
+                  <PortfolioInsights
+                    data={activePortfolio}
+                    changeVisibility={changeVisibility}
+                  />
+                  <DataTable data={activePortfolio.holdings} />
+                </>
+              ) : (
+                <>
+                  <PortfolioHeader
+                    changeVisibility={changeVisibility}
+                    totalAmount={0}
+                    valueChange24h={0}
+                    valueChangePercentage24h={0}
+                  />
+
+                  <EmptyTransaction />
+                </>
+              )}
+            </Flex>
           </>
         ) : (
           <EmptyDashboard />

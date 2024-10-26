@@ -14,7 +14,7 @@ import { PiEyeClosed } from "react-icons/pi";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 interface PortfolioHeaderProps {
-  setShowCharts: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowCharts?: React.Dispatch<React.SetStateAction<boolean>>;
   changeVisibility: () => void;
   totalAmount: number;
   valueChange24h: number;
@@ -64,21 +64,29 @@ export default function PortfolioHeader({
           flexDirection="row"
           justifyContent="start"
         >
-          <ProfitLossLabel className="text-base mr-2" profitLoss={valueChange24h} />
-          <PerformanceLabel text="base" performance={valueChangePercentage24h} />
+          <ProfitLossLabel
+            className="text-base mr-2"
+            profitLoss={valueChange24h}
+          />
+          <PerformanceLabel
+            text="base"
+            performance={valueChangePercentage24h}
+          />
         </Flex>
       </div>
       <div className="flex items-center gap-4">
-        <div className="items-center space-x-2 sm:inline-flex hidden">
-          <Label htmlFor="show-charts">Show Charts</Label>
-          <Switch
-            defaultChecked={true}
-            onCheckedChange={() => setShowCharts((prev: boolean) => !prev)}
-            id="show-charts"
-          />
-        </div>
+        {setShowCharts ? (
+          <div className="items-center space-x-2 sm:inline-flex hidden">
+            <Label htmlFor="show-charts">Show Charts</Label>
+            <Switch
+              defaultChecked={true}
+              onCheckedChange={() => setShowCharts((prev: boolean) => !prev)}
+              id="show-charts"
+            />
+          </div>
+        ) : null}
 
-        <TransactionDialog>+ Add Transaction</TransactionDialog>
+        <TransactionDialog label="+ Add Transaction" />
 
         <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
           <BsThreeDots />

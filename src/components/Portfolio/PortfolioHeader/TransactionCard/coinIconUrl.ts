@@ -35,7 +35,7 @@ import LEO from "../../../../assets/icons/LEO.png";
 import LINK from "../../../../assets/icons/LINK.png";
 import LTC from "../../../../assets/icons/LTC.png";
 import MANA from "../../../../assets/icons/MANA.png";
-import MATIC from "../../../../assets/icons/MATIC.png";
+import POL from "../../../../assets/icons/POL.png";
 import NEAR from "../../../../assets/icons/NEAR.png";
 import OP from "../../../../assets/icons/OP.png";
 import QNT from "../../../../assets/icons/QNT.png";
@@ -92,7 +92,7 @@ export const cryptoLogos: Record<string, string> = {
   LINK,
   LTC,
   MANA,
-  MATIC,
+  POL,
   NEAR,
   OP,
   QNT,

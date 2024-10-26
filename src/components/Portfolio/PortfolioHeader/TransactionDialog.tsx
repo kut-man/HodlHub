@@ -5,13 +5,19 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionTypes from "./TransactionTypesEnum";
 import { useState } from "react";
 
-export default function TransactionDialog({ children }: { children: string }) {
+export default function TransactionDialog({
+  label = "Add Transaction",
+  ...restProps // Gather the remaining props here
+}: {
+  label?: string;
+} & React.ComponentProps<typeof Button>) { // Ensure correct typing
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
   return (
     <Dialog onOpenChange={(open) => setIsDialogOpen(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" aria-label="Add Transaction">
-          {children}
+        <Button size="sm" aria-label="Add Transaction" {...restProps}> {/* Spread restProps here */}
+          {label}
         </Button>
       </DialogTrigger>
       <DialogContent>
