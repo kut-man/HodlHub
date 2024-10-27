@@ -6,13 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CoinSelect } from "./CoinSelect";
+import { Coin, CoinSelect } from "./CoinSelect";
 import { DateTimePicker } from "./TimePicker/DateTimePicker";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import TransactionCardInputs from "./TransactionCardInputs";
 import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -29,7 +29,7 @@ export type Transaction = {
   transactionType: TransactionTypes;
   amount: number;
   coin: string;
-  pricePerCoin: string;
+  pricePerCoin: number;
   portfolioId: number;
   date: string;
 };
@@ -56,23 +56,18 @@ export default function TransactionCard({
   onSuccess,
 }: TransactionCardProps) {
   const {
+    watch,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Transaction>();
-  const selectedCoin = useRef("");
+  const [selectedCoin, setSelectedCoin] = useState<Coin>();
   const selectedTime = useRef(new Date());
   const { portfolioId } = useContext(GlobalContext);
 
   const { mutate, isPending, error, isError } = useMutation({
-    mutationFn: (data: Pick<Transaction, "pricePerCoin" | "amount">) =>
-      addTransaction({
-        portfolioId: portfolioId as number,
-        ...data,
-        transactionType: type,
-        coin: selectedCoin.current,
-        date: selectedTime.current.toString(),
-      }),
+    mutationFn: (data: Transaction) => addTransaction(data),
     onSuccess,
   });
 
@@ -83,7 +78,10 @@ export default function TransactionCard({
       </CardHeader>
       <CardContent className="space-y-2">
         <CoinSelect
-          onSelectedChange={(coin) => (selectedCoin.current = coin)}
+          onSelectedChange={(coin) => {
+            setSelectedCoin(coin),
+              setValue("pricePerCoin", coin.currentPrice);
+          }}
         />
         <TransactionCardInputs register={register} errors={errors} />
         <DateTimePicker
@@ -99,7 +97,11 @@ export default function TransactionCard({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <CardTitle className="font-bold">$100</CardTitle>
+            <CardTitle className="font-bold">$
+              {selectedCoin?.currentPrice
+                ? (watch("pricePerCoin") * watch("amount")).toFixed(2)
+                : "0.00"}
+            </CardTitle>
           </CardContent>
         </Card>
       </CardContent>
@@ -108,7 +110,17 @@ export default function TransactionCard({
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}
         <Button
-          onClick={handleSubmit((data) => mutate(data))}
+          onClick={handleSubmit((data) => {
+            if (selectedCoin?.ticker && portfolioId) {
+              mutate({
+                ...data,
+                portfolioId: portfolioId,
+                coin: selectedCoin?.ticker,
+                transactionType: type,
+                date: selectedTime.current.toString(),
+              });
+            }
+          })}
           className="w-full"
           size="lg"
           disabled={isPending}

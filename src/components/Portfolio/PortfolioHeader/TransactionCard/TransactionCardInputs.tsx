@@ -22,6 +22,11 @@ export default function TransactionCardInputs({
         <Input
           {...register("amount", {
             required: "Quantity is required!",
+            validate: value => value > 0 || "Quantity must be greater than 0",
+            pattern: {
+              value: /^(?!0\d)\d{0,9}(\.\d{0,9})?$/,
+              message: "Max 9 digits before & after decimal",
+            },
           })}
           id="amount"
           type="number"
@@ -41,6 +46,11 @@ export default function TransactionCardInputs({
         <Input
           {...register("pricePerCoin", {
             required: "Price Per Coin is required!",
+            validate: value => value > 0 || "Price Per Coin must be greater than 0",
+            pattern: {
+              value: /^(?!0\d)\d{0,9}(\.\d{0,9})?$/,
+              message: "Max 9 digits before & after decimal",
+            },
           })}
           id="pricePerCoin"
           type="number"

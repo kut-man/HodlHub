@@ -20,19 +20,20 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cryptoLogos } from "./coinIconUrl";
 
-type Coin = {
+export type Coin = {
   id: number;
   name: string;
   ticker: string;
+  currentPrice: number;
 };
 
 export function CoinSelect({
   onSelectedChange,
 }: {
-  onSelectedChange: (coin: string) => void;
+  onSelectedChange: (coin: Coin) => void;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -52,10 +53,12 @@ export function CoinSelect({
 
   const [selectedCoin, setSelectedCoin] = useState("");
 
-  if (coins && !selectedCoin) {
-    onSelectedChange(coins[0].ticker);
-    setSelectedCoin(coins[0].name.toLowerCase());
-  }
+  useEffect(() => {
+    if (coins && !selectedCoin) {
+      onSelectedChange(coins[0]);
+      setSelectedCoin(coins[0].name.toLowerCase());
+    }
+  }, [coins, onSelectedChange, selectedCoin]);
 
   return (
     <Popover modal={true} open={open} onOpenChange={setOpen}>
@@ -118,7 +121,7 @@ export function CoinSelect({
                           (coin) => coin.name.toLowerCase() === currentValue
                         );
                         if (coin) {
-                          onSelectedChange(coin?.ticker);
+                          onSelectedChange(coin);
                         }
                         setSelectedCoin(
                           currentValue === selectedCoin ? "" : currentValue

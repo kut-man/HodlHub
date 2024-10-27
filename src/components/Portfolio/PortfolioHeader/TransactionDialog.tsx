@@ -7,16 +7,16 @@ import { useState } from "react";
 
 export default function TransactionDialog({
   label = "Add Transaction",
-  ...restProps // Gather the remaining props here
+  ...restProps
 }: {
   label?: string;
-} & React.ComponentProps<typeof Button>) { // Ensure correct typing
+} & React.ComponentProps<typeof Button>) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   return (
     <Dialog onOpenChange={(open) => setIsDialogOpen(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" aria-label="Add Transaction" {...restProps}> {/* Spread restProps here */}
+        <Button size="sm" aria-label="Add Transaction" {...restProps}>
           {label}
         </Button>
       </DialogTrigger>
