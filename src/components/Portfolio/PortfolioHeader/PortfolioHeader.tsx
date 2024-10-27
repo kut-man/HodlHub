@@ -60,7 +60,7 @@ export default function PortfolioHeader({
           </Button>
         </Flex>
         <Flex
-          className="my-1 text-green-500 items-end"
+          className="font-medium my-1 text-green-500 items-end"
           flexDirection="row"
           justifyContent="start"
         >
@@ -68,10 +68,13 @@ export default function PortfolioHeader({
             className="text-base mr-2"
             profitLoss={valueChange24h}
           />
-          <PerformanceLabel
-            text="base"
-            performance={valueChangePercentage24h}
-          />
+          {valueChangePercentage24h > 0 ? (
+            <PerformanceLabel
+              className="text-base mr-2"
+              performance={valueChangePercentage24h}
+            />
+          ) : null}
+          (24h)
         </Flex>
       </div>
       <div className="flex items-center gap-4">

@@ -9,7 +9,7 @@ interface ProfitLossLabelProps {
 
 export default function ProfitLossLabel({
   profitLoss,
-  className,
+  className = "",
 }: ProfitLossLabelProps) {
   const { privacy } = useContext(GlobalContext);
   function formatCurrency(number = profitLoss): string {

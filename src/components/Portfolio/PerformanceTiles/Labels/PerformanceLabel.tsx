@@ -5,13 +5,13 @@ import { useContext } from "react";
 
 interface PerformanceLabelProps {
   performance: number;
-  text?: "sm" | "base" | "xs";
+  className?: string;
   hidable?: boolean;
 }
 
 export default function PerformanceLabel({
   performance,
-  text = "sm",
+  className = "",
   hidable = true,
 }: PerformanceLabelProps) {
   const { privacy } = useContext(GlobalContext);
@@ -30,7 +30,9 @@ export default function PerformanceLabel({
         <TiArrowSortedDown className="mb-px text-red-500" />
       )}
       <Label
-        className={`text-${text} text-${performance > 0 ? "green" : "red"}-500`}
+        className={`text-sm text-${
+          performance > 0 ? "green" : "red"
+        }-500 ${className}`}
       >
         {formatAsPercentage()}
       </Label>

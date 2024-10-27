@@ -110,7 +110,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
             }
           />
           <PerformanceLabel
-            text="xs"
+            className="text-xs"
             performance={
               (row.getValue("profitLoss") as AssetsInfo["profitLoss"]).percent
             }

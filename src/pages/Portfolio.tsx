@@ -45,6 +45,7 @@ export default function Portfolio() {
       if (!response.ok) throw Error("Portfolio list fetch failed!");
       return await response.json();
     },
+    refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export default function Portfolio() {
   return (
     <GlobalContext.Provider value={{ privacy: visibility, portfolioId }}>
       <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
-        {isPending ? (
+        {isPending && !activePortfolio  ? (
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
