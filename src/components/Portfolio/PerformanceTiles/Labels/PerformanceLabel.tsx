@@ -24,14 +24,14 @@ export default function PerformanceLabel({
   }
   return (
     <div className="flex items-end">
-      {performance > 0 ? (
+      {performance >= 0 ? (
         <TiArrowSortedUp className="mb-px text-green-500" />
       ) : (
         <TiArrowSortedDown className="mb-px text-red-500" />
       )}
       <Label
         className={`text-sm text-${
-          performance > 0 ? "green" : "red"
+          performance >= 0 ? "green" : "red"
         }-500 ${className}`}
       >
         {formatAsPercentage()}

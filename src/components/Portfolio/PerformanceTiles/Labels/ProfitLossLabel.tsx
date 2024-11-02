@@ -27,7 +27,7 @@ export default function ProfitLossLabel({
   }
   return (
     <Label
-      className={`text-${profitLoss > 0 ? "green" : "red"}-500 ${className}`}
+      className={`text-${profitLoss >= 0 ? "green" : "red"}-500 ${className}`}
     >
       {formatCurrency()}
     </Label>
