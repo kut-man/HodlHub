@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 type TransactionCardProps = {
   type: TransactionTypes;
   onSuccess: () => void;
+  defaultSelectedCoinTicker?: string;
 };
 
 export type Transaction = {
@@ -54,6 +55,7 @@ const addTransaction = async (data: Transaction) => {
 export default function TransactionCard({
   type,
   onSuccess,
+  defaultSelectedCoinTicker,
 }: TransactionCardProps) {
   const {
     watch,
@@ -78,9 +80,9 @@ export default function TransactionCard({
       </CardHeader>
       <CardContent className="space-y-2">
         <CoinSelect
+          defaultSelectedCoinTicker={defaultSelectedCoinTicker}
           onSelectedChange={(coin) => {
-            setSelectedCoin(coin),
-              setValue("pricePerCoin", coin.currentPrice);
+            setSelectedCoin(coin), setValue("pricePerCoin", coin.currentPrice);
           }}
         />
         <TransactionCardInputs register={register} errors={errors} />
@@ -97,7 +99,8 @@ export default function TransactionCard({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <CardTitle className="font-bold">$
+            <CardTitle className="font-bold">
+              $
               {selectedCoin?.currentPrice
                 ? (watch("pricePerCoin") * watch("amount")).toFixed(2)
                 : "0.00"}

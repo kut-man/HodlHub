@@ -20,7 +20,7 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { cryptoLogos } from "./coinIconUrl";
 
 export type Coin = {
@@ -32,8 +32,10 @@ export type Coin = {
 
 export function CoinSelect({
   onSelectedChange,
+  defaultSelectedCoinTicker = "BTC",
 }: {
   onSelectedChange: (coin: Coin) => void;
+  defaultSelectedCoinTicker?: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -53,10 +55,13 @@ export function CoinSelect({
 
   const [selectedCoin, setSelectedCoin] = useState("");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (coins && !selectedCoin) {
-      onSelectedChange(coins[0]);
-      setSelectedCoin(coins[0].name.toLowerCase());
+      const defaultCoin =
+        coins.find((coin) => coin.ticker === defaultSelectedCoinTicker) ||
+        coins[0];
+      onSelectedChange(defaultCoin);
+      setSelectedCoin(defaultCoin.name.toLowerCase());
     }
   }, [coins, onSelectedChange, selectedCoin]);
 
@@ -69,30 +74,35 @@ export function CoinSelect({
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {selectedCoin
-            ? (() => {
-                const selectedItem = coins?.find(
-                  (coin) => coin.name.toLowerCase() === selectedCoin
+          {selectedCoin ? (
+            (() => {
+              const selectedItem = coins?.find(
+                (coin) => coin.name.toLowerCase() === selectedCoin
+              );
+              if (selectedItem) {
+                return (
+                  <div className="flex items-center">
+                    <AvatarWithSkeleton
+                      alt={selectedItem.name + "'s icon"}
+                      src={cryptoLogos[selectedItem.ticker]}
+                      className="mr-2 h-6 w-6"
+                    />
+                    {selectedItem.name}
+                    <Label className="ml-2 text-slate-400">
+                      {selectedItem.ticker}
+                    </Label>
+                  </div>
                 );
-                if (selectedItem) {
-                  return (
-                    <div className="flex items-center">
-                      <AvatarWithSkeleton
-                        alt={selectedItem.name + "'s icon"}
-                        src={cryptoLogos[selectedItem.ticker]}
-                        className="mr-2 h-6 w-6"
-                      />
-                      {selectedItem.name}
-                      <Label className="ml-2 text-slate-400">
-                        {selectedItem.ticker}
-                      </Label>
-                    </div>
-                  );
-                } else {
-                  return "Select Coin...";
-                }
-              })()
-            : "Select Coin..."}
+              } else {
+                return "Select Coin...";
+              }
+            })()
+          ) : isPending ? (
+            <div className="flex py-1.5 items-center gap-2">
+              <Skeleton className="w-6 h-6 rounded-full" />
+              <Skeleton className="w-32 h-4 rounded-medium" />
+            </div>
+          ) : "Select Coin..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

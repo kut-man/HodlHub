@@ -123,7 +123,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     id: "actions",
     enableHiding: false,
     header: () => <div className="text-left">Actions</div>,
-    cell: () => {
+    cell: ({ row }) => {
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -132,7 +132,9 @@ export const columns: ColumnDef<AssetsInfo>[] = [
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80 flex flex-col gap-2">
-            <AddTransaction />
+            <AddTransaction
+              defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
+            />
             <Button>View Transactions</Button>
             <Button>Remove Asset</Button>
           </PopoverContent>

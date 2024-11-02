@@ -7,12 +7,14 @@ import { useState } from "react";
 
 export default function TransactionDialog({
   label = "Add Transaction",
+  defaultSelectedCoinTicker,
   ...restProps
 }: {
   label?: string;
+  defaultSelectedCoinTicker?: string;
 } & React.ComponentProps<typeof Button>) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  
+
   return (
     <Dialog onOpenChange={(open) => setIsDialogOpen(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
@@ -28,12 +30,14 @@ export default function TransactionDialog({
           </TabsList>
           <TabsContent value="buy">
             <TransactionCard
+              defaultSelectedCoinTicker={defaultSelectedCoinTicker}
               onSuccess={() => setIsDialogOpen(false)}
               type={TransactionTypes.BUY}
             />
           </TabsContent>
           <TabsContent value="sell">
             <TransactionCard
+              defaultSelectedCoinTicker={defaultSelectedCoinTicker}
               onSuccess={() => setIsDialogOpen(false)}
               type={TransactionTypes.SELL}
             />
