@@ -10,9 +10,11 @@ import { Separator } from "@/components/ui/separator";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { LOGOUT_URL } from "@/lib/api";
 import { useAuth } from "@/lib/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function AccountActions() {
   const { refetchUser } = useAuth();
+  const queryClient = useQueryClient();
 
   const logout = async () => {
     try {
@@ -21,12 +23,13 @@ export default function AccountActions() {
         credentials: "include",
       });
       if (response.ok) {
+        queryClient.clear()
         refetchUser();
       } else {
-        console.error("Login failed");
+        console.error("Logout failed");
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error("Error during logout:", error);
     }
   };
 
