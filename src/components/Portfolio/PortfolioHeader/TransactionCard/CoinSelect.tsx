@@ -49,6 +49,7 @@ export function CoinSelect({
       if (!response.ok) throw Error("Portfolio list fetch failed!");
       return await response.json();
     },
+    refetchOnMount: false,
   });
 
   const coins = response?.data;
@@ -102,7 +103,9 @@ export function CoinSelect({
               <Skeleton className="w-6 h-6 rounded-full" />
               <Skeleton className="w-32 h-4 rounded-medium" />
             </div>
-          ) : "Select Coin..."}
+          ) : (
+            "Select Coin..."
+          )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

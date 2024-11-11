@@ -79,7 +79,7 @@ export default function Portfolio() {
               alignItems="start"
               flexDirection="col"
             >
-              {activePortfolio.statistics ? (
+              {activePortfolio.holdings ? (
                 <>
                   <PortfolioInsights
                     data={activePortfolio}

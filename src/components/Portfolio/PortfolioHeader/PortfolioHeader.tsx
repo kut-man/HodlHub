@@ -4,7 +4,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { BsThreeDots } from "react-icons/bs";
-import TransactionDialog from "./TransactionDialog";
+import TransactionDialog from "./AddTransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";

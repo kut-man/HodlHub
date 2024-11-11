@@ -5,7 +5,7 @@ import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionTypes from "./TransactionTypesEnum";
 import { useState } from "react";
 
-export default function TransactionDialog({
+export default function AddTransactionDialog({
   label = "Add Transaction",
   defaultSelectedCoinTicker,
   ...restProps

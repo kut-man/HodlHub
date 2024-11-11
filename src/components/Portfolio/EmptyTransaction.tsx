@@ -1,5 +1,5 @@
 import { Flex } from "@tremor/react";
-import AddTransaction from "./PortfolioHeader/TransactionDialog";
+import AddTransaction from "./PortfolioHeader/AddTransactionDialog";
 
 export default function EmptyTransaction() {
   return (

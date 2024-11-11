@@ -11,9 +11,10 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
 import { Label } from "@/components/ui/label";
-import AddTransaction from "../PortfolioHeader/TransactionDialog";
+import AddTransaction from "../PortfolioHeader/AddTransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
+import RemoveAssetDialog from "./RemoveAssetDialog";
 
 const createChangeColumn = (
   accessorKey: keyof AssetsInfo,
@@ -136,7 +137,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
             />
             <Button>View Transactions</Button>
-            <Button>Remove Asset</Button>
+            <RemoveAssetDialog assetTicker={(row.getValue("name") as Coin).ticker} />
           </PopoverContent>
         </Popover>
       );
