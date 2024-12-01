@@ -15,6 +15,7 @@ import AddTransaction from "../PortfolioHeader/AddTransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
+import { useState } from "react";
 
 const createChangeColumn = (
   accessorKey: keyof AssetsInfo,
@@ -125,8 +126,12 @@ export const columns: ColumnDef<AssetsInfo>[] = [
     enableHiding: false,
     header: () => <div className="text-left">Actions</div>,
     cell: ({ row }) => {
+      const [openPopover, setOpenPopover] = useState(false);
       return (
-        <Popover>
+        <Popover
+          onOpenChange={(open) => setOpenPopover(open)}
+          open={openPopover}
+        >
           <PopoverTrigger asChild>
             <Button variant="outline">
               <BsThreeDots />
@@ -135,9 +140,13 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           <PopoverContent className="w-80 flex flex-col gap-2">
             <AddTransaction
               defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
+              onClose={() => setOpenPopover(false)}
             />
             <Button>View Transactions</Button>
-            <RemoveAssetDialog assetTicker={(row.getValue("name") as Coin).ticker} />
+            <RemoveAssetDialog
+              assetTicker={(row.getValue("name") as Coin).ticker}
+              onClose={() => setOpenPopover(false)}
+            />
           </PopoverContent>
         </Popover>
       );

@@ -14,15 +14,28 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 export default function AddTransactionDialog({
   label = "Add Transaction",
   defaultSelectedCoinTicker,
+  onClose,
   ...restProps
 }: {
   label?: string;
   defaultSelectedCoinTicker?: string;
+  onClose?: () => void;
 } & React.ComponentProps<typeof Button>) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setIsDialogOpen(false);
+      if (onClose) {
+        onClose();
+      }
+    } else {
+      setIsDialogOpen(true);
+    }
+  };
+
   return (
-    <Dialog onOpenChange={(open) => setIsDialogOpen(open)} open={isDialogOpen}>
+    <Dialog onOpenChange={(open) => handleOpenChange(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
         <Button size="sm" aria-label="Add Transaction" {...restProps}>
           {label}
@@ -40,14 +53,14 @@ export default function AddTransactionDialog({
           <TabsContent value="buy">
             <TransactionCard
               defaultSelectedCoinTicker={defaultSelectedCoinTicker}
-              onSuccess={() => setIsDialogOpen(false)}
+              onSuccess={() => handleOpenChange(false)}
               type={TransactionTypes.BUY}
             />
           </TabsContent>
           <TabsContent value="sell">
             <TransactionCard
               defaultSelectedCoinTicker={defaultSelectedCoinTicker}
-              onSuccess={() => setIsDialogOpen(false)}
+              onSuccess={() => handleOpenChange(false)}
               type={TransactionTypes.SELL}
             />
           </TabsContent>

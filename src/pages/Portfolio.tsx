@@ -14,7 +14,7 @@ import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
 
 export const GlobalContext = createContext<{
   privacy: boolean;
-  portfolioId?: number;
+  portfolio?: { id: number; name: string };
 }>({ privacy: true });
 
 export default function Portfolio() {
@@ -23,7 +23,7 @@ export default function Portfolio() {
       ? localStorage.getItem("privacyMode") === "true"
       : true
   );
-  const [portfolioId, setPortfolioId] = useState<number>();
+  const [portfolio, setPortfolio] = useState<{ id: number; name: string }>();
   const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
 
   function changeVisibility() {
@@ -50,20 +50,20 @@ export default function Portfolio() {
 
   useEffect(() => {
     if (response && response.data && response.data.length > 0) {
-      setPortfolioId(response.data[0].id);
+      setPortfolio({ id: response.data[0].id, name: response.data[0].name });
       setActivePortfolio(response.data[0]);
     }
   }, [response]);
 
-  const changePortfolio = (id: number) => {
-    setPortfolioId(id);
+  const changePortfolio = (id: number, name: string) => {
+    setPortfolio({ id, name });
     setActivePortfolio(response?.data?.find((portfolio) => portfolio.id == id));
   };
 
   return (
-    <GlobalContext.Provider value={{ privacy: visibility, portfolioId }}>
+    <GlobalContext.Provider value={{ privacy: visibility, portfolio }}>
       <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
-        {isPending && !activePortfolio  ? (
+        {isPending && !activePortfolio ? (
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>

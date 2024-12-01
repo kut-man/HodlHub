@@ -2,44 +2,41 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
-import { Loader2, TriangleAlert } from "lucide-react";
+import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
-import { GlobalContext } from "@/pages/Portfolio";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { GlobalContext } from "@/pages/Portfolio";
 
-const removeAsset = async (portfolioId: number, assetTicker: string) => {
-  const response = await fetch(
-    `${PORTFOLIO_URL}/${portfolioId}/${assetTicker}`,
-    {
-      method: "DELETE",
-      credentials: "include",
-    }
-  );
+const removePortfolio = async (portfolioId: number) => {
+  const response = await fetch(`${PORTFOLIO_URL}/${portfolioId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
   if (!response.ok) {
     const { message }: ErrorResponse = await response.json();
     const errorMessage = message ? message : "Something went wrong!";
-    console.error("Failed to remove asset!");
+    console.error("Failed to remove portfolio!");
     throw Error(errorMessage);
   }
 };
 
-export default function RemoveAssetDialog({
-  assetTicker,
+export default function RemovePortfolioDialog({
   onClose,
   ...restProps
 }: {
-  assetTicker: string;
-  onClose?: () => void;
+  onClose: () => void;
 } & React.ComponentProps<typeof Button>) {
+  const { portfolio } = useContext(GlobalContext) as {
+    portfolio: { id: number; name: string };
+  };
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { portfolio } = useContext(GlobalContext);
 
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error, isError, reset } = useMutation({
-    mutationFn: () => removeAsset(portfolio?.id as number, assetTicker),
-    onSuccess: () => handleOpenChange(false),
+    mutationFn: () => removePortfolio(portfolio.id),
+    onSuccess: () => onClose(),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });
     },
@@ -47,7 +44,7 @@ export default function RemoveAssetDialog({
 
   useEffect(() => {
     return reset;
-  }, [isDialogOpen]);
+  }, [open]);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
@@ -61,28 +58,29 @@ export default function RemoveAssetDialog({
   };
 
   return (
-    <Dialog onOpenChange={(open) => handleOpenChange(open)} open={isDialogOpen}>
+    <Dialog onOpenChange={() => handleOpenChange} open={isDialogOpen}>
       <DialogTrigger asChild>
         <Button
           size="sm"
-          aria-label={`Remove Asset ${assetTicker}`}
+          aria-label={`Remove Portfolio ${portfolio.name}`}
           {...restProps}
         >
+          <Trash2 className="mr-4" />
           Remove
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
-        <Label className="text-xl">{`Remove ${assetTicker}`}</Label>
+        <Label className="text-xl">{`Remove ${portfolio.name}`}</Label>
         <Label className="mb-4">
-          All transactions associated with this coin will be removed.
+          All coins and transactions in this portfolio will be removed.
         </Label>
         <Button
           disabled={isPending}
           className="w-full"
           size="lg"
-          aria-label={`Remove Asset ${assetTicker}`}
+          aria-label={`Remove Portfolio ${portfolio.name}`}
           onClick={() => mutate()}
           {...restProps}
         >
@@ -92,8 +90,8 @@ export default function RemoveAssetDialog({
           variant="secondary"
           className="w-full"
           size="lg"
-          aria-label={`Remove Asset ${assetTicker}`}
-          onClick={() => handleOpenChange(false)}
+          aria-label={`Cancel Portfolio ${portfolio.name} removal`}
+          onClick={() => onClose()}
           {...restProps}
         >
           Cancel

@@ -1,4 +1,3 @@
-import { Copy, Pencil, Trash2 } from "lucide-react";
 import { BsThreeDots } from "react-icons/bs";
 
 import { Button } from "@/components/ui/button";
@@ -9,10 +8,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
+import { useState } from "react";
+import RemovePortfolioDialog from "./RemovePortfolioDialog";
 
 export function PortfolioActions() {
+  const [openDropdown, setOpenDropdown] = useState(false);
   return (
-    <DropdownMenu>
+    <DropdownMenu
+      open={openDropdown}
+      onOpenChange={(open) => setOpenDropdown(open)}
+    >
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
           <BsThreeDots />
@@ -20,17 +25,20 @@ export function PortfolioActions() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <Pencil />
             <span>Edit</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Copy />
             <span>Duplicate</span>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem>
-            <Trash2 />
-            <span>Remove</span>
+            <RemovePortfolioDialog
+              variant="ghost"
+              className="w-full justify-start px-0"
+              onClose={() => setOpenDropdown(false)}
+            />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

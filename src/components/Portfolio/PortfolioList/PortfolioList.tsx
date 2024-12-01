@@ -13,7 +13,7 @@ export default function Portfolio({
   changePortfolio,
   data,
 }: {
-  changePortfolio: (portfolioId: number) => void;
+  changePortfolio: (portfolioId: number, portfolioName: string) => void;
   data: PortfolioFields[];
 }) {
   return (

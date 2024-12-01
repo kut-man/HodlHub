@@ -46,7 +46,7 @@ const addTransaction = async (data: Transaction) => {
   });
   if (!response.ok) {
     const { message }: ErrorResponse = await response.json();
-    const errorMessage = message;
+    const errorMessage = message ? message : "Something went wrong!";
     console.error("Failed to add transaction!");
     throw Error(errorMessage);
   }
@@ -66,7 +66,7 @@ export default function TransactionCard({
   } = useForm<Transaction>();
   const [selectedCoin, setSelectedCoin] = useState<Coin>();
   const [selectedTime, setSelectedTime] = useState(new Date());
-  const { portfolioId } = useContext(GlobalContext);
+  const { portfolio } = useContext(GlobalContext);
 
   const queryClient = useQueryClient();
 
@@ -119,10 +119,10 @@ export default function TransactionCard({
         )}
         <Button
           onClick={handleSubmit((data) => {
-            if (selectedCoin?.ticker && portfolioId) {
+            if (selectedCoin?.ticker && portfolio) {
               mutate({
                 ...data,
-                portfolioId: portfolioId,
+                portfolioId: portfolio.id,
                 coin: selectedCoin?.ticker,
                 transactionType: type,
                 date: selectedTime.toString(),

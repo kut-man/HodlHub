@@ -14,14 +14,14 @@ export default function PortfolioItem({
   name,
   totalAmount,
   onClick,
-}: PortfolioFields & { onClick: (id: number) => void }) {
-  const { portfolioId } = useContext(GlobalContext);
+}: PortfolioFields & { onClick: (id: number, name: string) => void }) {
+  const { portfolio } = useContext(GlobalContext);
   return (
     <Button
       aria-label="Select Portfolio"
-      variant={id === portfolioId ? "secondary" : "ghost"}
+      variant={id === portfolio?.id ? "secondary" : "ghost"}
       className="w-full h-14 p-0 mb-1"
-      onClick={() => onClick(id)}
+      onClick={() => onClick(id, name)}
     >
       <Flex justifyContent="start">
         <PortfolioIcon
