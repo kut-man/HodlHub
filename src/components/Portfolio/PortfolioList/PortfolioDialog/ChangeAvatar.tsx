@@ -46,6 +46,7 @@ export function ChangeAvatar({
         <Flex className="max-w-72">
           {avatarBackground.map((color) => (
             <div
+              key={color}
               onClick={() =>
                 dispatch({ type: ACTIONS.SELECTED_COLOR, payload: color })
               }

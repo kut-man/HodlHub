@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import TransactionCardInputs from "./TransactionCardInputs";
 import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -65,7 +65,7 @@ export default function TransactionCard({
     formState: { errors },
   } = useForm<Transaction>();
   const [selectedCoin, setSelectedCoin] = useState<Coin>();
-  const selectedTime = useRef(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
   const { portfolioId } = useContext(GlobalContext);
 
   const queryClient = useQueryClient();
@@ -92,9 +92,9 @@ export default function TransactionCard({
         />
         <TransactionCardInputs register={register} errors={errors} />
         <DateTimePicker
-          date={selectedTime.current}
+          date={selectedTime}
           setDate={(date) => {
-            if (date) selectedTime.current = date;
+            if (date) setSelectedTime(date);
           }}
         />
         <Card>
@@ -125,7 +125,7 @@ export default function TransactionCard({
                 portfolioId: portfolioId,
                 coin: selectedCoin?.ticker,
                 transactionType: type,
-                date: selectedTime.current.toString(),
+                date: selectedTime.toString(),
               });
             }
           })}
