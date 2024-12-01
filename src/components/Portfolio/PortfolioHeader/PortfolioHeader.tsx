@@ -3,7 +3,6 @@ import { Label } from "@/components/ui/label";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { BsThreeDots } from "react-icons/bs";
 import TransactionDialog from "./AddTransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
@@ -12,6 +11,7 @@ import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
+import { PortfolioActions } from "./PortfolioActions";
 
 interface PortfolioHeaderProps {
   setShowCharts?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -93,9 +93,7 @@ export default function PortfolioHeader({
 
         <TransactionDialog label="+ Add Transaction" />
 
-        <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
-          <BsThreeDots />
-        </Button>
+        <PortfolioActions />
       </div>
     </Flex>
   );

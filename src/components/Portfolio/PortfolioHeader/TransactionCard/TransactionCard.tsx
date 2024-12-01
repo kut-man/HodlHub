@@ -10,7 +10,7 @@ import { Coin, CoinSelect } from "./CoinSelect";
 import { DateTimePicker } from "./TimePicker/DateTimePicker";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useContext, useRef, useState } from "react";
 import TransactionCardInputs from "./TransactionCardInputs";
@@ -68,9 +68,14 @@ export default function TransactionCard({
   const selectedTime = useRef(new Date());
   const { portfolioId } = useContext(GlobalContext);
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending, error, isError } = useMutation({
     mutationFn: (data: Transaction) => addTransaction(data),
     onSuccess,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+    },
   });
 
   return (
