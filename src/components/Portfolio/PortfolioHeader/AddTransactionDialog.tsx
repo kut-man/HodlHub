@@ -15,7 +15,7 @@ export default function AddTransactionDialog({
   label,
   defaultSelectedCoinTicker,
   onClose,
-  ...restProps
+  ...buttonProps
 }: {
   label?: ReactNode;
   defaultSelectedCoinTicker?: string;
@@ -37,7 +37,7 @@ export default function AddTransactionDialog({
   return (
     <Dialog onOpenChange={(open) => handleOpenChange(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" aria-label="Add Transaction" {...restProps}>
+        <Button size="sm" aria-label="Add Transaction" {...buttonProps}>
           {label}
         </Button>
       </DialogTrigger>

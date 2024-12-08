@@ -23,7 +23,7 @@ const removePortfolio = async (portfolioId: number) => {
 
 export default function RemovePortfolioDialog({
   onClose,
-  ...restProps
+  ...buttonProps
 }: {
   onClose: () => void;
 } & React.ComponentProps<typeof Button>) {
@@ -63,7 +63,7 @@ export default function RemovePortfolioDialog({
         <Button
           size="sm"
           aria-label={`Remove Portfolio ${portfolio.name}`}
-          {...restProps}
+          {...buttonProps}
         >
           <Trash2 size={18} className="mr-4" />
           Remove
@@ -82,7 +82,6 @@ export default function RemovePortfolioDialog({
           size="lg"
           aria-label={`Remove Portfolio ${portfolio.name}`}
           onClick={() => mutate()}
-          {...restProps}
         >
           {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
         </Button>
@@ -92,7 +91,6 @@ export default function RemovePortfolioDialog({
           size="lg"
           aria-label={`Cancel Portfolio ${portfolio.name} removal`}
           onClick={() => onClose()}
-          {...restProps}
         >
           Cancel
         </Button>

@@ -17,7 +17,7 @@ export default function EmptyDashboard() {
           Track profits, losses and valuation all in one place.
         </p>
       </Flex>
-      <PortfolioDialog className="mb-28 h-11 rounded-md px-8 bg-primary text-primary-foreground hover:bg-primary/90" />
+      <PortfolioDialog size="lg" className="text-base mb-28" />
     </Flex>
   );
 }

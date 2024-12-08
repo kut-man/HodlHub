@@ -5,19 +5,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { FiPlus } from "react-icons/fi";
 import { ChangeAvatar } from "./PortfolioDialog/ChangeAvatar";
 import { CreatePortfolio } from "./PortfolioDialog/CreatePortfolio";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import {
   avatarBackground,
   avatarValues,
   emojis,
 } from "./PortfolioDialog/AvatarAssets";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function PortfolioDialog({ className }: { className?: string }) {
+export default function PortfolioDialog({
+  label,
+  ...buttonProps
+}: { label?: ReactNode } & React.ComponentProps<typeof Button>) {
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
   const [portfolioIcon, setPortfolioIcon] = useState({
     color:
@@ -43,12 +46,16 @@ export default function PortfolioDialog({ className }: { className?: string }) {
   return (
     <Dialog onOpenChange={toggleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <button className={"flex items-center " + className}>
-          <FiPlus size={20} />
-          <Label className="cursor-pointer text-base ml-1">
-            Create Portfolio
-          </Label>
-        </button>
+        <Button aria-label="Create Portfolio" {...buttonProps}>
+          {label ? (
+            label
+          ) : (
+            <>
+              <Plus size={18} className="mr-2" />
+              Create Portfolio
+            </>
+          )}
+        </Button>
       </DialogTrigger>
       <DialogContent className={"sm:max-w-[425px] duration-500"}>
         <DialogHeader>

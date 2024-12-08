@@ -134,8 +134,8 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           open={openPopover}
         >
           <PopoverTrigger asChild>
-            <Button variant="outline">
-              <BsThreeDots />
+            <Button className="rounded-full p-0 w-10 h-10" variant="ghost">
+              <BsThreeDots size={18} />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-52 p-1 flex flex-col gap-1">

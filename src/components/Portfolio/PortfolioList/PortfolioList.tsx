@@ -32,7 +32,11 @@ export default function Portfolio({
       </CardContent>
 
       <CardFooter className="text-blue-600">
-        <PortfolioDialog />
+        <PortfolioDialog
+          className="h-fit p-0 text-base"
+          variant="ghost"
+          size="sm"
+        />
       </CardFooter>
     </Card>
   );

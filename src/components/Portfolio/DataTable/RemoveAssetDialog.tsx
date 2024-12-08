@@ -27,7 +27,7 @@ const removeAsset = async (portfolioId: number, assetTicker: string) => {
 export default function RemoveAssetDialog({
   assetTicker,
   onClose,
-  ...restProps
+  ...buttonProps
 }: {
   assetTicker: string;
   onClose?: () => void;
@@ -66,7 +66,7 @@ export default function RemoveAssetDialog({
         <Button
           size="sm"
           aria-label={`Remove Asset ${assetTicker}`}
-          {...restProps}
+          {...buttonProps}
         >
           <Trash2 size={18} className="mr-4" />
           Remove
@@ -85,7 +85,6 @@ export default function RemoveAssetDialog({
           size="lg"
           aria-label={`Remove Asset ${assetTicker}`}
           onClick={() => mutate()}
-          {...restProps}
         >
           {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
         </Button>
@@ -93,9 +92,8 @@ export default function RemoveAssetDialog({
           variant="secondary"
           className="w-full"
           size="lg"
-          aria-label={`Remove Asset ${assetTicker}`}
+          aria-label={`Cancel Asset ${assetTicker} removal`}
           onClick={() => handleOpenChange(false)}
-          {...restProps}
         >
           Cancel
         </Button>

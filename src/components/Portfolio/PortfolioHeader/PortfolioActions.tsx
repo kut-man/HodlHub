@@ -8,6 +8,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import PortfolioDialog from "../PortfolioList/PortfolioDialog";
+import { Pencil } from "lucide-react";
 
 export function PortfolioActions() {
   const [openPopover, setOpenPopover] = useState(false);
@@ -23,6 +25,17 @@ export function PortfolioActions() {
           className="justify-start"
           variant="ghost"
           onClose={() => setOpenPopover(false)}
+        />
+        <PortfolioDialog
+          label={
+            <>
+              <Pencil size={18} className="mr-4" />
+              Edit
+            </>
+          }
+          size="sm"
+          className="justify-start"
+          variant="ghost"
         />
       </PopoverContent>
     </Popover>
