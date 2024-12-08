@@ -11,11 +11,12 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
 import { Label } from "@/components/ui/label";
-import AddTransaction from "../PortfolioHeader/AddTransactionDialog";
+import AddTransactionDialog from "../PortfolioHeader/AddTransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
 import { useState } from "react";
+import { File, Plus } from "lucide-react";
 
 const createChangeColumn = (
   accessorKey: keyof AssetsInfo,
@@ -137,13 +138,26 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               <BsThreeDots />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 flex flex-col gap-2">
-            <AddTransaction
+          <PopoverContent className="w-52 p-1 flex flex-col gap-1">
+            <AddTransactionDialog
+              label={
+                <>
+                  <Plus size={18} className="mr-4" />
+                  Add Transaction
+                </>
+              }
+              className="justify-start"
+              variant="ghost"
               defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
               onClose={() => setOpenPopover(false)}
             />
-            <Button>View Transactions</Button>
+            <Button size="sm" className="justify-start" variant="ghost">
+              <File size={18} className="mr-4" />
+              View Transactions
+            </Button>
             <RemoveAssetDialog
+              className="justify-start"
+              variant="ghost"
               assetTicker={(row.getValue("name") as Coin).ticker}
               onClose={() => setOpenPopover(false)}
             />

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
-import { Loader2, TriangleAlert } from "lucide-react";
+import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -68,6 +68,7 @@ export default function RemoveAssetDialog({
           aria-label={`Remove Asset ${assetTicker}`}
           {...restProps}
         >
+          <Trash2 size={18} className="mr-4" />
           Remove
         </Button>
       </DialogTrigger>

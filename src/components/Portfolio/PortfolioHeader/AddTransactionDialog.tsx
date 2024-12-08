@@ -8,16 +8,16 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionTypes from "./TransactionTypesEnum";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 export default function AddTransactionDialog({
-  label = "Add Transaction",
+  label,
   defaultSelectedCoinTicker,
   onClose,
   ...restProps
 }: {
-  label?: string;
+  label?: ReactNode;
   defaultSelectedCoinTicker?: string;
   onClose?: () => void;
 } & React.ComponentProps<typeof Button>) {

@@ -1,47 +1,30 @@
 import { BsThreeDots } from "react-icons/bs";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
 import { useState } from "react";
 import RemovePortfolioDialog from "./RemovePortfolioDialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export function PortfolioActions() {
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [openPopover, setOpenPopover] = useState(false);
   return (
-    <DropdownMenu
-      open={openDropdown}
-      onOpenChange={(open) => setOpenDropdown(open)}
-    >
-      <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="sm" aria-label="Portfolio Settings">
+    <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
+      <PopoverTrigger asChild>
+        <Button variant="outline">
           <BsThreeDots />
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuGroup>
-          {/* <DropdownMenuItem>
-            <Pencil />
-            <span>Edit</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Copy />
-            <span>Duplicate</span>
-          </DropdownMenuItem> */}
-          <DropdownMenuItem>
-            <RemovePortfolioDialog
-              variant="ghost"
-              className="w-full justify-start px-0"
-              onClose={() => setOpenDropdown(false)}
-            />
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverTrigger>
+      <PopoverContent className="w-52 p-1 flex flex-col gap-1">
+        <RemovePortfolioDialog
+          className="justify-start"
+          variant="ghost"
+          onClose={() => setOpenPopover(false)}
+        />
+      </PopoverContent>
+    </Popover>
   );
 }

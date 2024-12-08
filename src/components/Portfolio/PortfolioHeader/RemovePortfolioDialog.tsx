@@ -58,14 +58,14 @@ export default function RemovePortfolioDialog({
   };
 
   return (
-    <Dialog onOpenChange={() => handleOpenChange} open={isDialogOpen}>
+    <Dialog onOpenChange={(open) => handleOpenChange(open)} open={isDialogOpen}>
       <DialogTrigger asChild>
         <Button
           size="sm"
           aria-label={`Remove Portfolio ${portfolio.name}`}
           {...restProps}
         >
-          <Trash2 className="mr-4" />
+          <Trash2 size={18} className="mr-4" />
           Remove
         </Button>
       </DialogTrigger>

@@ -1,5 +1,5 @@
 import { Flex } from "@tremor/react";
-import AddTransaction from "./PortfolioHeader/AddTransactionDialog";
+import AddTransactionDialog from "./PortfolioHeader/AddTransactionDialog";
 
 export default function EmptyTransaction() {
   return (
@@ -17,7 +17,11 @@ export default function EmptyTransaction() {
           Track profits, losses and valuation all in one place.
         </p>
       </Flex>
-      <AddTransaction label="+ Add Transaction" className="mb-20" size="lg" />
+      <AddTransactionDialog
+        label="+ Add Transaction"
+        className="mb-20"
+        size="lg"
+      />
     </Flex>
   );
 }

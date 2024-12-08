@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import TransactionDialog from "./AddTransactionDialog";
+import AddTransactionDialog from "./AddTransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
@@ -91,7 +91,7 @@ export default function PortfolioHeader({
           </div>
         ) : null}
 
-        <TransactionDialog label="+ Add Transaction" />
+        <AddTransactionDialog label="+ Add Transaction" />
 
         <PortfolioActions />
       </div>
