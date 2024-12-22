@@ -1,4 +1,4 @@
-import { avatarValues } from "./PortfolioDialog/AvatarAssets";
+import { avatarValues } from "../PortfolioDialog/AvatarAssets";
 
 type PortfolioIconProps = avatarValues & {
   style?: React.CSSProperties;

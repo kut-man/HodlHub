@@ -1,23 +1,23 @@
-import { avatarValues } from "./AvatarAssets";
+import { AvatarValues } from "./AvatarAssets";
 
 type SelectColorAction = {
   type: typeof ACTIONS.SELECTED_COLOR;
-  payload: avatarValues["color"];
+  payload: AvatarValues["color"];
 };
 
 type SelectLogoAction = {
   type: typeof ACTIONS.SELECTED_LOGO;
-  payload: avatarValues["avatar"];
+  payload: AvatarValues["avatar"];
 };
 
 type HoverColorAction = {
   type: typeof ACTIONS.HOVERED_COLOR;
-  payload: avatarValues["color"];
+  payload: AvatarValues["color"];
 };
 
 type HoverLogoAction = {
   type: typeof ACTIONS.HOVERED_LOGO;
-  payload: avatarValues["avatar"];
+  payload: AvatarValues["avatar"];
 };
 
 export type Action =
@@ -27,21 +27,22 @@ export type Action =
   | HoverLogoAction;
 
 export interface ChangeAvatarProps {
-  iconProperties: avatarValues;
-  changeProfileAvatar: (avatarProperties: avatarValues) => void;
+  iconProperties: AvatarValues;
+  changeProfileAvatar: (avatarProperties: AvatarValues) => void;
 }
 
 export interface State {
-  selectedColor: avatarValues["color"];
-  selectedLogo: avatarValues["avatar"];
-  hoveredColor: avatarValues["color"];
-  hoveredLogo: avatarValues["avatar"];
+  selectedColor: AvatarValues["color"];
+  selectedLogo: AvatarValues["avatar"];
+  hoveredColor: AvatarValues["color"];
+  hoveredLogo: AvatarValues["avatar"];
 }
 
 export interface PortfolioDialogProps {
-  iconProperties: avatarValues;
+  iconProperties: AvatarValues;
   changeCurrentDialogPage: () => void;
   onPortfolioCreate: () => void;
+  editPortfolio?: boolean;
 }
 
 export enum ACTIONS {
@@ -50,10 +51,6 @@ export enum ACTIONS {
   HOVERED_COLOR = "changeHoveredColor",
   HOVERED_LOGO = "changeHoverLogo",
 }
-
-export type CreatePortfolioProps = (
-  data: Pick<PortfolioFields, "name" | "avatar" | "color">,
-) => Promise<void>;
 
 export type Holding = {
   ticker: string;
@@ -83,7 +80,7 @@ type Statistics = {
   worstTicker: string;
 };
 
-export type PortfolioFields = avatarValues & {
+export type PortfolioFields = AvatarValues & {
   id: number;
   name: string;
   totalAmount: number;
@@ -92,4 +89,3 @@ export type PortfolioFields = avatarValues & {
   holdings: Holding[];
   statistics: Statistics;
 };
-

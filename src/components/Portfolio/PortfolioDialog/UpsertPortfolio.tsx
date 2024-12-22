@@ -3,54 +3,43 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  CreatePortfolioProps,
   PortfolioDialogProps,
   PortfolioFields,
 } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { PORTFOLIO_URL } from "@/lib/api";
 import { Loader2 } from "lucide-react";
-import { ErrorResponse } from "@/layout/Header/HeaderTypes";
-import PortfolioIcon from "../PortfolioIcon";
+import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-const createPortfolio: CreatePortfolioProps = async (data) => {
-  const response = await fetch(PORTFOLIO_URL, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) {
-    const { errors }: ErrorResponse = await response.json();
-    const errorMessage = errors ? errors[0].message : "Something went wrong!";
-    console.error("Portfolio creating failed!");
-    throw Error(errorMessage);
-  }
-};
+import { useContext } from "react";
+import { GlobalContext } from "@/pages/Portfolio";
+import {
+  upsertPortfolioAsync,
+  UpsertPortfolioAsyncProps,
+} from "./PortfolioDialogFunctions";
 
 type FormValues = {
   name: string;
 };
 
-export function CreatePortfolio({
+export function UpsertPortfolio({
   changeCurrentDialogPage,
   onPortfolioCreate,
   iconProperties,
+  editPortfolio,
 }: PortfolioDialogProps) {
+  const { portfolio } = useContext(GlobalContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>(
+    editPortfolio ? { defaultValues: { name: portfolio?.name } } : {}
+  );
 
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error, isError } = useMutation({
-    mutationFn: (data: Pick<PortfolioFields, "name" | "avatar" | "color">) =>
-      createPortfolio(data),
+    mutationFn: (data: UpsertPortfolioAsyncProps) => upsertPortfolioAsync(data),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });
     },
@@ -58,7 +47,13 @@ export function CreatePortfolio({
   });
 
   const onSubmit: SubmitHandler<FormValues> = (portfolioName) =>
-    mutate({ ...iconProperties, name: portfolioName.name });
+    mutate({
+      data: {
+        ...iconProperties,
+        name: portfolioName.name,
+      },
+      id: editPortfolio ? portfolio?.id : undefined,
+    });
 
   return (
     <>

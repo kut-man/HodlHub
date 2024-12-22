@@ -10,7 +10,7 @@ import {
   ChangeAvatarProps,
   State,
 } from "./PortfolioDialogInterfaces";
-import PortfolioIcon from "../PortfolioIcon";
+import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {

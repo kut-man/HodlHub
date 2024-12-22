@@ -2,7 +2,7 @@ import { Label } from "@radix-ui/react-label";
 import { Flex } from "@tremor/react";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
-import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
+import { PortfolioFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -14,14 +14,16 @@ export default function PortfolioItem({
   name,
   totalAmount,
   onClick,
-}: PortfolioFields & { onClick: (id: number, name: string) => void }) {
+}: PortfolioFields & {
+  onClick: (portfolioValues: GlobalContext["portfolio"]) => void;
+}) {
   const { portfolio } = useContext(GlobalContext);
   return (
     <Button
       aria-label="Select Portfolio"
       variant={id === portfolio?.id ? "secondary" : "ghost"}
       className="w-full h-14 p-0 mb-1"
-      onClick={() => onClick(id, name)}
+      onClick={() => onClick({ id, color, avatar, name })}
     >
       <Flex justifyContent="start">
         <PortfolioIcon

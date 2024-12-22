@@ -5,17 +5,20 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import PortfolioDialog from "./PortfolioDialog";
+import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import PortfolioItem from "./PortfolioItem";
-import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
+import { PortfolioFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import { GlobalContext } from "@/pages/Portfolio";
 
-export default function Portfolio({
-  changePortfolio,
-  data,
-}: {
-  changePortfolio: (portfolioId: number, portfolioName: string) => void;
+interface PortfolioListProps {
+  switchPortfolio: (portfolioValues: GlobalContext["portfolio"]) => void;
   data: PortfolioFields[];
-}) {
+}
+
+export default function PortfolioList({
+  switchPortfolio,
+  data,
+}: PortfolioListProps) {
   return (
     <Card className="border-none shadow-none max-lg:w-full lg:min-w-[340px]">
       <CardHeader>
@@ -24,7 +27,7 @@ export default function Portfolio({
       <CardContent className="flex flex-col py-2">
         {data.map((portfolio) => (
           <PortfolioItem
-            onClick={changePortfolio}
+            onClick={switchPortfolio}
             key={portfolio.id}
             {...portfolio}
           />

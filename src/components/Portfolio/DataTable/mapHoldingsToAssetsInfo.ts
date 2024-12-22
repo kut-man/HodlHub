@@ -1,5 +1,5 @@
 import { cryptoLogos } from "../PortfolioHeader/TransactionCard/coinIconUrl";
-import { Holding } from "../PortfolioList/PortfolioDialog/PortfolioDialogInterfaces";
+import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { AssetsInfo } from "./DataTableInterfaces";
 
 export function mapHoldingsToAssetsInfo(holdings: Holding[]): AssetsInfo[] {

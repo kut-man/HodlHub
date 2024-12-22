@@ -5,31 +5,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ChangeAvatar } from "./PortfolioDialog/ChangeAvatar";
-import { CreatePortfolio } from "./PortfolioDialog/CreatePortfolio";
-import { ReactNode, useState } from "react";
+import { ChangeAvatar } from "./ChangeAvatar";
+import { UpsertPortfolio } from "./UpsertPortfolio";
+import { useContext, useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import {
   avatarBackground,
-  avatarValues,
+  AvatarValues,
   emojis,
-} from "./PortfolioDialog/AvatarAssets";
-import { Plus } from "lucide-react";
+} from "./AvatarAssets";
+import { Pencil, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GlobalContext } from "@/pages/Portfolio";
 
 export default function PortfolioDialog({
-  label,
+  editPortfolio,
   ...buttonProps
-}: { label?: ReactNode } & React.ComponentProps<typeof Button>) {
+}: {
+  editPortfolio?: boolean;
+} & React.ComponentProps<typeof Button>) {
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
-  const [portfolioIcon, setPortfolioIcon] = useState({
-    color:
-      avatarBackground[Math.floor(Math.random() * avatarBackground.length)],
-    avatar: emojis[Math.floor(Math.random() * emojis.length)],
-  });
+  const { portfolio } = useContext(GlobalContext);
+  const [portfolioIcon, setPortfolioIcon] = useState<AvatarValues>(
+    editPortfolio && portfolio
+      ? { color: portfolio.color, avatar: portfolio.avatar }
+      : {
+          color:
+            avatarBackground[
+              Math.floor(Math.random() * avatarBackground.length)
+            ],
+          avatar: emojis[Math.floor(Math.random() * emojis.length)],
+        }
+  );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const changeProfileAvatar = (avatarProperties: avatarValues) => {
+  const changeProfileAvatar = (avatarProperties: AvatarValues) => {
     setPortfolioIcon(avatarProperties);
     changeCurrentDialogPage();
   };
@@ -47,8 +57,11 @@ export default function PortfolioDialog({
     <Dialog onOpenChange={toggleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
         <Button aria-label="Create Portfolio" {...buttonProps}>
-          {label ? (
-            label
+          {editPortfolio ? (
+            <>
+              <Pencil size={18} className="mr-4" />
+              Edit Portfolio
+            </>
           ) : (
             <>
               <Plus size={18} className="mr-2" />
@@ -76,7 +89,9 @@ export default function PortfolioDialog({
             changeProfileAvatar={changeProfileAvatar}
           />
         ) : (
-          <CreatePortfolio
+          <UpsertPortfolio
+            editPortfolio={editPortfolio}
+
             onPortfolioCreate={() => setIsDialogOpen(false)}
             iconProperties={portfolioIcon}
             changeCurrentDialogPage={changeCurrentDialogPage}

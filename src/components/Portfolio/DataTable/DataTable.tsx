@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Holding } from "../PortfolioList/PortfolioDialog/PortfolioDialogInterfaces";
+import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { mapHoldingsToAssetsInfo } from "./mapHoldingsToAssetsInfo";
 
 export function DataTable({ data }: { data: Holding[] }) {

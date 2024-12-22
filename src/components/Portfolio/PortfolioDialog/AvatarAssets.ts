@@ -1,4 +1,4 @@
-export type colors =
+export type Colors =
   | "lime"
   | "orange"
   | "green"
@@ -8,12 +8,12 @@ export type colors =
   | "teal"
   | "yellow";
 
-export interface avatarValues {
-  color: colors,
+export interface AvatarValues {
+  color: Colors,
   avatar: string
 }
 
-export const avatarBackground: colors[] = [
+export const avatarBackground: Colors[] = [
   "lime",
   "orange",
   "green",

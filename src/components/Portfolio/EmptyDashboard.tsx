@@ -1,5 +1,5 @@
 import { Flex } from "@tremor/react";
-import PortfolioDialog from "./PortfolioList/PortfolioDialog";
+import PortfolioDialog from "./PortfolioDialog/PortfolioDialog";
 
 export default function EmptyDashboard() {
   return (

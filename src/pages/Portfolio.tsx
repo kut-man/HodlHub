@@ -4,18 +4,21 @@ import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
 import { useState, createContext, useEffect } from "react";
 import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
 import { ApiResponse } from "@/lib/AuthProvider";
-import { PortfolioFields } from "@/components/Portfolio/PortfolioList/PortfolioDialog/PortfolioDialogInterfaces";
+import { PortfolioFields } from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
 import { useQuery } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
 import EmptyDashboard from "@/components/Portfolio/EmptyDashboard";
 import { Loader2 } from "lucide-react";
 import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
 import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
+import { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
 
-export const GlobalContext = createContext<{
+export interface GlobalContext {
   privacy: boolean;
-  portfolio?: { id: number; name: string };
-}>({ privacy: true });
+  portfolio?: { id: number; name: string } & AvatarValues;
+}
+
+export const GlobalContext = createContext<GlobalContext>({ privacy: true });
 
 export default function Portfolio() {
   const [visibility, setVisibility] = useState(
@@ -23,7 +26,7 @@ export default function Portfolio() {
       ? localStorage.getItem("privacyMode") === "true"
       : true
   );
-  const [portfolio, setPortfolio] = useState<{ id: number; name: string }>();
+  const [portfolio, setPortfolio] = useState<GlobalContext["portfolio"]>();
   const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
 
   function changeVisibility() {
@@ -50,14 +53,30 @@ export default function Portfolio() {
 
   useEffect(() => {
     if (response && response.data && response.data.length > 0) {
-      setPortfolio({ id: response.data[0].id, name: response.data[0].name });
-      setActivePortfolio(response.data[0]);
+      const selectedPortfolioId = sessionStorage.getItem("selectedPortfolio");
+      const selectedPortfolio = selectedPortfolioId
+        ? response.data.find(
+            (portfolio) => portfolio.id == parseInt(selectedPortfolioId)
+          ) ?? response.data[0]
+        : response.data[0];
+
+      setPortfolio({
+        id: selectedPortfolio.id,
+        name: selectedPortfolio.name,
+        color: selectedPortfolio.color,
+        avatar: selectedPortfolio.avatar,
+      });
+      setActivePortfolio(selectedPortfolio);
     }
   }, [response]);
 
-  const changePortfolio = (id: number, name: string) => {
-    setPortfolio({ id, name });
-    setActivePortfolio(response?.data?.find((portfolio) => portfolio.id == id));
+  const switchPortfolio = (portfolioValues: GlobalContext["portfolio"]) => {
+    if (!portfolioValues) return;
+    setPortfolio(portfolioValues);
+    sessionStorage.setItem("selectedPortfolio", portfolioValues.id.toString());
+    setActivePortfolio(
+      response?.data?.find((portfolio) => portfolio.id == portfolioValues?.id)
+    );
   };
 
   return (
@@ -71,7 +90,7 @@ export default function Portfolio() {
           <>
             <PortfolioList
               data={response.data}
-              changePortfolio={changePortfolio}
+              switchPortfolio={switchPortfolio}
             />
 
             <Flex
