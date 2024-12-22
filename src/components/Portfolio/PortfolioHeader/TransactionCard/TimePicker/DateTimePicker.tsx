@@ -54,6 +54,7 @@ export function DateTimePicker({
           selected={date}
           onSelect={(d) => handleSelect(d)}
           initialFocus
+          disabled={{ after: new Date() }}
         />
         <div className="p-3 border-t border-border">
           <TimePickerDemo setDate={setDate} date={date} />
