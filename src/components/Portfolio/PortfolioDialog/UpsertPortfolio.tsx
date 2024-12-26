@@ -2,10 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  PortfolioDialogProps,
-  PortfolioFields,
-} from "./PortfolioDialogInterfaces";
+import { PortfolioDialogProps } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";

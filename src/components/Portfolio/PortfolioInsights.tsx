@@ -52,7 +52,7 @@ export default function PortfolioInsights({
         <Tile {...bestPerformer} />
         <Tile {...worstPerformer} />
       </Flex>
-      {showCharts ? <Charts /> : null}
+      {showCharts ? <Charts data={data.holdings} /> : null}
     </>
   );
 }

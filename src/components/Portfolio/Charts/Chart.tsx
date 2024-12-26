@@ -1,11 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AreaChart } from "@tremor/react";
 import { DonutChart } from "@tremor/react";
-import { cities, chartdata } from "./MockData";
+import { chartdata } from "./MockData";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext, useEffect } from "react";
+import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 
 const valueFormatter = function (number: number) {
   if (number >= 1000) {
@@ -19,6 +20,7 @@ const valueFormatter = function (number: number) {
 interface ChartProps {
   variant: "area" | "donut";
   className?: string;
+  data: Holding[];
 }
 
 const titles: Record<ChartProps["variant"], string> = {
@@ -29,6 +31,16 @@ const titles: Record<ChartProps["variant"], string> = {
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
   const { privacy } = useContext(GlobalContext);
+
+  const donutChartData = useMemo(
+    () =>
+      props.data.map(({ name, totalValue }) => ({
+        name,
+        sales: totalValue,
+      })),
+    [props.data]
+  );
+
   const areaChartColor =
     chartdata[0].rate_open - chartdata[chartdata.length - 1].rate_open < 0
       ? "indigo"
@@ -83,7 +95,7 @@ export default function Chart(props: ChartProps) {
         ) : (
           <DonutChart
             className="h-72 mt-4"
-            data={cities}
+            data={donutChartData}
             category="sales"
             index="name"
             valueFormatter={valueFormatter}
