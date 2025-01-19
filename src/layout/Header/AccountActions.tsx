@@ -11,6 +11,7 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { LOGOUT_URL } from "@/lib/api";
 import { useAuth } from "@/lib/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
+import ProfileDialog from "./ProfileDialog/ProfileDialog";
 
 export default function AccountActions() {
   const { refetchUser } = useAuth();
@@ -23,7 +24,7 @@ export default function AccountActions() {
         credentials: "include",
       });
       if (response.ok) {
-        queryClient.clear()
+        queryClient.clear();
         refetchUser();
       } else {
         console.error("Logout failed");
@@ -42,7 +43,7 @@ export default function AccountActions() {
           src="https://github.com/shadcn.png"
         />
       </PopoverTrigger>
-      <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
+      <PopoverContent className="p-1" onOpenAutoFocus={(e) => e.preventDefault()}>
         <Flex justifyContent="start">
           <AvatarWithSkeleton
             className="h-10 w-10 m-2"
@@ -58,9 +59,7 @@ export default function AccountActions() {
         </Flex>
         <Separator />
         <Flex flexDirection="col">
-          <Button variant="ghost" className="justify-start w-full">
-            Settings
-          </Button>
+          <ProfileDialog />
           <Button
             onClick={logout}
             variant="ghost"

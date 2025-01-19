@@ -1,6 +1,6 @@
-import { avatarValues } from "../PortfolioDialog/AvatarAssets";
+import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
 
-type PortfolioIconProps = avatarValues & {
+type PortfolioIconProps = AvatarValues & {
   style?: React.CSSProperties;
   size?: "small" | "medium" | "large";
 };

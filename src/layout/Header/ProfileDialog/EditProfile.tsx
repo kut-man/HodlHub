@@ -2,75 +2,70 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PortfolioDialogProps } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useContext } from "react";
-import { GlobalContext } from "@/pages/Portfolio";
-import {
-  upsertPortfolioAsync,
-  UpsertPortfolioAsyncProps,
-} from "./PortfolioDialogFunctions";
+import { editProfileAsync } from "./ProfileDialogFunctions";
+import { useAuth } from "@/lib/useAuth";
+import { Holder } from "@/lib/AuthProvider";
+import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 type FormValues = {
   name: string;
 };
 
-export function UpsertPortfolio({
+export function EditProfile({
   changeCurrentDialogPage,
-  onPortfolioCreate,
-  iconProperties,
-  editPortfolio,
-}: PortfolioDialogProps) {
-  const { portfolio } = useContext(GlobalContext);
+  onProfileEdit,
+  profileUrl,
+}: {
+  changeCurrentDialogPage: () => void;
+  onProfileEdit: () => void;
+  profileUrl: string;
+}) {
+  const { data } = useAuth() as { data: Holder };
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>(
-    editPortfolio ? { defaultValues: { name: portfolio?.name } } : {}
-  );
+  } = useForm<FormValues>({ defaultValues: { name: data.name } });
 
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error, isError } = useMutation({
-    mutationFn: (data: UpsertPortfolioAsyncProps) => upsertPortfolioAsync(data),
+    mutationFn: (data: Holder) => editProfileAsync(data),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
-    onSuccess: onPortfolioCreate,
+    onSuccess: onProfileEdit,
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (portfolioName) =>
+  const onSubmit: SubmitHandler<FormValues> = ({ name }) =>
     mutate({
-      data: {
-        ...iconProperties,
-        name: portfolioName.name,
-      },
-      id: editPortfolio ? portfolio?.id : undefined,
+      ...data,
+      avatar: profileUrl,
+      name,
     });
 
   return (
     <>
       <div className="flex flex-col gap-4 py-4">
-        <Label>Portfolio Avatar</Label>
+        <Label>Profile Avatar</Label>
         <div className="flex items-center justify-between mb-2">
-          <PortfolioIcon
-            style={{ padding: "0" }}
-            color={iconProperties.color}
-            avatar={iconProperties.avatar}
+          <AvatarWithSkeleton
+            className="h-16 w-16"
+            alt="Profile Avatar"
+            src={profileUrl}
           />
           <Button onClick={changeCurrentDialogPage}>Change</Button>
         </div>
-        <Label htmlFor="name">Portfolio Name</Label>
+        <Label htmlFor="name">Profile Name</Label>
         <Input
           {...register("name", {
-            required: "Portfolio name is empty!",
+            required: "Name is empty!",
             maxLength: {
               value: 24,
-              message: "Portfolio name can not be longer that 24 characters!",
+              message: "Name can not be longer that 24 characters!",
             },
           })}
           className="col-span-3"
@@ -97,7 +92,7 @@ export function UpsertPortfolio({
               Please wait
             </>
           ) : (
-            "Create portfolio"
+            "Edit Profile"
           )}
         </Button>
       </DialogFooter>

@@ -24,6 +24,7 @@ type ContextValue = {
   isLoggedIn?: boolean;
   refetchUser: () => void;
   isPending: boolean;
+  data?: Holder;
 };
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
@@ -34,7 +35,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
     isError,
     isSuccess,
-  } = useQuery<ApiResponse>({
+  } = useQuery<ApiResponse<Holder>>({
     queryKey: ["user"],
     queryFn: () =>
       fetch(USER_URL, {
@@ -68,9 +69,16 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     );
   }
 
+  const userData = data?.data
+  ? {
+      ...data.data,
+      avatar: data.data.avatar || "https://github.com/shadcn.png",
+    }
+  : undefined;
+
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, refetchUser: refetch, isPending }}
+      value={{ isLoggedIn, refetchUser: refetch, isPending, data: userData }}
     >
       {children}
     </AuthContext.Provider>
