@@ -20,12 +20,17 @@ export function PortfolioActions() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-52 p-1 flex flex-col gap-1">
+        <PortfolioDialog
+          editPortfolio
+          size="sm"
+          className="justify-start"
+          variant="ghost"
+        />
         <RemovePortfolioDialog
           className="justify-start"
           variant="ghost"
           onClose={() => setOpenPopover(false)}
         />
-        <PortfolioDialog editPortfolio size="sm" className="justify-start" variant="ghost" />
       </PopoverContent>
     </Popover>
   );

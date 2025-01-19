@@ -9,11 +9,7 @@ import { ChangeAvatar } from "./ChangeAvatar";
 import { UpsertPortfolio } from "./UpsertPortfolio";
 import { useContext, useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
-import {
-  avatarBackground,
-  AvatarValues,
-  emojis,
-} from "./AvatarAssets";
+import { avatarBackground, AvatarValues, emojis } from "./AvatarAssets";
 import { Pencil, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -56,7 +52,10 @@ export default function PortfolioDialog({
   return (
     <Dialog onOpenChange={toggleDialog} open={isDialogOpen}>
       <DialogTrigger asChild>
-        <Button aria-label="Create Portfolio" {...buttonProps}>
+        <Button
+          aria-label={editPortfolio ? "Edit Portfolio" : "Create Portfolio"}
+          {...buttonProps}
+        >
           {editPortfolio ? (
             <>
               <Pencil size={18} className="mr-4" />
@@ -78,6 +77,8 @@ export default function PortfolioDialog({
                 <GoArrowLeft onClick={changeCurrentDialogPage} />
                 Change Avatar
               </>
+            ) : editPortfolio ? (
+              "Edit Portfolio"
             ) : (
               "Create Portfolio"
             )}
@@ -91,7 +92,6 @@ export default function PortfolioDialog({
         ) : (
           <UpsertPortfolio
             editPortfolio={editPortfolio}
-
             onPortfolioCreate={() => setIsDialogOpen(false)}
             iconProperties={portfolioIcon}
             changeCurrentDialogPage={changeCurrentDialogPage}

@@ -23,7 +23,7 @@ export function EditProfile({
   onProfileEdit: () => void;
   profileUrl: string;
 }) {
-  const { data } = useAuth() as { data: Holder };
+  const { data } = useAuth();
   const {
     register,
     handleSubmit,

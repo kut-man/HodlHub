@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { PortfolioActions } from "./PortfolioActions";
+import { useAuth } from "@/lib/useAuth";
 
 interface PortfolioHeaderProps {
   setShowCharts?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,6 +30,7 @@ export default function PortfolioHeader({
   valueChangePercentage24h,
 }: PortfolioHeaderProps) {
   const { privacy } = useContext(GlobalContext);
+  const { data } = useAuth();
   return (
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
@@ -36,7 +38,7 @@ export default function PortfolioHeader({
           <AvatarWithSkeleton
             className="h-8 w-8 m-2 ml-0"
             alt="Avatar"
-            src="https://github.com/shadcn.png"
+            src={data.avatar}
           />
           <Label className="text-lg">Binance</Label>
         </Flex>

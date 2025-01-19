@@ -14,7 +14,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import ProfileDialog from "./ProfileDialog/ProfileDialog";
 
 export default function AccountActions() {
-  const { refetchUser } = useAuth();
+  const { refetchUser, data } = useAuth();
   const queryClient = useQueryClient();
 
   const logout = async () => {
@@ -40,15 +40,18 @@ export default function AccountActions() {
         <AvatarWithSkeleton
           className="h-8 w-8 m-2"
           alt="Avatar"
-          src="https://github.com/shadcn.png"
+          src={data.avatar}
         />
       </PopoverTrigger>
-      <PopoverContent className="p-1" onOpenAutoFocus={(e) => e.preventDefault()}>
+      <PopoverContent
+        className="p-1"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
         <Flex justifyContent="start">
           <AvatarWithSkeleton
             className="h-10 w-10 m-2"
             alt="Avatar"
-            src="https://github.com/shadcn.png"
+            src={data.avatar}
           />
           <Flex justifyContent="start" alignItems="start" flexDirection="col">
             <Label className="cursor-pointer text-left leading-2 text-base">
