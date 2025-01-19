@@ -72,7 +72,7 @@ export default function RemovePortfolioDialog({
       <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
-        <Label className="text-xl">{`Remove ${portfolio.name}`}</Label>
+        <Label className="text-xl">{`Remove ${portfolio.name} portfolio?`}</Label>
         <Label className="mb-4">
           All coins and transactions in this portfolio will be removed.
         </Label>

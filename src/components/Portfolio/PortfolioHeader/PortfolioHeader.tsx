@@ -10,9 +10,9 @@ import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import { PiEyeClosed } from "react-icons/pi";
-import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { PortfolioActions } from "./PortfolioActions";
-import { useAuth } from "@/lib/useAuth";
+import PortfolioIcon from "../PortfolioList/PortfolioIcon";
+import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
 
 interface PortfolioHeaderProps {
   setShowCharts?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,18 +29,19 @@ export default function PortfolioHeader({
   valueChange24h,
   valueChangePercentage24h,
 }: PortfolioHeaderProps) {
-  const { privacy } = useContext(GlobalContext);
-  const { data } = useAuth();
+  const { privacy, portfolio } = useContext(GlobalContext);
+  const { color, avatar, name } = portfolio as AvatarValues & { name: string };
   return (
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
         <Flex flexDirection="row" alignItems="center" justifyContent="start">
-          <AvatarWithSkeleton
-            className="h-8 w-8 m-2 ml-0"
-            alt="Avatar"
-            src={data.avatar}
+          <PortfolioIcon
+            size="small"
+            style={{ width: "40px", height: "40px" }}
+            color={color}
+            avatar={avatar}
           />
-          <Label className="text-lg">Binance</Label>
+          <Label className="text-lg">{name}</Label>
         </Flex>
         <Flex flexDirection="row" justifyContent="start">
           <BalanceLabel balance={totalAmount} className="font-bold text-3xl" />

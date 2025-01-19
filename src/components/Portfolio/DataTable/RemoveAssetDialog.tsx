@@ -75,7 +75,7 @@ export default function RemoveAssetDialog({
       <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
-        <Label className="text-xl">{`Remove ${assetTicker}`}</Label>
+        <Label className="text-xl">{`Remove ${assetTicker}?`}</Label>
         <Label className="mb-4">
           All transactions associated with this coin will be removed.
         </Label>

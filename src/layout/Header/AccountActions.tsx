@@ -55,9 +55,9 @@ export default function AccountActions() {
           />
           <Flex justifyContent="start" alignItems="start" flexDirection="col">
             <Label className="cursor-pointer text-left leading-2 text-base">
-              Hi, Kutman
+              Hi, {data.name}
             </Label>
-            <Label>kutman.stel@gmail.com</Label>
+            <Label>{data.email}</Label>
           </Flex>
         </Flex>
         <Separator />
