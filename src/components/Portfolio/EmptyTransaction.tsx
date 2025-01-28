@@ -11,10 +11,10 @@ export default function EmptyTransaction() {
       />
       <Flex flexDirection="col" className="gap-4">
         <h1 className="w-fit text-xl sm:text-3xl font-bold">
-          Let’s get started with your first portfolio!
+        This portfolio needs some final touches…
         </h1>
         <p className="w-fit text-sm sm:text-xl">
-          Track profits, losses and valuation all in one place.
+        Add a coin to get started
         </p>
       </Flex>
       <AddTransactionDialog

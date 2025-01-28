@@ -12,10 +12,12 @@ import { LOGOUT_URL } from "@/lib/api";
 import { useAuth } from "@/lib/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import ProfileDialog from "./ProfileDialog/ProfileDialog";
+import { useState } from "react";
 
 export default function AccountActions() {
   const { refetchUser, data } = useAuth();
   const queryClient = useQueryClient();
+  const [openPopover, setOpenPopover] = useState(false);
 
   const logout = async () => {
     try {
@@ -35,7 +37,7 @@ export default function AccountActions() {
   };
 
   return (
-    <Popover>
+    <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
       <PopoverTrigger>
         <AvatarWithSkeleton
           className="h-8 w-8 m-2"
@@ -62,7 +64,7 @@ export default function AccountActions() {
         </Flex>
         <Separator />
         <Flex flexDirection="col">
-          <ProfileDialog />
+          <ProfileDialog onClose={() => setOpenPopover(false)} />
           <Button
             onClick={logout}
             variant="ghost"

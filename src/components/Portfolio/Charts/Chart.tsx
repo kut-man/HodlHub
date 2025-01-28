@@ -67,7 +67,7 @@ export default function Chart(props: ChartProps) {
             <Button
               key={title}
               onClick={() => setChart(title as ChartProps["variant"])}
-              variant="ghost"
+              variant={chart === title ? "secondary" : "ghost"}
               size="sm"
               className="w-1/2"
             >

@@ -13,8 +13,9 @@ import { ChangeAvatar } from "./ChangeAvatar";
 import { useAuth } from "@/lib/useAuth";
 
 export default function ProfileDialog({
+  onClose,
   ...buttonProps
-}: {} & React.ComponentProps<typeof Button>) {
+}: { onClose?: () => void } & React.ComponentProps<typeof Button>) {
   const { data } = useAuth();
 
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
@@ -30,6 +31,7 @@ export default function ProfileDialog({
 
   const toggleDialog = (open: boolean) => {
     if (open) setIsAvatarDialogPage(!open);
+    if (!open && onClose) onClose();
     setIsDialogOpen(open);
   };
 
