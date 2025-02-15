@@ -128,7 +128,7 @@ export default function Portfolio() {
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
-        ) : portfolioListData?.data ? (
+        ) : portfolioListData?.data?.length ? (
           <>
             <PortfolioList
               data={portfolioListData.data}

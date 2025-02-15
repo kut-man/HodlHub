@@ -71,7 +71,7 @@ export default function ProfileDialog({
         ) : (
           <EditProfile
             profileUrl={profileUrl}
-            onProfileEdit={() => setIsDialogOpen(false)}
+            onProfileEdit={() => toggleDialog(false)}
             changeCurrentDialogPage={changeCurrentDialogPage}
           />
         )}
