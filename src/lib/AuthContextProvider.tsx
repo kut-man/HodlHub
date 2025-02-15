@@ -27,7 +27,7 @@ type ContextValue = {
   data: Holder;
 };
 
-export default function AuthProvider({ children }: { children: ReactNode }) {
+export default function AuthContextProvider({ children }: { children: ReactNode }) {
   const {
     data: data,
     refetch,

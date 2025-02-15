@@ -3,9 +3,12 @@ import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
 import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
 import { useState, createContext, useEffect } from "react";
 import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
-import { ApiResponse } from "@/lib/AuthProvider";
-import { PortfolioFields } from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
-import { useQuery } from "@tanstack/react-query";
+import { ApiResponse } from "@/lib/AuthContextProvider";
+import {
+  PortfolioFields,
+  PortfolioListFields,
+} from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
 import EmptyDashboard from "@/components/Portfolio/EmptyDashboard";
 import { Loader2 } from "lucide-react";
@@ -29,6 +32,8 @@ export default function Portfolio() {
   const [portfolio, setPortfolio] = useState<GlobalContext["portfolio"]>();
   const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
 
+  const queryClient = useQueryClient();
+
   function changeVisibility() {
     setVisibility((prev) => {
       localStorage.setItem("privacyMode", (!prev).toString());
@@ -36,29 +41,32 @@ export default function Portfolio() {
     });
   }
 
-  const { data: response, isPending } = useQuery<
-    ApiResponse<PortfolioFields[]>
-  >({
-    queryKey: ["portfolio"],
-    queryFn: async () => {
-      const response = await fetch(PORTFOLIO_URL, {
-        method: "GET",
-        credentials: "include",
-      });
-      if (!response.ok) throw Error("Portfolio list fetch failed!");
-      return await response.json();
-    },
-    refetchOnWindowFocus: false,
-  });
+  const { data: portfolioListData, isPending: isPortfolioListDataPending } =
+    useQuery<ApiResponse<PortfolioListFields[]>>({
+      queryKey: ["portfolio"],
+      queryFn: async () => {
+        const response = await fetch(PORTFOLIO_URL, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!response.ok) throw Error("Portfolio list fetch failed!");
+        return await response.json();
+      },
+      refetchOnWindowFocus: false,
+    });
 
   useEffect(() => {
-    if (response && response.data && response.data.length > 0) {
+    if (
+      portfolioListData &&
+      portfolioListData.data &&
+      portfolioListData.data.length > 0
+    ) {
       const selectedPortfolioId = sessionStorage.getItem("selectedPortfolio");
       const selectedPortfolio = selectedPortfolioId
-        ? response.data.find(
+        ? portfolioListData.data.find(
             (portfolio) => portfolio.id == parseInt(selectedPortfolioId)
-          ) ?? response.data[0]
-        : response.data[0];
+          ) ?? portfolioListData.data[0]
+        : portfolioListData.data[0];
 
       setPortfolio({
         id: selectedPortfolio.id,
@@ -66,30 +74,64 @@ export default function Portfolio() {
         color: selectedPortfolio.color,
         avatar: selectedPortfolio.avatar,
       });
-      setActivePortfolio(selectedPortfolio);
     }
-  }, [response]);
+  }, [portfolioListData]);
+
+  const { data: portfolioData } = useQuery<ApiResponse<PortfolioFields>>({
+    queryKey: ["portfolio", portfolio?.id],
+    queryFn: async () => {
+      if (!portfolio?.id) return;
+      const response = await fetch(`${PORTFOLIO_URL}/${portfolio.id}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch portfolio data");
+      return await response.json();
+    },
+    enabled: !!portfolio,
+  });
+
+  useEffect(() => {
+    if (portfolioData) {
+      setActivePortfolio(portfolioData.data);
+
+      // Update the portfolio list cache with the latest portfolio data
+      queryClient.setQueryData(
+        ["portfolio"],
+        (oldData: ApiResponse<PortfolioListFields[]> | undefined) => {
+          if (!oldData || !oldData.data) return oldData;
+
+          return {
+            ...oldData,
+            data: oldData.data.map((portfolio) =>
+              portfolio.id === portfolioData.data?.id
+                ? { ...portfolio, totalAmount: portfolioData.data.totalAmount }
+                : portfolio
+            ),
+          };
+        }
+      );
+    }
+  }, [portfolioData, queryClient]);
 
   const switchPortfolio = (portfolioValues: GlobalContext["portfolio"]) => {
-    if (!portfolioValues) return;
+    if (!portfolioValues || (portfolio && portfolio.id === portfolioValues.id))
+      return;
     setPortfolio(portfolioValues);
     sessionStorage.setItem("selectedPortfolio", portfolioValues.id.toString());
-    setActivePortfolio(
-      response?.data?.find((portfolio) => portfolio.id == portfolioValues?.id)
-    );
   };
 
   return (
     <GlobalContext.Provider value={{ privacy: visibility, portfolio }}>
       <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
-        {isPending && !activePortfolio ? (
+        {isPortfolioListDataPending ? (
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
-        ) : activePortfolio && response?.data ? (
+        ) : portfolioListData?.data ? (
           <>
             <PortfolioList
-              data={response.data}
+              data={portfolioListData.data}
               switchPortfolio={switchPortfolio}
             />
 
@@ -98,7 +140,11 @@ export default function Portfolio() {
               alignItems="start"
               flexDirection="col"
             >
-              {activePortfolio.holdings ? (
+              {!activePortfolio || portfolio?.id !== activePortfolio.id ? (
+                <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
+                  <Loader2 className="h-8 w-8 animate-spin" />
+                </div>
+              ) : activePortfolio.holdings ? (
                 <>
                   <PortfolioInsights
                     data={activePortfolio}

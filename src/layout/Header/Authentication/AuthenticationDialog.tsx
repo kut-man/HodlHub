@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Register from "./Register";
 import { AuthAction } from "../HeaderTypes";
 import Login from "./Login";
-import { useAuth } from "@/lib/useAuth";
+import { useAuthContext } from "@/lib/useAuthContext";
 
 interface AuthenticationDialogProps {
   setDialog: React.Dispatch<
@@ -22,7 +22,7 @@ export default function AuthenticationDialog({
   setDialog,
   dialog,
 }: AuthenticationDialogProps) {
-  const { refetchUser } = useAuth();
+  const { refetchUser } = useAuthContext();
 
   const onSuccessfulAuthorizationHandler = () => {
     refetchUser();

@@ -1,12 +1,12 @@
 import { PropsWithChildren, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "./useAuth";
+import { useAuthContext } from "./useAuthContext";
 
 type ProtectedRouteProps = PropsWithChildren;
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuthContext();
   const navigate = useNavigate();
 
   useLayoutEffect(() => {

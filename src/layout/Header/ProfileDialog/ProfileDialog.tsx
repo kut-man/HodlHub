@@ -10,13 +10,13 @@ import { useState } from "react";
 import { GoArrowLeft } from "react-icons/go";
 import { Button } from "@/components/ui/button";
 import { ChangeAvatar } from "./ChangeAvatar";
-import { useAuth } from "@/lib/useAuth";
+import { useAuthContext } from "@/lib/useAuthContext";
 
 export default function ProfileDialog({
   onClose,
   ...buttonProps
 }: { onClose?: () => void } & React.ComponentProps<typeof Button>) {
-  const { data } = useAuth();
+  const { data } = useAuthContext();
 
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
 

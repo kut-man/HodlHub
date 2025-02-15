@@ -7,7 +7,7 @@ export default function EmptyTransaction() {
       <img
         className="h-60"
         src="https://s2.coinmarketcap.com/static/cloud/img/portfolio/no-manual-portfolio.png?_=3350d4d"
-        alt="portfolio"
+        alt="Empty Portfolio"
       />
       <Flex flexDirection="col" className="gap-4">
         <h1 className="w-fit text-xl sm:text-3xl font-bold">

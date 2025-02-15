@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { COIN_URL } from "@/lib/api";
-import { ApiResponse } from "@/lib/AuthProvider";
+import { ApiResponse } from "@/lib/AuthContextProvider";
 import { useQuery } from "@tanstack/react-query";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";

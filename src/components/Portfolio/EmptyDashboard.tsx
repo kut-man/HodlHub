@@ -7,7 +7,7 @@ export default function EmptyDashboard() {
       <img
         className="h-60"
         src="https://s2.coinmarketcap.com/static/cloud/img/portfolio/no-portfolio.png?_=dce0834"
-        alt="portfolio"
+        alt="Empty Dashboard"
       />
       <Flex flexDirection="col" className="gap-4">
         <h1 className="w-fit text-xl sm:text-3xl font-bold">

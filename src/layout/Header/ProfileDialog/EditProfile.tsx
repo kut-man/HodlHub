@@ -6,8 +6,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { editProfileAsync } from "./ProfileDialogFunctions";
-import { useAuth } from "@/lib/useAuth";
-import { Holder } from "@/lib/AuthProvider";
+import { useAuthContext } from "@/lib/useAuthContext";
+import { Holder } from "@/lib/AuthContextProvider";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 type FormValues = {
@@ -23,7 +23,7 @@ export function EditProfile({
   onProfileEdit: () => void;
   profileUrl: string;
 }) {
-  const { data } = useAuth();
+  const { data } = useAuthContext();
   const {
     register,
     handleSubmit,

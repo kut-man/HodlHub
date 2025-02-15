@@ -80,10 +80,13 @@ type Statistics = {
   worstTicker: string;
 };
 
-export type PortfolioFields = AvatarValues & {
+export type PortfolioListFields = AvatarValues & {
   id: number;
   name: string;
   totalAmount: number;
+};
+
+export type PortfolioFields = PortfolioListFields & {
   valueChange24h: number;
   valueChangePercentage24h: number;
   holdings: Holding[];

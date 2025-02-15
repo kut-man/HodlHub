@@ -2,7 +2,7 @@ import InteractiveIcons from "@/components/Home/InteractiveIcons/InteractiveIcon
 import { Button } from "@/components/ui/button";
 import AuthenticationDialog from "@/layout/Header/Authentication/AuthenticationDialog";
 import { AuthAction } from "@/layout/Header/HeaderTypes";
-import { useAuth } from "@/lib/useAuth";
+import { useAuthContext } from "@/lib/useAuthContext";
 import { Flex } from "@tremor/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ export default function Home() {
     tab: AuthAction;
   }>({ isOpen: false, tab: AuthAction.LOGIN });
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuthContext();
   const navigate = useNavigate();
 
   return (

@@ -2,7 +2,7 @@ import { Label } from "@radix-ui/react-label";
 import { Flex } from "@tremor/react";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
-import { PortfolioFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -14,7 +14,7 @@ export default function PortfolioItem({
   name,
   totalAmount,
   onClick,
-}: PortfolioFields & {
+}: PortfolioListFields & {
   onClick: (portfolioValues: GlobalContext["portfolio"]) => void;
 }) {
   const { portfolio } = useContext(GlobalContext);

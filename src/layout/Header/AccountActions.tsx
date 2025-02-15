@@ -9,13 +9,13 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { LOGOUT_URL } from "@/lib/api";
-import { useAuth } from "@/lib/useAuth";
+import { useAuthContext } from "@/lib/useAuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import ProfileDialog from "./ProfileDialog/ProfileDialog";
 import { useState } from "react";
 
 export default function AccountActions() {
-  const { refetchUser, data } = useAuth();
+  const { refetchUser, data } = useAuthContext();
   const queryClient = useQueryClient();
   const [openPopover, setOpenPopover] = useState(false);
 

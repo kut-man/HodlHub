@@ -5,11 +5,11 @@ import { Toggle } from "@radix-ui/react-toggle";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
 import Authentication from "./Authentication/Authentication";
-import { useAuth } from "@/lib/useAuth";
+import { useAuthContext } from "@/lib/useAuthContext";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuthContext();
 
   return (
     <header className="h-16 border-b flex items-center p-2 lg:px-24 px-8">

@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/card";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import PortfolioItem from "./PortfolioItem";
-import { PortfolioFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { GlobalContext } from "@/pages/Portfolio";
 
 interface PortfolioListProps {
   switchPortfolio: (portfolioValues: GlobalContext["portfolio"]) => void;
-  data: PortfolioFields[];
+  data: PortfolioListFields[];
 }
 
 export default function PortfolioList({
