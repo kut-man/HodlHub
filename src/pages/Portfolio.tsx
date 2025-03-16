@@ -85,7 +85,7 @@ export default function Portfolio() {
         method: "GET",
         credentials: "include",
       });
-      if (!response.ok) throw new Error("Failed to fetch portfolio data");
+      if (!response.ok) throw new Error("Failed to fetch portfolio data!");
       return await response.json();
     },
     enabled: !!portfolio,

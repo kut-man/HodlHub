@@ -1,21 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AreaChart } from "@tremor/react";
 import { DonutChart } from "@tremor/react";
-import { chartdata } from "./MockData";
 import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
-import { GlobalContext } from "@/pages/Portfolio";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import HistoryChart from "./HistoryChart";
 
-const valueFormatter = function (number: number) {
-  if (number >= 1000) {
-    const formattedNumber = number / 1000;
-    return "$ " + formattedNumber + "k";
-  } else {
-    return "$ " + new Intl.NumberFormat("us").format(number).toString();
-  }
-};
+const formatter = new Intl.NumberFormat('en', { notation: 'compact', style: 'currency', currency: 'USD' });
+
+export const valueFormatter = (number: number) => formatter.format(number);
 
 interface ChartProps {
   variant: "area" | "donut";
@@ -30,7 +23,6 @@ const titles: Record<ChartProps["variant"], string> = {
 
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
-  const { privacy } = useContext(GlobalContext);
 
   const donutChartData = useMemo(
     () =>
@@ -40,11 +32,6 @@ export default function Chart(props: ChartProps) {
       })),
     [props.data]
   );
-
-  const areaChartColor =
-    chartdata[0].rate_open - chartdata[chartdata.length - 1].rate_open < 0
-      ? "indigo"
-      : "red";
 
   useEffect(() => {
     function handleResize() {
@@ -78,20 +65,7 @@ export default function Chart(props: ChartProps) {
       </CardHeader>
       <CardContent className="pb-4 text-green-500 flex items-end flex-row">
         {chart === "area" ? (
-          <AreaChart
-            className="h-72 mt-4"
-            data={chartdata}
-            index="time_open"
-            yAxisWidth={40}
-            categories={["rate_open"]}
-            colors={[areaChartColor]}
-            valueFormatter={valueFormatter}
-            showXAxis={privacy}
-            showYAxis={privacy}
-            showTooltip={privacy}
-            autoMinValue
-            curveType="natural"
-          />
+          <HistoryChart/>
         ) : (
           <DonutChart
             className="h-72 mt-4"
