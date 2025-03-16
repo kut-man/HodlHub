@@ -1,12 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DonutChart } from "@tremor/react";
+import { DonutChart, Flex } from "@tremor/react";
 import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import HistoryChart from "./HistoryChart";
+import TimeIntervalSelector from "./TimeIntervalSelector";
 
-const formatter = new Intl.NumberFormat('en', { notation: 'compact', style: 'currency', currency: 'USD' });
+const formatter = new Intl.NumberFormat("en", {
+  notation: "compact",
+  style: "currency",
+  currency: "USD",
+});
 
 export const valueFormatter = (number: number) => formatter.format(number);
 
@@ -21,8 +26,12 @@ const titles: Record<ChartProps["variant"], string> = {
   donut: "Allocation",
 };
 
+export type ChartTimeIntervals = "5m" | "1h" | "6h" | "1d";
+
 export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
+  const [selectedTimeInterval, setSelectedTimeInterval] =
+    useState<ChartTimeIntervals>("1d");
 
   const donutChartData = useMemo(
     () =>
@@ -48,7 +57,19 @@ export default function Chart(props: ChartProps) {
       }
     >
       <CardHeader className="pb-2 pt-4">
-        <CardTitle className="max-md:hidden">{titles[chart]}</CardTitle>
+        <CardTitle className="max-md:hidden h-8">
+          <Flex flexDirection="row" alignItems="center">
+            {titles[chart]}{" "}
+            {chart === "area" ? (
+              <TimeIntervalSelector
+                value={selectedTimeInterval}
+                onValueChange={(value) =>
+                  setSelectedTimeInterval(value as ChartTimeIntervals)
+                }
+              />
+            ) : null}
+          </Flex>
+        </CardTitle>
         <Card className="md:hidden p-1">
           {Object.keys(titles).map((title) => (
             <Button
@@ -65,7 +86,7 @@ export default function Chart(props: ChartProps) {
       </CardHeader>
       <CardContent className="pb-4 text-green-500 flex items-end flex-row">
         {chart === "area" ? (
-          <HistoryChart/>
+          <HistoryChart interval={selectedTimeInterval} />
         ) : (
           <DonutChart
             className="h-72 mt-4"

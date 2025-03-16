@@ -1,21 +1,26 @@
 import { AreaChart, CustomTooltipProps } from "@tremor/react";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
-import { valueFormatter } from "./Chart";
+import { ChartTimeIntervals, valueFormatter } from "./Chart";
 import { useQuery } from "@tanstack/react-query";
 import { ApiResponse } from "@/lib/AuthContextProvider";
 import { PORTFOLIO_URL } from "@/lib/api";
 
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  };
-  return date.toLocaleDateString("en-US", options).replace(",", "");
+export function formatTimestamp(
+  timestamp: string,
+  interval: ChartTimeIntervals
+): string {
+  const date = new Date(timestamp);
+  if (interval.endsWith("m")) {
+    return date.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  }
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "short" });
+  return `${day} ${month}`;
 }
 
 export type HistoryChart = {
@@ -58,15 +63,19 @@ const ChartTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   return null;
 };
 
-export default function HistoryChart() {
+export default function HistoryChart({
+  interval,
+}: {
+  interval: ChartTimeIntervals;
+}) {
   const { privacy, portfolio } = useContext(GlobalContext);
 
   const { data: portfolioData } = useQuery<ApiResponse<HistoryChart[]>>({
-    queryKey: ["historyChart", portfolio?.id],
+    queryKey: ["historyChart", portfolio?.id, interval],
     queryFn: async () => {
       if (!portfolio?.id) return;
       const response = await fetch(
-        `${PORTFOLIO_URL}/${portfolio.id}/chart/1d`,
+        `${PORTFOLIO_URL}/${portfolio.id}/chart/${interval}`,
         {
           method: "GET",
           credentials: "include",
@@ -81,13 +90,11 @@ export default function HistoryChart() {
 
   const chartData = portfolioData?.data
     ? portfolioData.data.map((item) => ({
-        time: formatDate(item.date),
+        time: formatTimestamp(item.date, interval),
         TotalValue: item.value,
         value: item.value,
       }))
     : [];
-
-  console.log(chartData);
 
   const areaChartColor =
     chartData.length > 0
@@ -110,6 +117,7 @@ export default function HistoryChart() {
       autoMinValue
       showAnimation
       customTooltip={ChartTooltip}
+      tickGap={20}
     />
   );
 }
