@@ -19,6 +19,7 @@ import { GlobalContext } from "@/pages/Portfolio";
 import { TRANSACTION_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 type TransactionCardProps = {
   type: TransactionTypes;
@@ -72,9 +73,13 @@ export default function TransactionCard({
 
   const { mutate, isPending, error, isError } = useMutation({
     mutationFn: (data: Transaction) => addTransaction(data),
-    onSuccess,
+    onSuccess: () => {
+      toast.success("Transaction was added");
+      onSuccess();
+    },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+      queryClient.invalidateQueries({ queryKey: ["historyChart"] });
     },
   });
 

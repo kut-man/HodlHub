@@ -118,6 +118,7 @@ export default function HistoryChart({
       showAnimation
       customTooltip={ChartTooltip}
       tickGap={20}
+      noDataText="Loading..."
     />
   );
 }

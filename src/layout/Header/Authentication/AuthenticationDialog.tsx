@@ -26,10 +26,9 @@ export default function AuthenticationDialog({
 
   const onSuccessfulAuthorizationHandler = () => {
     refetchUser();
-    setTimeout(() => {
-      setDialog({ ...dialog, isOpen: false });
-    }, 300);
+    setDialog({ ...dialog, isOpen: false });
   };
+
   return (
     <Dialog
       onOpenChange={(open: boolean) => setDialog({ ...dialog, isOpen: open })}

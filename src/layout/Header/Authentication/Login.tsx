@@ -8,12 +8,9 @@ import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { loginUser } from "./AuthenticationFunctions";
+import { toast } from "sonner";
 
-export default function Login({
-  onLogin,
-}: {
-  onLogin: () => void;
-}) {
+export default function Login({ onLogin }: { onLogin: () => void }) {
   const {
     register,
     handleSubmit,
@@ -21,8 +18,14 @@ export default function Login({
   } = useForm<LoginFields>();
   const [loginError, setLoginError] = useState("");
 
+  const onLoginHandler = () => {
+    toast.success("Login successful!");
+    onLogin();
+  };
+
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: LoginFields) => loginUser(data, onLogin, setLoginError),
+    mutationFn: (data: LoginFields) =>
+      loginUser(data, onLoginHandler, setLoginError),
   });
 
   const onSubmit: SubmitHandler<LoginFields> = (data) => {

@@ -7,6 +7,7 @@ import { PORTFOLIO_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const removeAsset = async (portfolioId: number, assetTicker: string) => {
   const response = await fetch(
@@ -39,9 +40,13 @@ export default function RemoveAssetDialog({
 
   const { mutate, isPending, error, isError, reset } = useMutation({
     mutationFn: () => removeAsset(portfolio?.id as number, assetTicker),
-    onSuccess: () => handleOpenChange(false),
+    onSuccess: () => {
+      handleOpenChange(false);
+      toast.warning("Asset has been removed");
+    },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+      queryClient.invalidateQueries({ queryKey: ["historyChart"] });
     },
   });
 

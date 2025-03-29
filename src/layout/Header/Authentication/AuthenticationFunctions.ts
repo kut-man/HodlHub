@@ -1,14 +1,16 @@
 import {
-  AuthenticationMethodsProps,
   ErrorResponse,
+  LoginFields,
   LoginResponse,
+  RegisterFields,
+  VerifyEmailFields,
 } from "../HeaderTypes";
-import { LOGIN_URL, REGISTER_URL } from "@/lib/api";
+import { LOGIN_URL, REGISTER_URL, VERIFY_URL } from "@/lib/api";
 
-export const loginUser: AuthenticationMethodsProps = async (
-  data,
-  onSuccess,
-  onError
+export const loginUser = async (
+  data: LoginFields,
+  onSuccess?: () => void,
+  onError?: (message: string) => void
 ) => {
   try {
     const response = await fetch(
@@ -31,10 +33,10 @@ export const loginUser: AuthenticationMethodsProps = async (
   }
 };
 
-export const registerUser: AuthenticationMethodsProps = async (
-  data,
-  onSuccess,
-  onError
+export const registerUser = async (
+  data: RegisterFields,
+  onSuccess?: () => void,
+  onError?: (message: string) => void
 ) => {
   try {
     const response = await fetch(REGISTER_URL, {
@@ -46,16 +48,48 @@ export const registerUser: AuthenticationMethodsProps = async (
       body: JSON.stringify(data),
     });
     if (response.ok) {
-      loginUser(data).then(() => onSuccess && onSuccess());
+      onSuccess && onSuccess();
     } else {
       onError &&
         response.json().then(({ errors }: ErrorResponse) => {
-          errors ? onError(errors[0].message) : onError("Something went wrong!");
+          errors
+            ? onError(errors[0].message)
+            : onError("Something went wrong!");
           console.error("Registration failed");
         });
     }
   } catch (error) {
     onError && onError("Something went wrong!");
     console.error("Error during registration:", error);
+  }
+};
+
+export const verifyEmail = async (
+  data: VerifyEmailFields,
+  onSuccess: () => void,
+  onError: (message: string) => void
+) => {
+  try {
+    const response = await fetch(
+      `${VERIFY_URL}?email=${encodeURIComponent(
+        data.email
+      )}&code=${encodeURIComponent(data.code)}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
+    if (response.ok) {
+      loginUser(data).then(() => onSuccess && onSuccess());
+    } else {
+      onError &&
+        response.json().then(({ message }: ErrorResponse) => {
+          message ? onError(message) : onError("Something went wrong!");
+          console.error("Email Verification failed");
+        });
+    }
+  } catch (error) {
+    onError && onError("Something went wrong!");
+    console.error("Error during email verification:", error);
   }
 };

@@ -13,6 +13,7 @@ import { useAuthContext } from "@/lib/useAuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import ProfileDialog from "./ProfileDialog/ProfileDialog";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function AccountActions() {
   const { refetchUser, data } = useAuthContext();
@@ -28,6 +29,7 @@ export default function AccountActions() {
       if (response.ok) {
         queryClient.clear();
         refetchUser();
+        toast.success("Logged out successfully!");
       } else {
         console.error("Logout failed");
       }

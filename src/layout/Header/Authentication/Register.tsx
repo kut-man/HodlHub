@@ -8,31 +8,44 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { RegisterFields } from "../HeaderTypes";
 import { registerUser } from "./AuthenticationFunctions";
+import VerifyEmail from "./VerifyEmail";
 
-export default function Register({
-  onRegister,
-}: {
-  onRegister: () => void;
-}) {
+export default function Register({ onRegister }: { onRegister: () => void }) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    getValues,
   } = useForm<RegisterFields>();
 
   const [registrationError, setRegistrationError] = useState("");
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: RegisterFields) => {
-      delete (data as {repeatPassword?: string}).repeatPassword; 
-      return registerUser(data, onRegister, setRegistrationError)
-    }
+      delete (data as { repeatPassword?: string }).repeatPassword;
+      return registerUser(
+        data,
+        () => setShowEmailVerification(true),
+        setRegistrationError
+      );
+    },
   });
 
   const onSubmit: SubmitHandler<RegisterFields> = (data) => {
     mutate(data);
   };
+
+  if (showEmailVerification) {
+    return (
+      <VerifyEmail
+        email={getValues("email")}
+        password={getValues("password")}
+        onVerify={onRegister}
+      />
+    );
+  }
 
   return (
     <Card>

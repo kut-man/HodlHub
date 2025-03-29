@@ -10,11 +10,7 @@ export type LoginFields = {
   password: string;
 };
 
-export type AuthenticationMethodsProps = (
-  data: LoginFields | RegisterFields,
-  onSuccess?: () => void,
-  onError?: React.Dispatch<React.SetStateAction<string>>
-) => Promise<void>;
+export type VerifyEmailFields = LoginFields & { code: string };
 
 export type LoginResponse = {
   status: string;

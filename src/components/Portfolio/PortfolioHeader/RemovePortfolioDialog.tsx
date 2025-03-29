@@ -7,6 +7,7 @@ import { PORTFOLIO_URL } from "@/lib/api";
 import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { GlobalContext } from "@/pages/Portfolio";
+import { toast } from "sonner";
 
 const removePortfolio = async (portfolioId: number) => {
   const response = await fetch(`${PORTFOLIO_URL}/${portfolioId}`, {
@@ -36,7 +37,10 @@ export default function RemovePortfolioDialog({
 
   const { mutate, isPending, error, isError, reset } = useMutation({
     mutationFn: () => removePortfolio(portfolio.id),
-    onSuccess: () => onClose(),
+    onSuccess: () => {
+      onClose();
+      toast.success("Portfolio removed successfully!");
+    },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolio"] });
     },

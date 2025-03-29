@@ -57,7 +57,7 @@ export function CoinSelect({
   const [selectedCoin, setSelectedCoin] = useState("");
 
   useLayoutEffect(() => {
-    if (coins && !selectedCoin) {
+    if (coins?.length && !selectedCoin) {
       const defaultCoin =
         coins.find((coin) => coin.ticker === defaultSelectedCoinTicker) ||
         coins[0];
