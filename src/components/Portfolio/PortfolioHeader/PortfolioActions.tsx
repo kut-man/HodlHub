@@ -25,6 +25,7 @@ export function PortfolioActions() {
           size="sm"
           className="justify-start"
           variant="ghost"
+          onClose={() => setOpenPopover(false)}
         />
         <RemovePortfolioDialog
           className="justify-start"

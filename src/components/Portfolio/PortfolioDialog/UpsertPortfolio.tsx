@@ -23,6 +23,8 @@ export function UpsertPortfolio({
   onPortfolioCreate,
   iconProperties,
   editPortfolio,
+  portfolioName,
+  setPortfolioName,
 }: PortfolioDialogProps) {
   const { portfolio } = useContext(GlobalContext);
   const {
@@ -30,7 +32,7 @@ export function UpsertPortfolio({
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>(
-    editPortfolio ? { defaultValues: { name: portfolio?.name } } : {}
+    editPortfolio ? { defaultValues: { name: portfolioName } } : {}
   );
 
   const queryClient = useQueryClient();
@@ -74,6 +76,9 @@ export function UpsertPortfolio({
             },
           })}
           className="col-span-3"
+          onChange={(e) => {
+            setPortfolioName && setPortfolioName(e.target.value);
+          }}
         />
       </div>
       <DialogFooter className="sm:space-x-0 sm:flex-col flex flex-col gap-6">

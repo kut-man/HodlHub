@@ -16,12 +16,15 @@ import { GlobalContext } from "@/pages/Portfolio";
 
 export default function PortfolioDialog({
   editPortfolio,
+  onClose,
   ...buttonProps
 }: {
   editPortfolio?: boolean;
+  onClose?: () => void;
 } & React.ComponentProps<typeof Button>) {
   const [isAvatarDialogPage, setIsAvatarDialogPage] = useState(false);
   const { portfolio } = useContext(GlobalContext);
+  const [portfolioName, setPortfolioName] = useState(portfolio?.name || "");
   const [portfolioIcon, setPortfolioIcon] = useState<AvatarValues>(
     editPortfolio && portfolio
       ? { color: portfolio.color, avatar: portfolio.avatar }
@@ -42,6 +45,7 @@ export default function PortfolioDialog({
 
   const toggleDialog = (open: boolean) => {
     if (open) setIsAvatarDialogPage(!open);
+    if (!open && onClose) onClose();
     setIsDialogOpen(open);
   };
 
@@ -92,9 +96,14 @@ export default function PortfolioDialog({
         ) : (
           <UpsertPortfolio
             editPortfolio={editPortfolio}
-            onPortfolioCreate={() => setIsDialogOpen(false)}
+            onPortfolioCreate={() => {
+              setIsDialogOpen(false);
+              if (onClose) onClose();
+            }}
             iconProperties={portfolioIcon}
             changeCurrentDialogPage={changeCurrentDialogPage}
+            portfolioName={portfolioName}
+            setPortfolioName={setPortfolioName}
           />
         )}
       </DialogContent>

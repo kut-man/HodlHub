@@ -17,18 +17,23 @@ type FormValues = {
 export function EditProfile({
   changeCurrentDialogPage,
   onProfileEdit,
-  profileUrl,
+  formData,
+  onNameChange,
 }: {
   changeCurrentDialogPage: () => void;
   onProfileEdit: () => void;
-  profileUrl: string;
+  formData: {
+    profileUrl: string;
+    profileName: string;
+  };
+  onNameChange: (name: string) => void;
 }) {
   const { data } = useAuthContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ defaultValues: { name: data.name } });
+  } = useForm<FormValues>({ defaultValues: { name: formData.profileName } });
 
   const queryClient = useQueryClient();
 
@@ -43,7 +48,7 @@ export function EditProfile({
   const onSubmit: SubmitHandler<FormValues> = ({ name }) =>
     mutate({
       ...data,
-      avatar: profileUrl,
+      avatar: formData.profileUrl,
       name,
     });
 
@@ -55,7 +60,7 @@ export function EditProfile({
           <AvatarWithSkeleton
             className="h-16 w-16"
             alt="Profile Avatar"
-            src={profileUrl}
+            src={formData.profileUrl}
           />
           <Button onClick={changeCurrentDialogPage}>Change</Button>
         </div>
@@ -69,6 +74,9 @@ export function EditProfile({
             },
           })}
           className="col-span-3"
+          onChange={(e) => {
+            onNameChange(e.target.value);
+          }}
         />
       </div>
       <DialogFooter className="sm:space-x-0 sm:flex-col flex flex-col gap-6">

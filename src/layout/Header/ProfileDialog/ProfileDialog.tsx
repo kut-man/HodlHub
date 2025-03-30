@@ -24,6 +24,8 @@ export default function ProfileDialog({
 
   const [profileUrl, setProfileUrl] = useState(data.avatar);
 
+  const [profileName, setProfileName] = useState(data.name);
+
   const changeProfileAvatar = (url: string) => {
     setProfileUrl(url);
     changeCurrentDialogPage();
@@ -70,7 +72,8 @@ export default function ProfileDialog({
           />
         ) : (
           <EditProfile
-            profileUrl={profileUrl}
+            formData={{ profileUrl, profileName }}
+            onNameChange={(newName: string) => setProfileName(newName)}
             onProfileEdit={() => toggleDialog(false)}
             changeCurrentDialogPage={changeCurrentDialogPage}
           />

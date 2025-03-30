@@ -43,6 +43,8 @@ export interface PortfolioDialogProps {
   changeCurrentDialogPage: () => void;
   onPortfolioCreate: () => void;
   editPortfolio?: boolean;
+  portfolioName?: string;
+  setPortfolioName?: (name: string) => void;
 }
 
 export enum ACTIONS {
