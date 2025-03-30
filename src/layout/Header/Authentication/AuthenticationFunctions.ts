@@ -51,9 +51,11 @@ export const registerUser = async (
       onSuccess && onSuccess();
     } else {
       onError &&
-        response.json().then(({ errors }: ErrorResponse) => {
+        response.json().then(({ errors, message }: ErrorResponse) => {
           errors
             ? onError(errors[0].message)
+            : message
+            ? onError(message)
             : onError("Something went wrong!");
           console.error("Registration failed");
         });
@@ -80,7 +82,8 @@ export const verifyEmail = async (
       }
     );
     if (response.ok) {
-      loginUser(data).then(() => onSuccess && onSuccess());
+      await loginUser(data);
+      onSuccess && onSuccess();
     } else {
       onError &&
         response.json().then(({ message }: ErrorResponse) => {

@@ -76,7 +76,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           {loginError && (
-            <Label className="font-normal text-red-600">*{loginError}</Label>
+            <Label className="font-normal text-red-600 break-all">*{loginError}</Label>
           )}
           <Button disabled={isPending} className="w-full">
             {isPending ? (
