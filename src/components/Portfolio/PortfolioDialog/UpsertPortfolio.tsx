@@ -32,7 +32,7 @@ export function UpsertPortfolio({
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>(
-    editPortfolio ? { defaultValues: { name: portfolioName } } : {}
+    portfolioName ? { defaultValues: { name: portfolioName } } : {}
   );
 
   const queryClient = useQueryClient();
