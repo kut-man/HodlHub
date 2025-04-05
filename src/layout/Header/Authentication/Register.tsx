@@ -5,10 +5,11 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { RegisterFields } from "../HeaderTypes";
 import { registerUser } from "./AuthenticationFunctions";
 import VerifyEmail from "./VerifyEmail";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Register({ onRegister }: { onRegister: () => void }) {
   const {
@@ -21,12 +22,14 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
 
   const [registrationError, setRegistrationError] = useState("");
   const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [recaptchaValue, setRecaptchaValue] = useState("");
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: RegisterFields) => {
       delete (data as { repeatPassword?: string }).repeatPassword;
       return registerUser(
-        data,
+        { ...data, recaptchaToken: recaptchaValue },
         () => setShowEmailVerification(true),
         setRegistrationError
       );
@@ -34,8 +37,26 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
   });
 
   const onSubmit: SubmitHandler<RegisterFields> = (data) => {
+    if (!recaptchaValue) {
+      setRegistrationError("Please complete the reCAPTCHA verification");
+      return;
+    }
     mutate(data);
   };
+
+  const handleRecaptchaChange = (value: string | null) => {
+    if (value) {
+      setRecaptchaValue(value);
+      setRegistrationError("");
+    }
+  };
+
+  useEffect(() => {
+    document.body.classList.add("!pointer-events-auto");
+    return () => {
+      document.body.classList.remove("pointer-events-auto");
+    };
+  }, []);
 
   if (showEmailVerification) {
     return (
@@ -94,8 +115,12 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               {...register("password", {
                 required: "Password is required!",
                 minLength: {
-                  value: 6,
-                  message: "Password should be at least 6 characters!",
+                  value: 8,
+                  message: "Password should be at least 8 characters!",
+                },
+                pattern: {
+                  value: /^(?=.*\d).*$/,
+                  message: "Password must contain at least one number!",
                 },
               })}
               id="password"
@@ -126,6 +151,16 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
                 *{errors.repeatPassword.message}
               </Label>
             )}
+          </div>
+          <div className="space-y-1 z-10">
+            <Label>Verify you're human</Label>
+            <div className="flex justify-center mt-2">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={handleRecaptchaChange}
+              />
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">

@@ -3,6 +3,7 @@ export type RegisterFields = {
   email: string;
   password: string;
   repeatPassword: string;
+  recaptchaToken: string;
 };
 
 export type LoginFields = {
