@@ -19,6 +19,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { LoginFields, VerifyEmailFields } from "../HeaderTypes";
 import { verifyEmail } from "./AuthenticationFunctions";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export default function VerifyEmail({
   email,
@@ -81,6 +82,13 @@ export default function VerifyEmail({
             *{verificationError}
           </Label>
         )}
+
+        {isPending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Please wait
+          </>
+        ) : null}
       </CardFooter>
     </Card>
   );

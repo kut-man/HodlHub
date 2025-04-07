@@ -99,7 +99,7 @@ export default function HistoryChart({
   const areaChartColor =
     chartData.length > 0
       ? chartData[0].TotalValue - chartData[chartData.length - 1].TotalValue < 0
-        ? "indigo"
+        ? "green"
         : "red"
       : "";
 
