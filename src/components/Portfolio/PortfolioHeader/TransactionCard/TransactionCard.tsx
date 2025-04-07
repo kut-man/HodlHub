@@ -36,6 +36,8 @@ export type Transaction = {
   date: string;
 };
 
+const MAX_TRANSACTION_VALUE = 1000000000;
+
 const addTransaction = async (data: Transaction) => {
   const response = await fetch(TRANSACTION_URL, {
     method: "POST",
@@ -83,6 +85,38 @@ export default function TransactionCard({
     },
   });
 
+  const calculateTotalValue = () => {
+    const amount = watch("amount");
+    const pricePerCoin = watch("pricePerCoin");
+
+    if (amount && pricePerCoin) {
+      return amount * pricePerCoin;
+    }
+    return 0;
+  };
+
+  const handleAddTransaction = handleSubmit((data) => {
+    const totalValue = calculateTotalValue();
+
+    if (totalValue > MAX_TRANSACTION_VALUE) {
+      toast.error("Amount beyond the limit", {
+        description:
+          "Oh uh! This number looks way too large. Are you sure you've entered it correctly?",
+      });
+      return;
+    }
+
+    if (selectedCoin?.ticker && portfolio) {
+      mutate({
+        ...data,
+        portfolioId: portfolio.id,
+        coin: selectedCoin?.ticker,
+        transactionType: type,
+        date: selectedTime.toString(),
+      });
+    }
+  });
+
   return (
     <Card>
       <CardHeader>
@@ -112,7 +146,7 @@ export default function TransactionCard({
             <CardTitle className="font-bold">
               $
               {selectedCoin?.currentPrice
-                ? (watch("pricePerCoin") * watch("amount")).toFixed(2)
+                ? calculateTotalValue().toFixed(2)
                 : "0.00"}
             </CardTitle>
           </CardContent>
@@ -123,17 +157,7 @@ export default function TransactionCard({
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}
         <Button
-          onClick={handleSubmit((data) => {
-            if (selectedCoin?.ticker && portfolio) {
-              mutate({
-                ...data,
-                portfolioId: portfolio.id,
-                coin: selectedCoin?.ticker,
-                transactionType: type,
-                date: selectedTime.toString(),
-              });
-            }
-          })}
+          onClick={handleAddTransaction}
           className="w-full"
           size="lg"
           disabled={isPending}
