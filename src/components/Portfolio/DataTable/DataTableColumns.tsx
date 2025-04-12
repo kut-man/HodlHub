@@ -134,7 +134,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           open={openPopover}
         >
           <PopoverTrigger asChild>
-            <Button className="rounded-full p-0 w-10 h-10" variant="ghost">
+            <Button data-testid="asset-actions-menu-trigger" className="rounded-full p-0 w-10 h-10" variant="ghost">
               <BsThreeDots size={18} />
             </Button>
           </PopoverTrigger>
@@ -151,10 +151,10 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
               onClose={() => setOpenPopover(false)}
             />
-            <Button size="sm" className="justify-start" variant="ghost">
+            {/* <Button size="sm" className="justify-start" variant="ghost">
               <File size={18} className="mr-4" />
               View Transactions
-            </Button>
+            </Button> */}
             <RemoveAssetDialog
               className="justify-start"
               variant="ghost"

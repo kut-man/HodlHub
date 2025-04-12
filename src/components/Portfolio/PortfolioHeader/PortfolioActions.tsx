@@ -15,7 +15,7 @@ export function PortfolioActions() {
   return (
     <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
       <PopoverTrigger asChild>
-        <Button variant="outline">
+        <Button data-testid="portfolio-actions-menu-trigger" variant="outline">
           <BsThreeDots />
         </Button>
       </PopoverTrigger>

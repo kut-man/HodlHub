@@ -78,7 +78,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
           {loginError && (
             <Label className="font-normal text-red-600 break-all">*{loginError}</Label>
           )}
-          <Button disabled={isPending} className="w-full">
+          <Button data-testid="login-button" disabled={isPending} className="w-full">
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

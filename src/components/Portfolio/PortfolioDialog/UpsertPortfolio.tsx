@@ -95,6 +95,7 @@ export function UpsertPortfolio({
           onClick={handleSubmit(onSubmit)}
           className="w-full"
           size="lg"
+          data-testid="upsert-portfolio-button"
         >
           {isPending ? (
             <>
@@ -104,7 +105,7 @@ export function UpsertPortfolio({
           ) : editPortfolio ? (
             "Save"
           ) : (
-            "Create portfolio"
+            "Create Portfolio"
           )}
         </Button>
       </DialogFooter>
