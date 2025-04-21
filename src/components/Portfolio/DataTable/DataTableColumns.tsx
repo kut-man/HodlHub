@@ -16,7 +16,7 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
 import { useState } from "react";
-import { File, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const createChangeColumn = (
   accessorKey: keyof AssetsInfo,
