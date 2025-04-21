@@ -1,8 +1,6 @@
 export default function Logo({ ...rest }) {
   return (
-    <div className="flex items-center mt-96 gap-1" {...rest}>
-
-
+    <div className="flex items-center gap-1" {...rest}>
       <svg
         className="dark:fill-white"
         height="28"
