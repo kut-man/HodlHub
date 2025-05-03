@@ -1,4 +1,5 @@
 export default function Logo({ ...rest }) {
+	//Press Start 2P font
   return (
     <svg
       className="dark:fill-white"
