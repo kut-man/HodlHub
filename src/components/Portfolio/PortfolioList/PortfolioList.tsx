@@ -20,7 +20,10 @@ export default function PortfolioList({
   data,
 }: PortfolioListProps) {
   return (
-    <Card data-testid="portfolio-list-sidebar" className="border-none shadow-none max-lg:w-full lg:min-w-[340px]">
+    <Card
+      data-testid="portfolio-list-sidebar"
+      className="h-screen overflow-auto border-none shadow-none max-lg:w-full lg:min-w-[340px]"
+    >
       <CardHeader>
         <CardTitle className="text-lg">My portfolios</CardTitle>
       </CardHeader>
