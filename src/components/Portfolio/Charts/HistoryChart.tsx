@@ -29,7 +29,6 @@ export type HistoryChart = {
 };
 
 const ChartTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-  console.log(payload);
   if (active && payload && payload.length) {
     return (
       <div className="rounded-md border text-sm shadow-md border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
