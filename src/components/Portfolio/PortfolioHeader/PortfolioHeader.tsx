@@ -37,7 +37,6 @@ export default function PortfolioHeader({
         <Flex flexDirection="row" alignItems="center" justifyContent="start">
           <PortfolioIcon
             size="small"
-            style={{ width: "40px", height: "40px" }}
             color={color}
             avatar={avatar}
           />

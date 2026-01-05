@@ -60,7 +60,7 @@ export function UpsertPortfolio({
         <Label>Portfolio Avatar</Label>
         <div className="flex items-center justify-between mb-2">
           <PortfolioIcon
-            style={{ padding: "0" }}
+            size="large"
             color={iconProperties.color}
             avatar={iconProperties.avatar}
           />

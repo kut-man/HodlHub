@@ -1,30 +1,25 @@
 import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
 
 type PortfolioIconProps = AvatarValues & {
-  style?: React.CSSProperties;
   size?: "small" | "medium" | "large";
 };
 
-const sizes = {
-  small: "2xl",
-  medium: "3xl",
-  large: "4xl",
+const sizeClasses = {
+  small: "size-8 text-base pb-px",
+  medium: "size-10 text-xl pb-0.5",
+  large: "size-16 text-3xl pb-1",
 };
 
 export default function PortfolioIcon({
   color,
   avatar,
-  style,
-  size = "large",
+  size = "medium",
 }: PortfolioIconProps) {
   return (
     <div
-      style={style}
-      className={`text-${sizes[size]} flex justify-center items-center aspect-square rounded-full m-2 h-16 w-16 bg-${color}-500`}
+      className={`${sizeClasses[size]} flex justify-center items-center aspect-square rounded-full m-2 bg-${color}-500`}
     >
-        <span className="mb-1">
-        {avatar}
-        </span>
+      <span>{avatar}</span>
     </div>
   );
 }

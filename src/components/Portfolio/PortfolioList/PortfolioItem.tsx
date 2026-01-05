@@ -29,8 +29,6 @@ export default function PortfolioItem({
         <PortfolioIcon
           color={color}
           avatar={avatar}
-          size="small"
-          style={{ width: "50px", height: "40px" }}
         />
         <Flex justifyContent="start" alignItems="start" flexDirection="col">
           <Label className="cursor-pointer text-left leading-2 text-base">
