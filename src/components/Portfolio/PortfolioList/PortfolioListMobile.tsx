@@ -94,7 +94,10 @@ export default function PortfolioListMobile({
               <CardContent className="flex flex-col p-0">
                 {data.map((portfolio) => (
                   <PortfolioItem
-                    onClick={switchPortfolio}
+                    onClick={() => {
+                      setIsDialogOpen(false);
+                      switchPortfolio(portfolio);
+                    }}
                     key={portfolio.id}
                     {...portfolio}
                   />
@@ -108,6 +111,7 @@ export default function PortfolioListMobile({
               variant="outline"
               size="lg"
               className="text-base w-full"
+              onClose={() => setIsDialogOpen(false)}
             />
           </DialogFooter>
         </DialogContent>

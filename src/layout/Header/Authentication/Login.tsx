@@ -47,6 +47,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
                 },
               })}
               id="email"
+              type="email"
             />
             {errors.email && (
               <Label className="font-normal text-red-600">

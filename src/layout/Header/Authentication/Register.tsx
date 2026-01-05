@@ -102,6 +102,7 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
                 },
               })}
               id="email"
+              type="email"
             />
             {errors.email && (
               <Label className="font-normal text-red-600">
