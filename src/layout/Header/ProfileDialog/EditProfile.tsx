@@ -100,7 +100,7 @@ export function EditProfile({
               Please wait
             </>
           ) : (
-            "Edit Profile"
+            "Save"
           )}
         </Button>
       </DialogFooter>
