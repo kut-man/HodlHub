@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react";
 import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
 import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
 import { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
+import PortfolioListMobile from "@/components/Portfolio/PortfolioList/PortfolioListMobile";
 
 export interface GlobalContext {
   privacy: boolean;
@@ -131,6 +132,11 @@ export default function Portfolio() {
         ) : portfolioListData?.data?.length ? (
           <>
             <PortfolioList
+              data={portfolioListData.data}
+              switchPortfolio={switchPortfolio}
+            />
+
+            <PortfolioListMobile
               data={portfolioListData.data}
               switchPortfolio={switchPortfolio}
             />

@@ -144,10 +144,7 @@ export default function TransactionCard({
           </CardHeader>
           <CardContent>
             <CardTitle className="font-bold">
-              $
-              {selectedCoin?.currentPrice
-                ? calculateTotalValue().toFixed(2)
-                : "0.00"}
+              ${calculateTotalValue().toFixed(2)}
             </CardTitle>
           </CardContent>
         </Card>

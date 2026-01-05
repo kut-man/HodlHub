@@ -34,11 +34,17 @@ export default function PortfolioHeader({
   return (
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
-        <Flex flexDirection="row" alignItems="center" justifyContent="start">
+        <Flex
+          className="max-lg:hidden"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="start"
+        >
           <PortfolioIcon
             size="small"
             color={color}
             avatar={avatar}
+            className="ml-0"
           />
           <Label className="text-lg">{name}</Label>
         </Flex>
