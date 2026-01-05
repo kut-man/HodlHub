@@ -1,18 +1,13 @@
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
 import { useContext, useState } from "react";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import PortfolioItem from "./PortfolioItem";
 import { PortfolioListProps } from "./PortfolioList";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
@@ -24,6 +19,7 @@ import { Label } from "@/components/ui/label";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { ChevronDown } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function PortfolioListMobile({
   switchPortfolio,
@@ -85,35 +81,35 @@ export default function PortfolioListMobile({
             <Separator />
           </>
         </DialogTrigger>
-        <DialogContent className="h-3/4 w-96">
-          <VisuallyHidden.Root asChild>
-            <DialogTitle> Add Transaction Dialog </DialogTitle>
-          </VisuallyHidden.Root>
-          <Card
-            data-testid="portfolio-list-dialog"
-            className="h-full overflow-auto border-none shadow-none"
-          >
-            <CardHeader className="p-0">
-              <CardTitle className="text-lg">My portfolios</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col p-0">
-              {data.map((portfolio) => (
-                <PortfolioItem
-                  onClick={switchPortfolio}
-                  key={portfolio.id}
-                  {...portfolio}
-                />
-              ))}
-            </CardContent>
+        <DialogContent className="max-w-96">
+          <DialogHeader>
+            <DialogTitle> Portfolio </DialogTitle>
+          </DialogHeader>
 
-            <CardFooter className="text-blue-600">
-              <PortfolioDialog
-                className="h-fit p-0 text-base"
-                variant="ghost"
-                size="sm"
-              />
-            </CardFooter>
-          </Card>
+          <ScrollArea className="h-96">
+            <Card
+              data-testid="portfolio-list-dialog"
+              className="h-full overflow-auto border-none shadow-none"
+            >
+              <CardContent className="flex flex-col p-0">
+                {data.map((portfolio) => (
+                  <PortfolioItem
+                    onClick={switchPortfolio}
+                    key={portfolio.id}
+                    {...portfolio}
+                  />
+                ))}
+              </CardContent>
+            </Card>
+          </ScrollArea>
+
+          <DialogFooter>
+            <PortfolioDialog
+              variant="outline"
+              size="lg"
+              className="text-base w-full"
+            />
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
