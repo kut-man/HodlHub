@@ -15,6 +15,7 @@ import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
 
 interface PortfolioHeaderProps {
+  isEmptyPortfolio?: boolean;
   setShowCharts?: React.Dispatch<React.SetStateAction<boolean>>;
   changeVisibility: () => void;
   totalAmount: number;
@@ -23,6 +24,7 @@ interface PortfolioHeaderProps {
 }
 
 export default function PortfolioHeader({
+  isEmptyPortfolio,
   setShowCharts,
   changeVisibility,
   totalAmount,
@@ -55,6 +57,7 @@ export default function PortfolioHeader({
             size="icon"
             variant="ghost"
             onClick={changeVisibility}
+            className={isEmptyPortfolio ? "hidden" : ""}
           >
             {privacy ? (
               <MdOutlineRemoveRedEye
@@ -70,7 +73,7 @@ export default function PortfolioHeader({
         <Flex
           className={`font-medium my-1 text-${
             valueChange24h >= 0 ? "green" : "red"
-          }-500 items-end`}
+          }-500 items-end ${isEmptyPortfolio ? "hidden" : ""}`}
           flexDirection="row"
           justifyContent="start"
         >

@@ -161,6 +161,7 @@ export default function Portfolio() {
               ) : (
                 <>
                   <PortfolioHeader
+                    isEmptyPortfolio={true}
                     changeVisibility={changeVisibility}
                     totalAmount={0}
                     valueChange24h={0}
