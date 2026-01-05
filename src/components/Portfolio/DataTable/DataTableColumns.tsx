@@ -17,6 +17,7 @@ import { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import AmountLabel from "../PerformanceTiles/Labels/AmountLabel";
 
 const createChangeColumn = (
   accessorKey: keyof AssetsInfo,
@@ -82,9 +83,10 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           <BalanceLabel
             balance={(row.getValue("holdings") as AssetsInfo["holdings"]).value}
           />
-          <Label className="text-xs text-slate-500">
-            {(row.getValue("holdings") as AssetsInfo["holdings"]).amount}
-          </Label>
+          <AmountLabel
+            className="text-xs text-slate-500"
+            amount={(row.getValue("holdings") as AssetsInfo["holdings"]).amount}
+          />
         </div>
       );
     },
@@ -134,7 +136,11 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           open={openPopover}
         >
           <PopoverTrigger asChild>
-            <Button data-testid="asset-actions-menu-trigger" className="rounded-full p-0 w-10 h-10" variant="ghost">
+            <Button
+              data-testid="asset-actions-menu-trigger"
+              className="rounded-full p-0 w-10 h-10"
+              variant="ghost"
+            >
               <BsThreeDots size={18} />
             </Button>
           </PopoverTrigger>
