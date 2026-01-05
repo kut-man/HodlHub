@@ -14,16 +14,41 @@
   </head>
   <body>
     <script>
-      //to prevent showing white background on reaload when user chose dark theme
-      var theme = localStorage.getItem("vite-ui-theme");
-      if (theme === "dark") {
-        document.documentElement.style.backgroundColor = "#020817";
+      // Override localStorage.setItem to dispatch a custom event for same-tab changes
+      var originalSetItem = localStorage.setItem;
+      localStorage.setItem = function (key, value) {
+        originalSetItem.call(this, key, value);
+        if (key === "vite-ui-theme") {
+          window.dispatchEvent(
+            new CustomEvent("localStorageChange", { detail: { key, value } })
+          );
+        }
+      };
+
+      function updateBackground(theme) {
+        document.documentElement.style.backgroundColor =
+          theme === "dark" ? "#020817" : "";
       }
+
+      // Initial load
+      var initialTheme = localStorage.getItem("vite-ui-theme");
+      updateBackground(initialTheme);
+
+      // Listen for same-tab changes
+      window.addEventListener("localStorageChange", function (e) {
+        if (e.detail.key === "vite-ui-theme") {
+          updateBackground(e.detail.value);
+        }
+      });
+
+      // Listen for cross-tab changes
+      window.addEventListener("storage", function (e) {
+        if (e.key === "vite-ui-theme") {
+          updateBackground(e.newValue);
+        }
+      });
     </script>
-    <div
-      id="root"
-      style="scrollbar-gutter: stable; height: 100vh;"
-    ></div>
+    <div id="root" style="scrollbar-gutter: stable; height: 100vh"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

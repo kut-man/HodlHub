@@ -64,7 +64,7 @@ export default function AccountActions() {
             <Label>{data.email}</Label>
           </Flex>
         </Flex>
-        <Separator />
+        <Separator orientation="horizontal" />
         <Flex flexDirection="col">
           <ProfileDialog onClose={() => setOpenPopover(false)} />
           <Button

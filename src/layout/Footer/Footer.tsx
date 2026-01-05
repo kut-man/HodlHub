@@ -13,7 +13,7 @@ const socialLinks = {
 export default function Footer() {
   return (
     <>
-      <Separator />
+      <Separator orientation="horizontal" />
       <Flex className="py-10 lg:px-32 md:px-12 px-6">
         <Logo />
         <Flex className="hidden sm:flex w-1/2">

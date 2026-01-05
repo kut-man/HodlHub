@@ -49,7 +49,7 @@ export default function PortfolioListMobile({
       >
         <DialogTrigger asChild>
           <>
-            <Separator />
+            <Separator orientation="horizontal" />
             <Button
               aria-label="Select Portfolio"
               variant={"ghost"}
@@ -78,7 +78,7 @@ export default function PortfolioListMobile({
                 <ChevronDown />
               </Flex>
             </Button>
-            <Separator />
+            <Separator orientation="horizontal" />
           </>
         </DialogTrigger>
         <DialogContent className="max-w-96">

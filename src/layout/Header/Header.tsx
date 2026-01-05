@@ -38,7 +38,7 @@ export default function Header() {
           </>
         </div>
       </header>
-      <Separator />
+      <Separator orientation="horizontal" />
     </>
   );
 }
