@@ -16,6 +16,7 @@ import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHea
 import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
 import { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
 import PortfolioListMobile from "@/components/Portfolio/PortfolioList/PortfolioListMobile";
+import useBreakpoint from "@/lib/useBreakpoint";
 
 export interface GlobalContext {
   privacy: boolean;
@@ -32,6 +33,7 @@ export default function Portfolio() {
   );
   const [portfolio, setPortfolio] = useState<GlobalContext["portfolio"]>();
   const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
+  const { isTablet, isMobile } = useBreakpoint();
 
   const queryClient = useQueryClient();
 
@@ -124,22 +126,24 @@ export default function Portfolio() {
 
   return (
     <GlobalContext.Provider value={{ privacy: visibility, portfolio }}>
-      <Flex alignItems="start" className="font-inter lg:flex-row flex-col">
+      <Flex alignItems="start" className="font-inter max-md:flex-col flex-row">
         {isPortfolioListDataPending ? (
           <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
         ) : portfolioListData?.data?.length ? (
           <>
-            <PortfolioList
-              data={portfolioListData.data}
-              switchPortfolio={switchPortfolio}
-            />
-
-            <PortfolioListMobile
-              data={portfolioListData.data}
-              switchPortfolio={switchPortfolio}
-            />
+            {isTablet || isMobile ? (
+              <PortfolioListMobile
+                data={portfolioListData.data}
+                switchPortfolio={switchPortfolio}
+              />
+            ) : (
+              <PortfolioList
+                data={portfolioListData.data}
+                switchPortfolio={switchPortfolio}
+              />
+            )}
 
             <Flex
               className="w-full overflow-auto mt-6 px-6 gap-8"

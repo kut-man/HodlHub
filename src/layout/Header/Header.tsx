@@ -1,12 +1,12 @@
 import { FaMoon } from "react-icons/fa";
 import { HiSun } from "react-icons/hi";
 import { useTheme } from "./Theme";
-import { Toggle } from "@radix-ui/react-toggle";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
 import Authentication from "./Authentication/Authentication";
 import { useAuthContext } from "@/lib/useAuthContext";
 import { Separator } from "@/components/ui/separator";
+import { Toggle } from "@/components/ui/toggle";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();

@@ -84,6 +84,7 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               })}
               id="name"
               type="text"
+              autoFocus
             />
             {errors.name && (
               <Label className="font-normal text-red-600">

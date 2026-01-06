@@ -1,4 +1,3 @@
-import { Label } from "@radix-ui/react-label";
 import { Flex } from "@tremor/react";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
@@ -6,6 +5,7 @@ import { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterface
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
+import { Label } from "@/components/ui/label";
 
 export default function PortfolioItem({
   id,

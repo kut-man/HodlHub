@@ -25,7 +25,7 @@ export default function PortfolioList({
       <ScrollArea>
         <Card
           data-testid="portfolio-list-sidebar"
-          className="h-screen border-none shadow-none max-lg:hidden lg:min-w-[340px]"
+          className="h-screen border-none shadow-none lg:min-w-[340px]"
         >
           <CardHeader>
             <CardTitle className="text-lg">My portfolios</CardTitle>

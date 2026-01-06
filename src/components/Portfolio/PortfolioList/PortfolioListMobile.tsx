@@ -42,7 +42,7 @@ export default function PortfolioListMobile({
   if (!activePortfolio) return null;
 
   return (
-    <div className="block lg:hidden w-full">
+    <div className="block w-full">
       <Dialog
         onOpenChange={(open) => handleOpenChange(open)}
         open={isDialogOpen}

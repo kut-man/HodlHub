@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
@@ -93,15 +98,18 @@ export default function RemoveAssetDialog({
         >
           {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
         </Button>
-        <Button
-          variant="secondary"
-          className="w-full"
-          size="lg"
-          aria-label={`Cancel Asset ${assetTicker} removal`}
-          onClick={() => handleOpenChange(false)}
-        >
-          Cancel
-        </Button>
+        <DialogClose>
+          <Button
+            variant="secondary"
+            className="w-full"
+            size="lg"
+            aria-label={`Cancel Asset ${assetTicker} removal`}
+            onClick={() => handleOpenChange(false)}
+          >
+            Cancel
+          </Button>
+        </DialogClose>
+
         {isError && (
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}
