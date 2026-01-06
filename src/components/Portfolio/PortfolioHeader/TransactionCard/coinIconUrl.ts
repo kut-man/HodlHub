@@ -10,28 +10,20 @@ import AVAX from "../../../../assets/icons/AVAX.png";
 import AXS from "../../../../assets/icons/AXS.png";
 import BAT from "../../../../assets/icons/BAT.png";
 import BCH from "../../../../assets/icons/BCH.png";
-import BIT from "../../../../assets/icons/BIT.png";
 import BNB from "../../../../assets/icons/BNB.png";
-import BSV from "../../../../assets/icons/BSV.png";
 import BTC from "../../../../assets/icons/BTC.png";
 import CHZ from "../../../../assets/icons/CHZ.png";
-import CRO from "../../../../assets/icons/CRO.png";
-import DAI from "../../../../assets/icons/DAI.png";
 import DOGE from "../../../../assets/icons/DOGE.png";
 import DOT from "../../../../assets/icons/DOT.png";
 import EGLD from "../../../../assets/icons/EGLD.png";
-import EOS from "../../../../assets/icons/EOS.png";
 import ETC from "../../../../assets/icons/ETC.png";
 import ETH from "../../../../assets/icons/ETH.png";
 import FIL from "../../../../assets/icons/FIL.png";
-import FRAX from "../../../../assets/icons/FRAX.png";
-import FTM from "../../../../assets/icons/FTM.png";
 import GRT from "../../../../assets/icons/GRT.png";
 import HBAR from "../../../../assets/icons/HBAR.png";
 import ICP from "../../../../assets/icons/ICP.png";
 import INJ from "../../../../assets/icons/INJ.png";
 import LDO from "../../../../assets/icons/LDO.png";
-import LEO from "../../../../assets/icons/LEO.png";
 import LINK from "../../../../assets/icons/LINK.png";
 import LTC from "../../../../assets/icons/LTC.png";
 import MANA from "../../../../assets/icons/MANA.png";
@@ -50,7 +42,6 @@ import USDT from "../../../../assets/icons/USDT.png";
 import VET from "../../../../assets/icons/VET.png";
 import WBTC from "../../../../assets/icons/WBTC.png";
 import XLM from "../../../../assets/icons/XLM.png";
-import XMR from "../../../../assets/icons/XMR.png";
 import XRP from "../../../../assets/icons/XRP.png";
 import XTZ from "../../../../assets/icons/XTZ.png";
 
@@ -67,28 +58,20 @@ export const cryptoLogos: Record<string, string> = {
   AXS,
   BAT,
   BCH,
-  BIT,
   BNB,
-  BSV,
   BTC,
   CHZ,
-  CRO,
-  DAI,
   DOGE,
   DOT,
   EGLD,
-  EOS,
   ETC,
   ETH,
   FIL,
-  FRAX,
-  FTM,
   GRT,
   HBAR,
   ICP,
   INJ,
   LDO,
-  LEO,
   LINK,
   LTC,
   MANA,
@@ -107,7 +90,6 @@ export const cryptoLogos: Record<string, string> = {
   VET,
   WBTC,
   XLM,
-  XMR,
   XRP,
   XTZ,
 };
