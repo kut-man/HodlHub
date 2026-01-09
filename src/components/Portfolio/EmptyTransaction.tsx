@@ -10,7 +10,7 @@ export default function EmptyTransaction() {
         alt="Empty Portfolio"
       />
       <Flex flexDirection="col" className="gap-4">
-        <h1 className="w-fit text-xl sm:text-3xl font-bold">
+        <h1 className="w-fit text-xl sm:text-3xl font-bold text-center">
         This portfolio needs some final touches…
         </h1>
         <p className="w-fit text-sm sm:text-xl">

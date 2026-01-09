@@ -10,7 +10,7 @@ export default function EmptyDashboard() {
         alt="Empty Dashboard"
       />
       <Flex flexDirection="col" className="gap-4">
-        <h1 className="w-fit text-xl sm:text-3xl font-bold">
+        <h1 className="w-fit text-xl sm:text-3xl font-bold text-center">
           Let’s get started with your first portfolio!
         </h1>
         <p className="w-fit text-sm sm:text-xl">

@@ -37,7 +37,7 @@ export default function PortfolioHeader({
     <Flex className="flex-col sm:flex-row sm:items-center items-start">
       <div>
         <Flex
-          className="max-lg:hidden"
+          className="max-md:hidden"
           flexDirection="row"
           alignItems="center"
           justifyContent="start"

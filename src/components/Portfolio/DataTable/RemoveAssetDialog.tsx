@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
@@ -13,6 +14,7 @@ import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 const removeAsset = async (portfolioId: number, assetTicker: string) => {
   const response = await fetch(
@@ -83,6 +85,9 @@ export default function RemoveAssetDialog({
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
+        <VisuallyHidden.Root asChild>
+          <DialogTitle> Remove Asset </DialogTitle>
+        </VisuallyHidden.Root>
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
         <Label className="text-xl">{`Remove ${assetTicker}?`}</Label>
@@ -98,7 +103,7 @@ export default function RemoveAssetDialog({
         >
           {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
         </Button>
-        <DialogClose>
+        <DialogClose className="w-full">
           <Button
             variant="secondary"
             className="w-full"

@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "../../ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
@@ -8,6 +14,7 @@ import { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { GlobalContext } from "@/pages/Portfolio";
 import { toast } from "sonner";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 const removePortfolio = async (portfolioId: number) => {
   const response = await fetch(`${PORTFOLIO_URL}/${portfolioId}`, {
@@ -74,6 +81,9 @@ export default function RemovePortfolioDialog({
         </Button>
       </DialogTrigger>
       <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
+        <VisuallyHidden.Root asChild>
+          <DialogTitle> Remove Portfolio </DialogTitle>
+        </VisuallyHidden.Root>
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
         <Label className="text-xl">{`Remove ${portfolio.name} portfolio?`}</Label>
@@ -89,7 +99,7 @@ export default function RemovePortfolioDialog({
         >
           {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
         </Button>
-        <DialogClose>
+        <DialogClose className="w-full">
           <Button
             variant="secondary"
             className="w-full"
