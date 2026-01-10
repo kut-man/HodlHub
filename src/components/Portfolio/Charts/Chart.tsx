@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
-import HistoryChart from "./HistoryChart";
+// import HistoryChart from "./HistoryChart";
 import TimeIntervalSelector from "./TimeIntervalSelector";
+import ShadcnHistoryChart from "./ShadcnHistoryChart";
 
 const formatter = new Intl.NumberFormat("en", {
   notation: "compact",
@@ -86,7 +87,7 @@ export default function Chart(props: ChartProps) {
       </CardHeader>
       <CardContent className="pb-4 text-green-500 flex items-end flex-row">
         {chart === "area" ? (
-          <HistoryChart interval={selectedTimeInterval} />
+          <ShadcnHistoryChart interval={selectedTimeInterval} />
         ) : (
           <DonutChart
             className="h-72 mt-4"
