@@ -1,4 +1,4 @@
-import { cryptoLogos } from "../PortfolioHeader/TransactionCard/coinIconUrl";
+import { cryptoAssets } from "../PortfolioHeader/TransactionCard/coinIconUrl";
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { AssetsInfo } from "./DataTableInterfaces";
 
@@ -7,7 +7,7 @@ export function mapHoldingsToAssetsInfo(holdings: Holding[]): AssetsInfo[] {
     name: {
       name: holding.name,
       ticker: holding.ticker,
-      iconURL: cryptoLogos[holding.ticker] || "",
+      iconURL: cryptoAssets[holding.ticker]?.logo || "",
     },
     price: holding.currentPrice,
     hourChange: holding.oneHourChangePercent,
