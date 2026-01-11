@@ -10,7 +10,7 @@ import {
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { cryptoAssets } from "../PortfolioHeader/TransactionCard/coinIconUrl";
 import { GlobalContext } from "@/pages/Portfolio";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 export function AllocationChart({ data }: { data: Holding[] }) {
   const [legendPortal, setLegendPortal] = useState<HTMLDivElement | null>(null);
@@ -29,17 +29,44 @@ export function AllocationChart({ data }: { data: Holding[] }) {
     return acc;
   }, {} satisfies ChartConfig);
 
-  const totalValue = data.reduce((sum, holding) => sum + holding.totalValue, 0);
-  const chartLegendData = data.reduce((acc, holding) => {
-    const percentage = ((holding.totalValue / totalValue) * 100).toFixed(2);
-    acc[holding.name] = `${percentage}%`;
-    return acc;
-  }, {} as Record<string, string>);
+  const chartLegendDataSorted = useMemo(() => {
+    const totalValue = data.reduce(
+      (sum, holding) => sum + holding.totalValue,
+      0
+    );
+
+    const sorted = data
+      .map((holding) => {
+        const percentage = (holding.totalValue / totalValue) * 100;
+        return {
+          label: holding.name,
+          value: `${percentage.toFixed(2)}%`,
+          percentage,
+        };
+      })
+      .sort((a, b) => b.percentage - a.percentage);
+
+    if (sorted.length <= 7) {
+      return sorted.map(({ label, value }) => ({ label, value }));
+    }
+
+    const top7 = sorted.slice(0, 7);
+    const rest = sorted.slice(7);
+    const otherPercentage = rest.reduce(
+      (sum, item) => sum + item.percentage,
+      0
+    );
+
+    return [
+      ...top7.map(({ label, value }) => ({ label, value })),
+      { label: "Other", value: `${otherPercentage.toFixed(2)}%` },
+    ];
+  }, [data]);
 
   return (
     <>
       <ChartContainer
-        config={chartConfig}
+        config={{ ...chartConfig, Other: { label: "Other", color: "#cccccc" } }}
         className="w-[calc(100%-150px)] h-64 aspect-auto"
       >
         <PieChart>
@@ -51,11 +78,14 @@ export function AllocationChart({ data }: { data: Holding[] }) {
 
           {legendPortal && (
             <Legend
-              wrapperStyle={{ width: "100%", color: "hsl(var(--card-foreground))" }}
+              wrapperStyle={{
+                width: "100%",
+                color: "hsl(var(--card-foreground))",
+              }}
               content={
                 <ChartLegendContent
-                  verticalAlign="middle"
-                  values={chartLegendData}
+                  values={chartLegendDataSorted}
+                  hideValue={!privacy}
                 />
               }
               portal={legendPortal}
@@ -66,8 +96,8 @@ export function AllocationChart({ data }: { data: Holding[] }) {
             data={chartData}
             dataKey="totalValue"
             nameKey="name"
-            innerRadius={75}
-            outerRadius={95}
+            innerRadius={"60%"}
+            outerRadius={"75%"}
           />
         </PieChart>
       </ChartContainer>
