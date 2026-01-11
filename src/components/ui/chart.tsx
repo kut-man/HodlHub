@@ -59,6 +59,7 @@ export type ChartLegendContentProps = {
   verticalAlign?: LegendProps["verticalAlign"];
   payload?: LegendPayload[];
   nameKey?: string;
+  values?: Record<string, string>;
 };
 
 const ChartContext = React.createContext<ChartContextProps | null>(null);
@@ -271,15 +272,92 @@ function ChartTooltipContent({
                     </div>
                     {item.value != null && item.value != undefined && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {hideValue ? "****" : item.value.toLocaleString(undefined, {
-                          style: "currency",
-                          currency: "USD",
-                        })}
+                        {hideValue
+                          ? "****"
+                          : item.value.toLocaleString(undefined, {
+                              style: "currency",
+                              currency: "USD",
+                            })}
                       </span>
                     )}
                   </div>
                 </>
               )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const ChartLegend = RechartsPrimitive.Legend;
+
+function ChartLegendContent({
+  className,
+  hideIcon = false,
+  payload,
+  verticalAlign = "bottom",
+  nameKey,
+  values,
+}: ChartLegendContentProps) {
+  const { config } = useChart();
+
+  if (!payload?.length) {
+    return null;
+  }
+
+  return (
+    <div className="flex justify-between w-full text-sm font-medium">
+      <div
+        className={cn(
+          "flex-col flex items-start justify-center gap-4 p-0 pt-0",
+          verticalAlign === "top" ? "pb-3" : "pt-3",
+          className
+        )}
+      >
+        {payload.map((item) => {
+          const key = `${nameKey || item.dataKey || "value"}`;
+          const itemConfig = getPayloadConfigFromPayload(config, item, key);
+
+          return (
+            <div
+              key={item.value}
+              className={cn(
+                "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3"
+              )}
+            >
+              {itemConfig?.icon && !hideIcon ? (
+                <itemConfig.icon />
+              ) : (
+                <div
+                  className="h-3 w-3 shrink-0 rounded-[2px]"
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                />
+              )}
+              {itemConfig?.label}
+            </div>
+          );
+        })}
+      </div>
+      <div
+        className={cn(
+          "flex-col flex items-end justify-center gap-4 p-0 pt-0",
+          verticalAlign === "top" ? "pb-3" : "pt-3",
+          className
+        )}
+      >
+        {payload.map((item) => {
+          const key = `${nameKey || item.dataKey || "value"}`;
+          const itemConfig = getPayloadConfigFromPayload(config, item, key);
+
+          return (
+            <div key={item.value} className={cn("flex items-center gap-1.5")}>
+              {values && itemConfig?.label && values[itemConfig.label as string]
+                ? ` ${values[itemConfig.label as string]}`
+                : ""}
             </div>
           );
         })}
@@ -331,5 +409,7 @@ export {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
   ChartStyle,
 };
