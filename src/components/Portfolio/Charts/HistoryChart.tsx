@@ -1,10 +1,22 @@
-import { AreaChart, CustomTooltipProps } from "@tremor/react";
 import { GlobalContext } from "@/pages/Portfolio";
-import { useContext } from "react";
-import { ChartTimeIntervals, valueFormatter } from "./Chart";
-import { useQuery } from "@tanstack/react-query";
+import { useContext, useState } from "react";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 import { ApiResponse } from "@/lib/AuthContextProvider";
+import { useQuery } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
+import { ChartTimeIntervals } from "./Chart";
+import {
+  ChartContainer,
+  ChartTooltipContent,
+  CustomTooltipProps,
+} from "@/components/ui/chart";
 
 export function formatTimestamp(
   timestamp: string,
@@ -28,46 +40,9 @@ export type HistoryChart = {
   value: number;
 };
 
-const ChartTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="rounded-md border text-sm shadow-md border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-        <div className="border-b border-inherit px-4 py-2">
-          <p className="font-medium text-gray-900 dark:text-gray-50">{label}</p>
-        </div>
-        <div className="space-y-1 px-4 py-2">
-          {payload.map(({ value, color }, index) => (
-            <div
-              key={`id-${index}`}
-              className="flex items-center justify-between space-x-8"
-            >
-              <div className="flex items-center space-x-2">
-                <span
-                  aria-hidden="true"
-                  className={`h-[3px] w-3.5 shrink-0 rounded-full bg-${color}-500`}
-                />
-                <p className="whitespace-nowrap text-right text-gray-700 dark:text-gray-300">
-                  TotalValue
-                </p>
-              </div>
-              <p className="whitespace-nowrap text-right font-medium tabular-nums text-gray-900 dark:text-gray-50">
-                {(value as number).toFixed(2)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  return null;
-};
-
-export default function HistoryChart({
-  interval,
-}: {
-  interval: ChartTimeIntervals;
-}) {
+const HistoryChart = ({ interval }: { interval: ChartTimeIntervals }) => {
   const { privacy, portfolio } = useContext(GlobalContext);
+  const [yTickSize, setYTickSize] = useState<undefined | "auto">();
 
   const { data: portfolioData } = useQuery<ApiResponse<HistoryChart[]>>({
     queryKey: ["historyChart", portfolio?.id, interval],
@@ -89,35 +64,77 @@ export default function HistoryChart({
 
   const chartData = portfolioData?.data
     ? portfolioData.data.map((item) => ({
-        time: formatTimestamp(item.date, interval),
-        TotalValue: item.value,
+        date: formatTimestamp(item.date, interval),
         value: item.value,
       }))
     : [];
 
   const areaChartColor =
     chartData.length > 0
-      ? chartData[0].TotalValue - chartData[chartData.length - 1].TotalValue < 0
-        ? "green"
-        : "red"
+      ? chartData[0].value - chartData[chartData.length - 1].value < 0
+        ? "#16C784"
+        : "#EA3943"
       : "";
 
   return (
-    <AreaChart
-      className="h-72 mt-4"
-      data={chartData}
-      index="time"
-      categories={["TotalValue"]}
-      colors={[areaChartColor]}
-      valueFormatter={valueFormatter}
-      showXAxis={privacy}
-      showYAxis={privacy}
-      showTooltip={privacy}
-      autoMinValue
-      showAnimation
-      customTooltip={ChartTooltip}
-      tickGap={20}
-      noDataText="Loading..."
-    />
+    <ChartContainer
+      config={{
+        date: { label: "Date", color: areaChartColor },
+        value: { label: "Total Value:", color: areaChartColor },
+      }}
+      className="w-full h-64 aspect-auto"
+    >
+      <AreaChart
+        className="w-full h-64"
+        responsive
+        data={chartData}
+        margin={{
+          top: 20,
+          right: 0,
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
+        <Tooltip
+          content={(props: CustomTooltipProps) => (
+            <ChartTooltipContent hideValue={!privacy} {...props} />
+          )}
+        />
+        <XAxis
+          tick={{ className: "text-[11px]" }}
+          tickMargin={6}
+          tickSize={5}
+          minTickGap={40}
+          dataKey="date"
+          axisLine={false}
+          hide={!privacy}
+        />
+        <YAxis
+          tick={{ className: "text-[11px]" }}
+          tickCount={7}
+          orientation="right"
+          width={yTickSize}
+          axisLine={false}
+          tickLine={false}
+          hide={!privacy}
+          tickFormatter={(value) =>
+            value.toLocaleString(undefined, {
+              style: "currency",
+              currency: "USD",
+            })
+          }
+        />
+        <Area
+          onAnimationStart={() => setYTickSize("auto")}
+          type="monotone"
+          dataKey="value"
+          stroke={areaChartColor}
+          fill={areaChartColor}
+        />
+      </AreaChart>
+    </ChartContainer>
   );
-}
+};
+
+export default HistoryChart;

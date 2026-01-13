@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLayoutEffect, useState } from "react";
-import { cryptoLogos } from "./coinIconUrl";
+import { cryptoAssets } from "./coinIconUrl";
 import { CoinSelectDialog } from "./CoinSelectDialog";
 import { CoinSelectPopover } from "./CoinSelectPopover";
 import useBreakpoint from "@/lib/useBreakpoint";
@@ -82,7 +82,7 @@ export function CoinSelect({
               <div className="flex items-center">
                 <AvatarWithSkeleton
                   alt={selectedItem.name + "'s icon"}
-                  src={cryptoLogos[selectedItem.ticker]}
+                  src={cryptoAssets[selectedItem.ticker]?.logo}
                   className="mr-2 h-6 w-6"
                 />
                 {selectedItem.name}
@@ -148,7 +148,7 @@ export function CoinSelect({
                 >
                   <AvatarWithSkeleton
                     alt={coin.name + "'s icon"}
-                    src={cryptoLogos[coin.ticker]}
+                    src={cryptoAssets[coin.ticker]?.logo}
                     className="mr-2 h-8 w-8"
                   ></AvatarWithSkeleton>
                   {coin.name}

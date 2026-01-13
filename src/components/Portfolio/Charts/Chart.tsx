@@ -1,11 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DonutChart, Flex } from "@tremor/react";
+import { Flex } from "@tremor/react";
 import { Button } from "@/components/ui/button";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
-import HistoryChart from "./HistoryChart";
+// import HistoryChart from "./HistoryChart";
 import TimeIntervalSelector from "./TimeIntervalSelector";
+import HistoryChart from "./HistoryChart";
+import { AllocationChart } from "./AllocationChart";
+import useBreakpoint from "@/lib/useBreakpoint";
 
 const formatter = new Intl.NumberFormat("en", {
   notation: "compact",
@@ -32,23 +35,11 @@ export default function Chart(props: ChartProps) {
   const [chart, setChart] = useState(props.variant);
   const [selectedTimeInterval, setSelectedTimeInterval] =
     useState<ChartTimeIntervals>("1d");
-
-  const donutChartData = useMemo(
-    () =>
-      props.data.map(({ name, totalValue }) => ({
-        name,
-        sales: totalValue,
-      })),
-    [props.data]
-  );
+  const { isDesktop } = useBreakpoint();
 
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth >= 768) setChart(props.variant);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [props.variant]);
+    if (isDesktop) setChart(props.variant);
+  }, [props.variant, isDesktop]);
 
   return (
     <Card
@@ -88,14 +79,7 @@ export default function Chart(props: ChartProps) {
         {chart === "area" ? (
           <HistoryChart interval={selectedTimeInterval} />
         ) : (
-          <DonutChart
-            className="h-72 mt-4"
-            data={donutChartData}
-            category="sales"
-            index="name"
-            valueFormatter={valueFormatter}
-            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-          />
+          <AllocationChart data={props.data} />
         )}
       </CardContent>
     </Card>

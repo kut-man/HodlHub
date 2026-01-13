@@ -4,7 +4,7 @@ import Charts from "./Charts/Charts";
 import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import { Flex } from "@tremor/react";
 import Tile from "./PerformanceTiles/Tile";
-import { cryptoLogos } from "./PortfolioHeader/TransactionCard/coinIconUrl";
+import { cryptoAssets } from "./PortfolioHeader/TransactionCard/coinIconUrl";
 
 interface PortfolioInsightsProps {
   changeVisibility: () => void;
@@ -26,7 +26,7 @@ export default function PortfolioInsights({
 
   const bestPerformer = {
     description: "Best Performer",
-    avatarSrc: cryptoLogos[statistics.bestName],
+    avatarSrc: cryptoAssets[statistics.bestName]?.logo,
     title: statistics.bestTicker,
     performance: statistics.bestPlPercentValue,
     profitLoss: statistics.bestPlValue,
@@ -34,7 +34,7 @@ export default function PortfolioInsights({
 
   const worstPerformer = {
     description: "Worst Performer",
-    avatarSrc: cryptoLogos[statistics.worstName],
+    avatarSrc: cryptoAssets[statistics.worstName]?.logo,
     title: statistics.worstTicker,
     performance: statistics.worstPlPercentValue,
     profitLoss: statistics.worstPlValue,
