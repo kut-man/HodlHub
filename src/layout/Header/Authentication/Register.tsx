@@ -5,11 +5,11 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { RegisterFields } from "../HeaderTypes";
 import { registerUser } from "./AuthenticationFunctions";
 import VerifyEmail from "./VerifyEmail";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Register({ onRegister }: { onRegister: () => void }) {
   const {
@@ -22,33 +22,26 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
 
   const [registrationError, setRegistrationError] = useState("");
   const [showEmailVerification, setShowEmailVerification] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState("");
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: RegisterFields) => {
       delete (data as { repeatPassword?: string }).repeatPassword;
       return registerUser(
-        { ...data, recaptchaToken: recaptchaValue },
+        data,
         () => setShowEmailVerification(true),
         setRegistrationError
       );
     },
   });
 
-  const onSubmit: SubmitHandler<RegisterFields> = (data) => {
-    if (!recaptchaValue) {
-      setRegistrationError("Please complete the reCAPTCHA verification");
+  const onSubmit: SubmitHandler<RegisterFields> = async (data) => {
+    if (!executeRecaptcha) {
+      setRegistrationError("reCAPTCHA not loaded yet");
       return;
     }
-    mutate(data);
-  };
-
-  const handleRecaptchaChange = (value: string | null) => {
-    if (value) {
-      setRecaptchaValue(value);
-      setRegistrationError("");
-    }
+    const recaptchaToken = await executeRecaptcha();
+    mutate({ ...data, recaptchaToken });
   };
 
   useEffect(() => {
@@ -153,16 +146,6 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
                 *{errors.repeatPassword.message}
               </Label>
             )}
-          </div>
-          <div className="space-y-1 z-10">
-            <Label>Verify you're human</Label>
-            <div className="flex justify-center mt-2">
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={handleRecaptchaChange}
-              />
-            </div>
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">

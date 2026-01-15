@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./lib/AuthContextProvider";
 import ProtectedRoute from "./lib/ProtectedRoute";
 import { Toaster } from "./components/ui/sonner";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
 
 const router = createBrowserRouter([
   {
@@ -28,16 +30,18 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <Header />
-          <RouterProvider router={router} />
-          <Footer />
-          <Toaster position="bottom-left" />
-        </AuthProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <Header />
+            <RouterProvider router={router} />
+            <Footer />
+            <Toaster position="bottom-left" />
+          </AuthProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </GoogleReCaptchaProvider>
   );
 }
 
