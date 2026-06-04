@@ -42,7 +42,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.53.1",
     "react-icons": "^5.3.0",
-    "react-router-dom": "^6.27.0",
+    "react-router-dom": "^7.17.0",
     "recharts": "3.6.0",
     "sonner": "^2.0.2",
     "tailwind-merge": "^2.5.4",
@@ -50,21 +50,21 @@
   },
   "devDependencies": {
     "@headlessui/tailwindcss": "^0.2.2",
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^22.8.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-google-recaptcha": "^2.1.9",
     "@typescript-eslint/eslint-plugin": "^8.12.2",
     "@typescript-eslint/parser": "^8.12.2",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.14.0",
+    "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "postcss": "^8.4.47",
+    "postcss": "^8.5.15",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
-    "vite": "^6.2.2"
+    "vite": "^8.0.16"
   }
 }
