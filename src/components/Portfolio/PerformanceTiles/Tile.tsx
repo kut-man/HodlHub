@@ -27,7 +27,7 @@ export default function Tile({
   return (
     <Card
       className="max-md:rounded-none max-md:flex justify-between max-md:w-full 
-    dark:bg-white/20 md:border-none border-x-0 border-t-0 shadow-none md:!shadow-charts"
+    dark:bg-white/20 md:border-none border-x-0 border-t-0 shadow-none md:shadow-charts!"
     >
       <CardHeader className="pb-1 max-md:pl-1 pt-4">
         <CardDescription className="text-sm font-medium">
@@ -35,7 +35,7 @@ export default function Tile({
         </CardDescription>
       </CardHeader>
       <CardContent className="max-md:items-end max-md:p-4 pb-4 flex flex-col">
-        <div className="flex items-center !m-0">
+        <div className="flex items-center m-0!">
           {avatarSrc ? (
             <AvatarWithSkeleton
               className="h-6 w-6 m-2 ml-0 my-0 rounded-none"

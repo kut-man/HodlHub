@@ -35,7 +35,7 @@ export default function Chart(props: ChartProps) {
   return (
     <Card
       className={
-        "w-full dark:bg-white/20 border-none !shadow-charts " + props?.className
+        "w-full dark:bg-white/20 border-none shadow-charts! " + props?.className
       }
     >
       <CardHeader className="pb-2 pt-4">

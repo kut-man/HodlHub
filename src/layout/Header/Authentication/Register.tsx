@@ -45,7 +45,7 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
   };
 
   useEffect(() => {
-    document.body.classList.add("!pointer-events-auto");
+    document.body.classList.add("pointer-events-auto!");
     return () => {
       document.body.classList.remove("pointer-events-auto");
     };
