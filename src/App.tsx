@@ -10,7 +10,6 @@ import ProtectedRoute from "./lib/ProtectedRoute";
 import { Toaster } from "./components/ui/sonner";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +29,9 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}>
+    <GoogleReCaptchaProvider
+      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+    >
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <QueryClientProvider client={queryClient}>
           <AuthProvider>

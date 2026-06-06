@@ -42,7 +42,7 @@ export default function AccountActions() {
     <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
       <PopoverTrigger>
         <AvatarWithSkeleton
-          className="h-8 w-8 m-2"
+          className="m-2 h-8 w-8"
           alt="Avatar"
           src={data.avatar}
         />
@@ -53,12 +53,12 @@ export default function AccountActions() {
       >
         <Flex justifyContent="start">
           <AvatarWithSkeleton
-            className="h-10 w-10 m-2"
+            className="m-2 h-10 w-10"
             alt="Avatar"
             src={data.avatar}
           />
           <Flex justifyContent="start" alignItems="start" flexDirection="col">
-            <Label className="cursor-pointer text-left leading-2 text-base">
+            <Label className="cursor-pointer text-left text-base leading-2">
               Hi, {data.name}
             </Label>
             <Label>{data.email}</Label>
@@ -70,7 +70,7 @@ export default function AccountActions() {
           <Button
             onClick={logout}
             variant="ghost"
-            className="justify-start w-full"
+            className="w-full justify-start"
           >
             Log out
           </Button>

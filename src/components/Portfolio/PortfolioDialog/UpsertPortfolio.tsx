@@ -2,17 +2,17 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { PortfolioDialogProps } from "./PortfolioDialogInterfaces"
+import type { PortfolioDialogProps } from "./PortfolioDialogInterfaces";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
-import { useForm, type SubmitHandler } from "react-hook-form"
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
 import {
   upsertPortfolioAsync,
   type UpsertPortfolioAsyncProps,
-} from "./PortfolioDialogFunctions"
+} from "./PortfolioDialogFunctions";
 
 type FormValues = {
   name: string;
@@ -58,7 +58,7 @@ export function UpsertPortfolio({
     <>
       <div className="flex flex-col gap-4 py-4">
         <Label>Portfolio Avatar</Label>
-        <div className="flex items-center justify-between mb-2">
+        <div className="mb-2 flex items-center justify-between">
           <PortfolioIcon
             size="large"
             color={iconProperties.color}
@@ -81,7 +81,7 @@ export function UpsertPortfolio({
           }}
         />
       </div>
-      <DialogFooter className="sm:space-x-0 sm:flex-col flex flex-col gap-6">
+      <DialogFooter className="flex flex-col gap-6 sm:flex-col sm:space-x-0">
         {isError && (
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}

@@ -1,5 +1,3 @@
-// import { BsThreeDots } from "react-icons/bs";
-
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import RemovePortfolioDialog from "./RemovePortfolioDialog";
@@ -9,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
+import { Ellipsis } from "lucide-react";
 
 export function PortfolioActions() {
   const [openPopover, setOpenPopover] = useState(false);
@@ -16,10 +15,10 @@ export function PortfolioActions() {
     <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
       <PopoverTrigger asChild>
         <Button data-testid="portfolio-actions-menu-trigger" variant="outline">
-          {/*<BsThreeDots />*/}
+          <Ellipsis size={18} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-52 p-1 flex flex-col gap-1">
+      <PopoverContent className="flex w-52 flex-col gap-1 p-1">
         <PortfolioDialog
           editPortfolio
           size="sm"

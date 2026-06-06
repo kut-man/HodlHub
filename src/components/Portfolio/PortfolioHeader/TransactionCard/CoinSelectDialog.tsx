@@ -20,7 +20,6 @@ export function CoinSelectDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogTrigger asChild>{Trigger}</DialogTrigger>
@@ -31,11 +30,7 @@ export function CoinSelectDialog({
         {Content}
         <DialogFooter className="w-full">
           <DialogClose className="w-full">
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-base w-full"
-            >
+            <Button variant="outline" size="lg" className="w-full text-base">
               Close
             </Button>
           </DialogClose>

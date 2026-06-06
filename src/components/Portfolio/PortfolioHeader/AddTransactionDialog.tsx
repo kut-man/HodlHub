@@ -8,7 +8,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransactionCard from "./TransactionCard/TransactionCard";
 import TransactionTypes from "./TransactionTypesEnum";
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 export default function AddTransactionDialog({

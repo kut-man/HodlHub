@@ -9,7 +9,7 @@ import {
   type Action,
   type ChangeAvatarProps,
   type State,
-} from "./PortfolioDialogInterfaces"
+} from "./PortfolioDialogInterfaces";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 
 const reducer = (state: State, action: Action): State => {
@@ -60,8 +60,7 @@ export function ChangeAvatar({
                 })
               }
               data-selected={state.selectedColor === color}
-              className={`w-5 h-5 bg-${color}-600 hover:outline-solid hover:border-2 hover:outline-blue-500 border-white rounded-full 
-              data-[selected=true]:outline-solid data-[selected=true]:border-2 data-[selected=true]:outline-blue-500`}
+              className={`h-5 w-5 bg-${color}-600 rounded-full border-white hover:border-2 hover:outline-blue-500 hover:outline-solid data-[selected=true]:border-2 data-[selected=true]:outline-blue-500 data-[selected=true]:outline-solid`}
             ></div>
           ))}
         </Flex>
@@ -69,7 +68,7 @@ export function ChangeAvatar({
           <Label className="text-gray-500">
             How are you feeling about this portfolio?
           </Label>
-          <div className="flex gap-y-6 flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between gap-y-6">
             {emojis.map((emoji) => (
               <span
                 onClick={() =>
@@ -85,7 +84,7 @@ export function ChangeAvatar({
                   })
                 }
                 key={emoji}
-                className="cursor-pointer hover:scale-110 text-4xl"
+                className="cursor-pointer text-4xl hover:scale-110"
               >
                 {emoji}
               </span>

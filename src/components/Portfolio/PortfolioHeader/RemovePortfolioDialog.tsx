@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
-import type { ErrorResponse } from "@/layout/Header/HeaderTypes"
+import type { ErrorResponse } from "@/layout/Header/HeaderTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { GlobalContext } from "@/pages/Portfolio";
 import { toast } from "sonner";
@@ -80,7 +80,7 @@ export default function RemovePortfolioDialog({
           Remove
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-8 pt-12 flex flex-col gap-4 items-center">
+      <DialogContent className="flex flex-col items-center gap-4 p-8 pt-12">
         <VisuallyHidden.Root asChild>
           <DialogTitle> Remove Portfolio </DialogTitle>
         </VisuallyHidden.Root>

@@ -2,11 +2,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { type SubmitHandler, useForm } from "react-hook-form"
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import type { RegisterFields } from "../HeaderTypes"
+import type { RegisterFields } from "../HeaderTypes";
 import { registerUser } from "./AuthenticationFunctions";
 import VerifyEmail from "./VerifyEmail";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -149,10 +149,28 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          {registrationError && (
+          {registrationError ? (
             <Label className="font-normal text-red-600">
               *{registrationError}
             </Label>
+          ) : (
+            <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
+              This site is protected by reCAPTCHA and the Google
+              <a
+                href="https://policies.google.com/privacy"
+                className="text-blue-600 hover:underline"
+              >
+                Privacy Policy
+              </a>
+              and
+              <a
+                href="https://policies.google.com/terms"
+                className="text-blue-600 hover:underline"
+              >
+                Terms of Service
+              </a>
+              apply.
+            </p>
           )}
           <Button disabled={isPending} className="w-full">
             {isPending ? (

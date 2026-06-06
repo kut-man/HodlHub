@@ -2,8 +2,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { type SubmitHandler, useForm } from "react-hook-form"
-import type { LoginFields } from "../HeaderTypes"
+import { type SubmitHandler, useForm } from "react-hook-form";
+import type { LoginFields } from "../HeaderTypes";
 import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
@@ -78,9 +78,15 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           {loginError && (
-            <Label className="font-normal text-red-600 break-all">*{loginError}</Label>
+            <Label className="font-normal break-all text-red-600">
+              *{loginError}
+            </Label>
           )}
-          <Button data-testid="login-button" disabled={isPending} className="w-full">
+          <Button
+            data-testid="login-button"
+            disabled={isPending}
+            className="w-full"
+          >
             {isPending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

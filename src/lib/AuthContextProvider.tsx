@@ -27,7 +27,11 @@ type ContextValue = {
   data: Holder;
 };
 
-export default function AuthContextProvider({ children }: { children: ReactNode }) {
+export default function AuthContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const {
     data: data,
     refetch,
@@ -55,7 +59,7 @@ export default function AuthContextProvider({ children }: { children: ReactNode 
 
   if (isError) {
     return (
-      <div className="h-screen flex justify-center items-center w-full">
+      <div className="flex h-screen w-full items-center justify-center">
         <h1>SOME TERRIBLE ERROR HAPPENED, SORRY :\</h1>
       </div>
     );
@@ -63,7 +67,7 @@ export default function AuthContextProvider({ children }: { children: ReactNode 
 
   if (isLoading) {
     return (
-      <div className="h-screen flex justify-center items-center w-full">
+      <div className="flex h-screen w-full items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );

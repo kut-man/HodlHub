@@ -4,7 +4,7 @@ import type {
   LoginResponse,
   RegisterFields,
   VerifyEmailFields,
-} from "../HeaderTypes"
+} from "../HeaderTypes";
 import { LOGIN_URL, REGISTER_URL, VERIFY_URL } from "@/lib/api";
 
 export const loginUser = async (
@@ -55,8 +55,8 @@ export const registerUser = async (
           errors
             ? onError(errors[0].message)
             : message
-            ? onError(message)
-            : onError("Something went wrong!");
+              ? onError(message)
+              : onError("Something went wrong!");
           console.error("Registration failed");
         });
     }

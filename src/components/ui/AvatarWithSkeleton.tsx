@@ -16,7 +16,7 @@ export default function AvatarWithSkeleton({
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(false);
   return (
     <Avatar onLoad={() => setIsAvatarLoaded(true)} className={className}>
-      {!isAvatarLoaded && <Skeleton className="w-full h-full" />}
+      {!isAvatarLoaded && <Skeleton className="h-full w-full" />}
       <AvatarImage alt={alt} src={src} />
     </Avatar>
   );

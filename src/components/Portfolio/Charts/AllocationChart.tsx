@@ -6,8 +6,8 @@ import {
   ChartLegendContent,
   ChartTooltipContent,
   type CustomTooltipProps,
-} from "@/components/ui/chart"
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
+} from "@/components/ui/chart";
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { cryptoAssets } from "../PortfolioHeader/TransactionCard/coinIconUrl";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext, useMemo, useState } from "react";
@@ -67,7 +67,7 @@ export function AllocationChart({ data }: { data: Holding[] }) {
     <>
       <ChartContainer
         config={{ ...chartConfig, Other: { label: "Other", color: "#cccccc" } }}
-        className="w-[calc(100%-150px)] h-64 aspect-auto"
+        className="aspect-auto h-64 w-[calc(100%-150px)]"
       >
         <PieChart>
           <Tooltip
@@ -102,7 +102,7 @@ export function AllocationChart({ data }: { data: Holding[] }) {
         </PieChart>
       </ChartContainer>
       <div
-        className="w-[150px] flex items-center h-64 aspect-auto"
+        className="flex aspect-auto h-64 w-[150px] items-center"
         ref={(node) => {
           if (legendPortal == null && node != null) {
             setLegendPortal(node);

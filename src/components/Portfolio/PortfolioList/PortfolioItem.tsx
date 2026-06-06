@@ -1,7 +1,7 @@
 import Flex from "@/components/ui/flex.tsx";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
-import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces"
+import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -22,14 +22,11 @@ export default function PortfolioItem({
     <Button
       aria-label="Select Portfolio"
       variant={id === portfolio?.id ? "secondary" : "ghost"}
-      className="w-full h-14 p-0 mb-1"
+      className="h-14 w-full p-0"
       onClick={() => onClick({ id, color, avatar, name })}
     >
       <Flex justifyContent="start">
-        <PortfolioIcon
-          color={color}
-          avatar={avatar}
-        />
+        <PortfolioIcon color={color} avatar={avatar} />
         <Flex justifyContent="start" alignItems="start" flexDirection="col">
           <Label className="cursor-pointer text-left leading-2 text-base">
             {name}

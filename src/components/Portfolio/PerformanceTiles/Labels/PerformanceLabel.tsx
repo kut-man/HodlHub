@@ -1,7 +1,8 @@
 import { Label } from "@/components/ui/label";
-// import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
+import CaretUp from "@/components/Portfolio/PerformanceTiles/Icons/CaretUp.tsx";
+import CaretDown from "@/components/Portfolio/PerformanceTiles/Icons/CaretDown.tsx";
 
 interface PerformanceLabelProps {
   performance: number;
@@ -23,16 +24,16 @@ export default function PerformanceLabel({
     return result;
   }
   return (
-    <div className="flex items-end">
-      {/*{performance >= 0 ? (*/}
-      {/*  <TiArrowSortedUp className="mb-px text-green-500" />*/}
-      {/*) : (*/}
-      {/*  <TiArrowSortedDown className="mb-px text-red-500" />*/}
-      {/*)}*/}
+    <div className="flex items-center">
+      {performance >= 0 ? (
+        <CaretUp width={12} fill="var(--color-green-500)" />
+      ) : (
+        <CaretDown width={12} fill="var(--color-red-500)" />
+      )}
       <Label
-        className={`text-sm text-${
-          performance >= 0 ? "green" : "red"
-        }-500 ${className}`}
+        className={`text-sm ${
+          performance >= 0 ? "text-green-500" : "text-red-500"
+        } ${className}`}
       >
         {formatAsPercentage()}
       </Label>

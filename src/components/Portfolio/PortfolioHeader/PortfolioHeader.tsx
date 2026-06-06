@@ -1,18 +1,17 @@
 import { Label } from "@/components/ui/label";
-// import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
 import AddTransactionDialog from "./AddTransactionDialog";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
-// import { PiEyeClosed } from "react-icons/pi";
 import { PortfolioActions } from "./PortfolioActions";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 import type { AvatarValues } from "../PortfolioDialog/AvatarAssets";
-import Flex from "@/components/ui/flex.tsx"
+import Flex from "@/components/ui/flex.tsx";
+import { Eye, EyeClosed } from "lucide-react";
+import { Toggle } from "@/components/ui/toggle.tsx";
 
 interface PortfolioHeaderProps {
   isEmptyPortfolio?: boolean;
@@ -34,7 +33,7 @@ export default function PortfolioHeader({
   const { privacy, portfolio } = useContext(GlobalContext);
   const { color, avatar, name } = portfolio as AvatarValues & { name: string };
   return (
-    <Flex className="flex-col sm:flex-row sm:items-center items-start">
+    <Flex className="flex-col items-start sm:flex-row sm:items-center">
       <div>
         <Flex
           className="max-md:hidden"
@@ -50,40 +49,37 @@ export default function PortfolioHeader({
           />
           <Label className="text-lg">{name}</Label>
         </Flex>
-        <Flex flexDirection="row" justifyContent="start">
-          <BalanceLabel balance={totalAmount} className="font-bold text-3xl" />
-          <Button
-            aria-label="Toggle number's visibility"
-            size="icon"
-            variant="ghost"
-            onClick={changeVisibility}
-            className={isEmptyPortfolio ? "hidden" : ""}
+        <Flex
+          className="cursor-pointer gap-2"
+          flexDirection="row"
+          justifyContent="start"
+        >
+          <BalanceLabel balance={totalAmount} className="text-3xl font-bold" />
+          <Toggle
+            aria-label="Change Privacy"
+            onPressedChange={changeVisibility}
           >
-            {/*{privacy ? (*/}
-            {/*  <MdOutlineRemoveRedEye*/}
-            {/*    color="gray"*/}
-            {/*    className="mx-2 mt-1"*/}
-            {/*    size={27}*/}
-            {/*  />*/}
-            {/*) : (*/}
-            {/*  <PiEyeClosed color="gray" size={27} />*/}
-            {/*)}*/}
-          </Button>
+            {privacy ? (
+              <Eye onClick={changeVisibility} />
+            ) : (
+              <EyeClosed onClick={changeVisibility} />
+            )}
+          </Toggle>
         </Flex>
         <Flex
-          className={`font-medium my-1 text-${
+          className={`my-1 font-medium text-${
             valueChange24h >= 0 ? "green" : "red"
           }-500 items-end ${isEmptyPortfolio ? "hidden" : ""}`}
           flexDirection="row"
           justifyContent="start"
         >
           <ProfitLossLabel
-            className="text-base mr-2"
+            className="mr-2 text-base"
             profitLoss={valueChange24h}
           />
           {valueChangePercentage24h != 0 ? (
             <PerformanceLabel
-              className="text-base mr-2"
+              className="mr-2 text-base"
               performance={valueChangePercentage24h}
             />
           ) : null}
@@ -92,7 +88,7 @@ export default function PortfolioHeader({
       </div>
       <div className="flex items-center gap-4">
         {setShowCharts ? (
-          <div className="items-center space-x-2 sm:inline-flex hidden">
+          <div className="hidden items-center space-x-2 sm:inline-flex">
             <Label htmlFor="show-charts">Show Charts</Label>
             <Switch
               defaultChecked={true}

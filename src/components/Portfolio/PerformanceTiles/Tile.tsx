@@ -25,20 +25,17 @@ export default function Tile({
   profitLoss,
 }: PortfolioHeaderProps) {
   return (
-    <Card
-      className="max-md:rounded-none max-md:flex justify-between max-md:w-full 
-    dark:bg-white/20 md:border-none border-x-0 border-t-0 shadow-none md:shadow-charts!"
-    >
-      <CardHeader className="pb-1 max-md:pl-1 pt-4">
+    <Card className="md:shadow-charts! justify-between border-x-0 border-t-0 shadow-none max-md:flex max-md:w-full max-md:rounded-none md:border-none dark:bg-white/20">
+      <CardHeader className="pt-4 pb-1 max-md:pl-1">
         <CardDescription className="text-sm font-medium">
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="max-md:items-end max-md:p-4 pb-4 flex flex-col">
-        <div className="flex items-center m-0!">
+      <CardContent className="flex flex-col pb-4 max-md:items-end max-md:p-4">
+        <div className="m-0! flex items-center">
           {avatarSrc ? (
             <AvatarWithSkeleton
-              className="h-6 w-6 m-2 ml-0 my-0 rounded-none"
+              className="m-2 my-0 ml-0 h-6 w-6 rounded-none"
               alt={`${description}'s Icon`}
               src={avatarSrc}
             />
@@ -46,7 +43,7 @@ export default function Tile({
           <CardTitle className="flex-row text-lg font-bold">
             {typeof title === "number" ? (
               <ProfitLossLabel
-                className="font-bold text-lg"
+                className="text-lg font-bold"
                 profitLoss={title}
               />
             ) : (
@@ -56,7 +53,7 @@ export default function Tile({
         </div>
         <div className="flex items-end">
           {profitLoss ? (
-            <ProfitLossLabel className="text-sm mr-2" profitLoss={profitLoss} />
+            <ProfitLossLabel className="mr-2 text-sm" profitLoss={profitLoss} />
           ) : null}
           <PerformanceLabel performance={performance} />
         </div>

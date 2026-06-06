@@ -15,5 +15,9 @@ export default function AmountLabel({
 }: AmountProps) {
   const { privacy } = useContext(GlobalContext);
 
-  return <Label className={className}>{!privacy && hidable ? "*****" : amount}</Label>;
+  return (
+    <Label className={className}>
+      {!privacy && hidable ? "*****" : amount}
+    </Label>
+  );
 }

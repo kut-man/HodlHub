@@ -5,8 +5,8 @@ import { useState, createContext, useEffect } from "react";
 import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
 import type { ApiResponse } from "@/lib/AuthContextProvider";
 import type {
-    PortfolioFields,
-    PortfolioListFields,
+  PortfolioFields,
+  PortfolioListFields,
 } from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
@@ -66,9 +66,9 @@ export default function Portfolio() {
     ) {
       const selectedPortfolioId = sessionStorage.getItem("selectedPortfolio");
       const selectedPortfolio = selectedPortfolioId
-        ? portfolioListData.data.find(
+        ? (portfolioListData.data.find(
             (portfolio) => portfolio.id == parseInt(selectedPortfolioId)
-          ) ?? portfolioListData.data[0]
+          ) ?? portfolioListData.data[0])
         : portfolioListData.data[0];
 
       setPortfolio({
@@ -126,9 +126,9 @@ export default function Portfolio() {
 
   return (
     <GlobalContext.Provider value={{ privacy: visibility, portfolio }}>
-      <Flex alignItems="start" className="font-inter max-md:flex-col flex-row">
+      <Flex alignItems="start" className="font-inter flex-row max-md:flex-col">
         {isPortfolioListDataPending ? (
-          <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
+          <div className="flex h-[calc(100vh-173.8px)] w-full items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
         ) : portfolioListData?.data?.length ? (
@@ -146,12 +146,12 @@ export default function Portfolio() {
             )}
 
             <Flex
-              className="w-full overflow-auto mt-6 px-6 gap-8"
+              className="mt-6 w-full gap-8 overflow-auto px-6"
               alignItems="start"
               flexDirection="col"
             >
               {!activePortfolio || portfolio?.id !== activePortfolio.id ? (
-                <div className="h-[calc(100vh-173.8px)] flex justify-center items-center w-full">
+                <div className="flex h-[calc(100vh-173.8px)] w-full items-center justify-center">
                   <Loader2 className="h-8 w-8 animate-spin" />
                 </div>
               ) : activePortfolio.holdings ? (

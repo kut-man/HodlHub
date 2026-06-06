@@ -56,7 +56,7 @@ export function DateTimePicker({
           initialFocus
           disabled={{ after: new Date() }}
         />
-        <div className="p-3 border-t border-border">
+        <div className="border-t border-border p-3">
           <TimePickerDemo setDate={setDate} date={date} />
         </div>
       </PopoverContent>

@@ -1,7 +1,13 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-type JustifyContent = "start" | "end" | "center" | "between" | "around" | "evenly";
+type JustifyContent =
+  | "start"
+  | "end"
+  | "center"
+  | "between"
+  | "around"
+  | "evenly";
 type AlignItems = "start" | "end" | "center" | "baseline" | "stretch";
 type FlexDirection = "row" | "col" | "row-reverse" | "col-reverse";
 
@@ -54,7 +60,7 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
         flexDirectionClassNames[flexDirection],
         justifyContentClassNames[justifyContent],
         alignItemsClassNames[alignItems],
-        className,
+        className
       )}
       {...other}
     >

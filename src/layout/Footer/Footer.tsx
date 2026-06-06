@@ -1,22 +1,19 @@
 import Flex from "@/components/ui/flex.tsx";
 import Logo from "../Header/Logo";
-// import { FaTelegram, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
 
 const socialLinks = {
   LinkedIn: "https://www.linkedin.com/in/kutman-eshenkulov/",
   GitHub: "https://github.com/kut-man",
-  Telegram: "https://t.me/kut_man",
-  Instagram: "https://www.instagram.com/_.kutman/",
 };
 
 export default function Footer() {
   return (
     <>
       <Separator orientation="horizontal" />
-      <Flex className="py-10 lg:px-32 md:px-12 px-6">
+      <Flex className="px-6 py-10 md:px-12 lg:px-32">
         <Logo />
-        <Flex className="hidden sm:flex w-1/2">
+        <Flex className="w-2/5 md:w-1/5">
           {Object.keys(socialLinks).map((value) => (
             <a
               target="_blank"
@@ -28,20 +25,6 @@ export default function Footer() {
             </a>
           ))}
         </Flex>
-        {/*<Flex className="sm:hidden w-2/5">*/}
-        {/*  <a href={socialLinks.LinkedIn}>*/}
-        {/*    <FaLinkedin size={22} />*/}
-        {/*  </a>*/}
-        {/*  <a href={socialLinks.GitHub}>*/}
-        {/*    <FaGithub size={22} />*/}
-        {/*  </a>*/}
-        {/*  <a href={socialLinks.Telegram}>*/}
-        {/*    <FaTelegram size={22} />*/}
-        {/*  </a>*/}
-        {/*  <a href={socialLinks.Instagram}>*/}
-        {/*    <FaInstagram size={22} />*/}
-        {/*  </a>*/}
-        {/*</Flex>*/}
       </Flex>
     </>
   );

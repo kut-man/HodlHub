@@ -1,10 +1,10 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { TabsProps } from "@radix-ui/react-tabs"
+import type { TabsProps } from "@radix-ui/react-tabs";
 
 export default function TimeIntervalSelector(props: TabsProps) {
   return (
     <Tabs {...props} defaultValue="buy">
-      <TabsList className="grid w-full grid-cols-4 h-fit p-[2px]">
+      <TabsList className="grid h-fit w-full grid-cols-4 p-[2px]">
         <TabsTrigger className="h-[28px]" value="5m">
           5m
         </TabsTrigger>

@@ -8,7 +8,7 @@ export function CoinSelectPopover({
   Trigger,
   Content,
   open,
-  onOpenChange
+  onOpenChange,
 }: {
   Trigger: React.ReactNode;
   Content: React.ReactNode;

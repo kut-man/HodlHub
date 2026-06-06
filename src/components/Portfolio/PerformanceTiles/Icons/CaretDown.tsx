@@ -1,0 +1,7 @@
+const CaretDown = ({ ...props }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 58 256 156" {...props}>
+    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,48,88H208a8,8,0,0,1,5.66,13.66Z"></path>
+  </svg>
+);
+
+export default CaretDown;

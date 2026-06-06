@@ -8,15 +8,15 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import type { ApiResponse } from "@/lib/AuthContextProvider"
+import type { ApiResponse } from "@/lib/AuthContextProvider";
 import { useQuery } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
-import type { ChartTimeIntervals } from "./Chart"
+import type { ChartTimeIntervals } from "./Chart";
 import {
   ChartContainer,
   ChartTooltipContent,
   type CustomTooltipProps,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
 export function formatTimestamp(
   timestamp: string,
@@ -82,10 +82,10 @@ const HistoryChart = ({ interval }: { interval: ChartTimeIntervals }) => {
         date: { label: "Date", color: areaChartColor },
         value: { label: "Total Value:", color: areaChartColor },
       }}
-      className="w-full h-64 aspect-auto"
+      className="aspect-auto h-64 w-full"
     >
       <AreaChart
-        className="w-full h-64"
+        className="h-64 w-full"
         responsive
         data={chartData}
         margin={{

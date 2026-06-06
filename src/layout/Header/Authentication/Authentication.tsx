@@ -12,7 +12,7 @@ export default function Authentication() {
 
   return (
     <>
-      <Flex className="gap-2 justify-end w-fit">
+      <Flex className="w-fit justify-end gap-2">
         <Button
           onClick={() => setDialog({ tab: AuthAction.LOGIN, isOpen: true })}
           size="sm"

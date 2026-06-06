@@ -1,4 +1,3 @@
-// import { BsThreeDots } from "react-icons/bs";
 import type { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +15,7 @@ import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import type { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Ellipsis, Plus } from "lucide-react";
 import AmountLabel from "../PerformanceTiles/Labels/AmountLabel";
 
 const createChangeColumn = (
@@ -43,13 +42,13 @@ export const columns: ColumnDef<AssetsInfo>[] = [
       left: true,
     },
     cell: ({ row }) => (
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <AvatarWithSkeleton
           className="h-6 w-6"
           alt={`${(row.getValue("name") as Coin).name}'s Icon`}
           src={(row.getValue("name") as Coin).iconURL}
         />
-        <div className="flex max-md:flex-col gap-2 md:items-center">
+        <div className="flex gap-2 max-md:flex-col md:items-center">
           <Label className="font-semibold">
             {(row.getValue("name") as Coin).name}
           </Label>
@@ -109,7 +108,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
       return (
         <div className="flex flex-col items-end gap-1 text-right font-medium">
           <ProfitLossLabel
-            className="text-right text-black-500"
+            className="text-black-500 text-right"
             profitLoss={
               (row.getValue("profitLoss") as AssetsInfo["profitLoss"]).value
             }
@@ -138,13 +137,13 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           <PopoverTrigger asChild>
             <Button
               data-testid="asset-actions-menu-trigger"
-              className="rounded-full p-0 w-10 h-10"
+              className="h-10 w-10 rounded-full p-0"
               variant="ghost"
             >
-              {/*<BsThreeDots size={18} />*/}
+              <Ellipsis size={18} />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-52 p-1 flex flex-col gap-1">
+          <PopoverContent className="flex w-52 flex-col gap-1 p-1">
             <AddTransactionDialog
               label={
                 <>

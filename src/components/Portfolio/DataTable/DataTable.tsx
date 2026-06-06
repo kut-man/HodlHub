@@ -7,7 +7,7 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { mapHoldingsToAssetsInfo } from "./mapHoldingsToAssetsInfo";
 
 export function DataTable({ data }: { data: Holding[] }) {
@@ -42,7 +42,7 @@ export function DataTable({ data }: { data: Holding[] }) {
   });
   return (
     <Card className="mb-6 w-full border-none shadow-none">
-      <CardHeader className="px-4 pb-2 pt-4">
+      <CardHeader className="px-4 pt-4 pb-2">
         <CardTitle>Assets</CardTitle>
       </CardHeader>
       <CardContent className="p-0">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PortfolioHeader from "./PortfolioHeader/PortfolioHeader";
 import Charts from "./Charts/Charts";
-import type { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces"
+import type { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
 import Flex from "@/components/ui/flex.tsx";
 import Tile from "./PerformanceTiles/Tile";
 import { cryptoAssets } from "./PortfolioHeader/TransactionCard/coinIconUrl";
@@ -47,7 +47,7 @@ export default function PortfolioInsights({
         setShowCharts={setShowCharts}
         {...data}
       />
-      <Flex className="md:gap-6 flex-col md:flex-row" justifyContent="start">
+      <Flex className="flex-col md:flex-row md:gap-6" justifyContent="start">
         <Tile {...allTimeProfit} />
         <Tile {...bestPerformer} />
         <Tile {...worstPerformer} />

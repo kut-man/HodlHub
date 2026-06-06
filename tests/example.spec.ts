@@ -18,15 +18,15 @@ async function setupAuthenticatedContext(browser: Browser) {
 
 async function createPortfolio(page: Page) {
   const portfolioName = "test portfolio" + Math.floor(Math.random() * 1000);
-  
+
   await page.goto(`${APP_URL}/portfolio`);
   await page.getByText("Create Portfolio").click();
   await page.locator('input[name="name"]').fill(portfolioName);
   await page.getByTestId("upsert-portfolio-button").click();
-  
+
   await expect(page.getByText("Add Transaction").first()).toBeVisible();
   await expect(page.getByText(portfolioName).first()).toBeVisible();
-  
+
   return portfolioName;
 }
 
@@ -42,13 +42,13 @@ async function addTransaction(page, amount = "1") {
   await expect(
     page.getByRole("heading").getByText("Add Transaction", { exact: true })
   ).toBeVisible();
-  
+
   await expect(page.getByText("BTC")).toBeVisible();
   await page.locator('input[name="amount"]').fill(amount);
   await page
     .getByRole("button", { name: "Add Transaction", exact: true })
     .click();
-    
+
   await expect(page.getByRole("table")).toBeVisible();
 }
 
@@ -69,14 +69,14 @@ test("Login", async ({ page }) => {
 test("Add portfolio", async ({ browser }) => {
   const context = await setupAuthenticatedContext(browser);
   const page = await context.newPage();
-  
+
   await createPortfolio(page);
 });
 
 test("Remove portfolio", async ({ browser }) => {
   const context = await setupAuthenticatedContext(browser);
   const page = await context.newPage();
-  
+
   const portfolioName = await createPortfolio(page);
   await selectPortfolio(page, portfolioName);
 
@@ -94,7 +94,7 @@ test("Remove portfolio", async ({ browser }) => {
 test("Add transaction", async ({ browser }) => {
   const context = await setupAuthenticatedContext(browser);
   const page = await context.newPage();
-  
+
   const portfolioName = await createPortfolio(page);
   await selectPortfolio(page, portfolioName);
   await addTransaction(page);
@@ -103,13 +103,13 @@ test("Add transaction", async ({ browser }) => {
 test("Remove transaction", async ({ browser }) => {
   const context = await setupAuthenticatedContext(browser);
   const page = await context.newPage();
-  
+
   const portfolioName = await createPortfolio(page);
   await selectPortfolio(page, portfolioName);
   await addTransaction(page);
 
   await page.getByTestId("asset-actions-menu-trigger").click();
   await page.getByText("Remove").click();
-  await page.getByRole("dialog").getByText("Remove", {exact: true}).click();
+  await page.getByRole("dialog").getByText("Remove", { exact: true }).click();
   await expect(page.getByRole("table")).toBeHidden();
 });

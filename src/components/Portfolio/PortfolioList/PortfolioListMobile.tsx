@@ -9,7 +9,7 @@ import {
 import { useContext, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import PortfolioItem from "./PortfolioItem";
-import type { PortfolioListProps } from "./PortfolioList"
+import type { PortfolioListProps } from "./PortfolioList";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import { GlobalContext } from "@/pages/Portfolio";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ export default function PortfolioListMobile({
             <Button
               aria-label="Select Portfolio"
               variant={"ghost"}
-              className="w-full h-14 px-6 py-0 hover:bg-transparent"
+              className="h-14 w-full px-6 py-0 hover:bg-transparent"
               onClick={() => setIsDialogOpen(true)}
             >
               <Flex justifyContent="start">
@@ -67,7 +67,7 @@ export default function PortfolioListMobile({
                   alignItems="start"
                   flexDirection="col"
                 >
-                  <Label className="cursor-pointer text-left leading-2 text-base">
+                  <Label className="cursor-pointer text-left text-base leading-2">
                     {activePortfolio.name}
                   </Label>
                   <BalanceLabel
@@ -91,7 +91,7 @@ export default function PortfolioListMobile({
               data-testid="portfolio-list-dialog"
               className="h-full overflow-auto border-none shadow-none"
             >
-              <CardContent className="flex flex-col p-0">
+              <CardContent className="flex flex-col gap-1 p-0">
                 {data.map((portfolio) => (
                   <PortfolioItem
                     onClick={() => {
@@ -110,7 +110,7 @@ export default function PortfolioListMobile({
             <PortfolioDialog
               variant="outline"
               size="lg"
-              className="text-base w-full"
+              className="w-full text-base"
               onClose={() => setIsDialogOpen(false)}
             />
           </DialogFooter>

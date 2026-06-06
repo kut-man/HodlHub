@@ -1,4 +1,4 @@
-import type { AvatarValues } from "../PortfolioDialog/AvatarAssets"
+import type { AvatarValues } from "../PortfolioDialog/AvatarAssets";
 
 type PortfolioIconProps = AvatarValues & {
   size?: "small" | "medium" | "large";
@@ -19,7 +19,7 @@ export default function PortfolioIcon({
 }: PortfolioIconProps) {
   return (
     <div
-      className={`${sizeClasses[size]} flex justify-center items-center aspect-square rounded-full m-2 bg-${color}-500 ${className}`}
+      className={`${sizeClasses[size]} m-2 flex aspect-square items-center justify-center rounded-full bg-${color}-500 ${className}`}
     >
       <span>{avatar}</span>
     </div>

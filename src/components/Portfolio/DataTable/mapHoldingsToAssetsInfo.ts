@@ -1,6 +1,6 @@
 import { cryptoAssets } from "../PortfolioHeader/TransactionCard/coinIconUrl";
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
-import type { AssetsInfo } from "./DataTableInterfaces"
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { AssetsInfo } from "./DataTableInterfaces";
 
 export function mapHoldingsToAssetsInfo(holdings: Holding[]): AssetsInfo[] {
   return holdings.map((holding) => ({

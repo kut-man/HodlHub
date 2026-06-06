@@ -1,5 +1,5 @@
 const BASE_URL =
-  process.env.NODE_ENV === "production"
+  import.meta.env.MODE === "production"
     ? "https://hodlhubspring.onrender.com"
     : "http://localhost:8080";
 export const LOGOUT_URL = `${BASE_URL}/logout`;

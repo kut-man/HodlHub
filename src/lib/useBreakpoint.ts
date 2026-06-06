@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-type Breakpoint = 'mobile' | 'tablet' | 'desktop';
+type Breakpoint = "mobile" | "tablet" | "desktop";
 
 const getBreakpoint = (width: number): Breakpoint => {
-  if (width < 640) return 'mobile';
-  if (width < 768) return 'tablet';
-  return 'desktop';
+  if (width < 640) return "mobile";
+  if (width < 768) return "tablet";
+  return "desktop";
 };
 
 const useBreakpoint = () => {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>(() => getBreakpoint(window.innerWidth));
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>(() =>
+    getBreakpoint(window.innerWidth)
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,14 +21,14 @@ const useBreakpoint = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [breakpoint]);
 
-  const isMobile = breakpoint === 'mobile';
-  const isTablet = breakpoint === 'tablet';
-  const isDesktop = breakpoint === 'desktop';
+  const isMobile = breakpoint === "mobile";
+  const isTablet = breakpoint === "tablet";
+  const isDesktop = breakpoint === "desktop";
 
   return { isMobile, isTablet, isDesktop };
 };

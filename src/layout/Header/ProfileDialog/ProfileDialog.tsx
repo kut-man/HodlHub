@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/dialog";
 import { EditProfile } from "./EditProfile";
 import { useState } from "react";
-// import { GoArrowLeft } from "react-icons/go";
 import { Button } from "@/components/ui/button";
 import { ChangeAvatar } from "./ChangeAvatar";
 import { useAuthContext } from "@/lib/useAuthContext";
+import { ArrowLeft } from "lucide-react";
 
 export default function ProfileDialog({
   onClose,
@@ -46,18 +46,18 @@ export default function ProfileDialog({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="justify-start w-full"
+          className="w-full justify-start"
           {...buttonProps}
         >
           Settings
         </Button>
       </DialogTrigger>
-      <DialogContent className={"sm:max-w-[425px] duration-500"}>
+      <DialogContent className={"duration-500 sm:max-w-[425px]"}>
         <DialogHeader>
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
               <>
-                {/*<GoArrowLeft onClick={changeCurrentDialogPage} />*/}
+                <ArrowLeft size={18} />
                 Change Avatar
               </>
             ) : (

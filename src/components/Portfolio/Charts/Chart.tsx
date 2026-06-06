@@ -3,7 +3,7 @@ import Flex from "@/components/ui/flex.tsx";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import TimeIntervalSelector from "./TimeIntervalSelector";
 import HistoryChart from "./HistoryChart";
 import { AllocationChart } from "./AllocationChart";
@@ -35,11 +35,11 @@ export default function Chart(props: ChartProps) {
   return (
     <Card
       className={
-        "w-full dark:bg-white/20 border-none shadow-charts! " + props?.className
+        "shadow-charts! w-full border-none dark:bg-white/20 " + props?.className
       }
     >
-      <CardHeader className="pb-2 pt-4">
-        <CardTitle className="max-md:hidden h-8">
+      <CardHeader className="pt-4 pb-2">
+        <CardTitle className="h-8 max-md:hidden">
           <Flex flexDirection="row" alignItems="center">
             {titles[chart]}{" "}
             {chart === "area" ? (
@@ -52,7 +52,7 @@ export default function Chart(props: ChartProps) {
             ) : null}
           </Flex>
         </CardTitle>
-        <Card className="md:hidden p-1">
+        <Card className="p-1 md:hidden">
           {Object.keys(titles).map((title) => (
             <Button
               key={title}
@@ -66,7 +66,7 @@ export default function Chart(props: ChartProps) {
           ))}
         </Card>
       </CardHeader>
-      <CardContent className="pb-4 text-green-500 flex items-end flex-row">
+      <CardContent className="flex flex-row items-end pb-4 text-green-500">
         {chart === "area" ? (
           <HistoryChart interval={selectedTimeInterval} />
         ) : (

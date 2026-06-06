@@ -5,7 +5,7 @@ import { useState } from "react";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { avatarUrls } from "./AvatarAssets";
 import { CloudUpload } from "lucide-react";
-import Flex from "@/components/ui/flex.tsx"
+import Flex from "@/components/ui/flex.tsx";
 
 export function ChangeAvatar({
   changeProfileAvatar,
@@ -35,7 +35,7 @@ export function ChangeAvatar({
           </Button>
         </Flex>
 
-        <div className="flex gap-y-6 flex-wrap justify-between">
+        <div className="flex flex-wrap justify-between gap-y-6">
           {avatarUrls.map((url) => (
             <span onClick={() => setAvatar(url)}>
               <AvatarWithSkeleton

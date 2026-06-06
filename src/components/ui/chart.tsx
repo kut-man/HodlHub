@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 import type {
-    NameType,
-    Payload,
-    ValueType,
+  NameType,
+  Payload,
+  ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import type { TooltipContentProps } from "recharts/types/component/Tooltip";
 
@@ -35,15 +35,15 @@ export type CustomTooltipProps = TooltipContentProps<ValueType, NameType> & {
   nameKey?: string;
   labelKey?: string;
   labelFormatter?: (
-      label: TooltipContentProps<ValueType, NameType>["label"],
-      payload: TooltipContentProps<ValueType, NameType>["payload"]
+    label: TooltipContentProps<ValueType, NameType>["label"],
+    payload: TooltipContentProps<ValueType, NameType>["payload"]
   ) => React.ReactNode;
   formatter?: (
-      value: ValueType,
-      name: NameType,
-      item: Payload<ValueType, NameType>,
-      index: number,
-      payload: ReadonlyArray<Payload<ValueType, NameType>>
+    value: ValueType,
+    name: NameType,
+    item: Payload<ValueType, NameType>,
+    index: number,
+    payload: ReadonlyArray<Payload<ValueType, NameType>>
   ) => React.ReactNode;
   labelClassName?: string;
   color?: string;
@@ -91,7 +91,7 @@ function ChartContainer({
         data-slot="chart"
         data-chart={chartId}
         className={cn(
-          "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
           className
         )}
         {...props}
@@ -169,7 +169,7 @@ function ChartTooltipContent({
     const value = (() => {
       const v =
         !labelKey && typeof label === "string"
-          ? config[label as keyof typeof config]?.label ?? label
+          ? (config[label as keyof typeof config]?.label ?? label)
           : itemConfig?.label;
 
       return typeof v === "string" || typeof v === "number" ? v : undefined;
@@ -207,7 +207,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "border-border/50 bg-background grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
+        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
         className
       )}
     >
@@ -222,7 +222,7 @@ function ChartTooltipContent({
             <div
               key={item.dataKey}
               className={cn(
-                "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
+                "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                 indicator === "dot" && "items-center"
               )}
             >
@@ -256,7 +256,7 @@ function ChartTooltipContent({
                   )}
                   <div
                     className={cn(
-                      "flex flex-1 justify-between leading-none gap-4",
+                      "flex flex-1 justify-between gap-4 leading-none",
                       nestLabel ? "items-end" : "items-center"
                     )}
                   >
@@ -267,7 +267,7 @@ function ChartTooltipContent({
                       </span>
                     </div>
                     {item.value != null && item.value != undefined && (
-                      <span className="text-foreground font-mono font-medium tabular-nums">
+                      <span className="font-mono font-medium text-foreground tabular-nums">
                         {hideValue
                           ? "****"
                           : item.value.toLocaleString(undefined, {
@@ -297,9 +297,7 @@ function ChartLegendContent({
   const { config } = useChart();
 
   return (
-    <div
-      className="flex gap-3 flex-col justify-center w-full text-sm font-medium"
-    >
+    <div className="flex w-full flex-col justify-center gap-3 text-sm font-medium">
       {values?.map((item) => {
         return (
           <div

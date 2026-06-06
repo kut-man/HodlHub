@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useForm, type SubmitHandler } from "react-hook-form"
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { editProfileAsync } from "./ProfileDialogFunctions";
 import { useAuthContext } from "@/lib/useAuthContext";
-import type { Holder } from "@/lib/AuthContextProvider"
+import type { Holder } from "@/lib/AuthContextProvider";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 type FormValues = {
@@ -56,7 +56,7 @@ export function EditProfile({
     <>
       <div className="flex flex-col gap-4 py-4">
         <Label>Profile Avatar</Label>
-        <div className="flex items-center justify-between mb-2">
+        <div className="mb-2 flex items-center justify-between">
           <AvatarWithSkeleton
             className="h-16 w-16"
             alt="Profile Avatar"
@@ -79,7 +79,7 @@ export function EditProfile({
           }}
         />
       </div>
-      <DialogFooter className="sm:space-x-0 sm:flex-col flex flex-col gap-6">
+      <DialogFooter className="flex flex-col gap-6 sm:flex-col sm:space-x-0">
         {isError && (
           <Label className="font-normal text-red-600">*{error.message}</Label>
         )}

@@ -16,7 +16,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import type { LoginFields, VerifyEmailFields } from "../HeaderTypes"
+import type { LoginFields, VerifyEmailFields } from "../HeaderTypes";
 import { verifyEmail } from "./AuthenticationFunctions";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -54,7 +54,7 @@ export default function VerifyEmail({
           {` , please check your inbox and insert the code in form below to verify your email.`}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 flex justify-center items-center">
+      <CardContent className="flex items-center justify-center space-y-2">
         <InputOTP
           pattern={REGEXP_ONLY_DIGITS}
           disabled={isPending}

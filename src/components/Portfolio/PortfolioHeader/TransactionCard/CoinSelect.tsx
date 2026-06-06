@@ -8,7 +8,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { COIN_URL } from "@/lib/api";
-import type { ApiResponse } from "@/lib/AuthContextProvider"
+import type { ApiResponse } from "@/lib/AuthContextProvider";
 import { useQuery } from "@tanstack/react-query";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
@@ -96,9 +96,9 @@ export function CoinSelect({
           }
         })()
       ) : isPending ? (
-        <div className="flex py-1.5 items-center gap-2">
-          <Skeleton className="w-6 h-6 rounded-full" />
-          <Skeleton className="w-32 h-4 rounded-medium" />
+        <div className="flex items-center gap-2 py-1.5">
+          <Skeleton className="h-6 w-6 rounded-full" />
+          <Skeleton className="rounded-medium h-4 w-32" />
         </div>
       ) : (
         "Select Coin..."
@@ -117,10 +117,10 @@ export function CoinSelect({
             ? Array.from({ length: 10 }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex px-2 py-1.5 items-center gap-2"
+                  className="flex items-center gap-2 px-2 py-1.5"
                 >
-                  <Skeleton className="w-8 h-8 rounded-full" />
-                  <Skeleton className="w-32 h-4 rounded-medium" />
+                  <Skeleton className="h-8 w-8 rounded-full" />
+                  <Skeleton className="rounded-medium h-4 w-32" />
                 </div>
               ))
             : coins?.map((coin) => (
@@ -140,7 +140,7 @@ export function CoinSelect({
                     setOpen(false);
                   }}
                   className={cn(
-                    "font-medium ",
+                    "font-medium",
                     selectedCoin === coin.name.toLowerCase()
                       ? "bg-accent text-accent-foreground"
                       : "opacity-100"

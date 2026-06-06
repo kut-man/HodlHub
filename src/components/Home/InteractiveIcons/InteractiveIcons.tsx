@@ -3,7 +3,11 @@ import interactiveCoinIconData from "./assets";
 
 const SCROLL_LIMIT = 600;
 
-const calculateTranslate = (position: number[], scrollX: number, idx:number) => {
+const calculateTranslate = (
+  position: number[],
+  scrollX: number,
+  idx: number
+) => {
   const percent = scrollX / SCROLL_LIMIT;
   const moveY = position[0] + (200 - position[0]) * percent;
   const moveX = position[1] + (50 - position[1]) * percent;
@@ -27,12 +31,12 @@ export default function InteractiveIcons() {
   }, []);
 
   return (
-    <div className="relative top-24 w-11/12 max-w-[1200px] m-auto h-[500px]">
+    <div className="relative top-24 m-auto h-[500px] w-11/12 max-w-[1200px]">
       <div>
         {interactiveCoinIconData.map((obj, idx) =>
           obj.coinIcon({
             key: idx,
-            className: "absolute " + obj.size ,
+            className: "absolute " + obj.size,
             style: {
               ...calculateTranslate(obj.position, scrollPosition, idx),
               transformOrigin: idx > 4 ? "left" : "right",

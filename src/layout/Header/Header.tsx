@@ -1,5 +1,3 @@
-// import { FaMoon } from "react-icons/fa";
-// import { HiSun } from "react-icons/hi";
 import { useTheme } from "./Theme";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
@@ -7,6 +5,7 @@ import Authentication from "./Authentication/Authentication";
 import { useAuthContext } from "@/lib/useAuthContext";
 import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
+import { Moon, Sun } from "lucide-react";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -14,11 +13,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-16 flex items-center p-2 lg:px-24 px-8">
+      <header className="flex h-16 items-center p-2 px-8 lg:px-24">
         <div className="lg:flex-1"></div>
         <Logo alt="CoinMarketCap" />
 
-        <div className="flex-1 flex justify-end items-center">
+        <div className="flex flex-1 items-center justify-end">
           <>
             <Toggle
               aria-label="Change Theme"
@@ -27,7 +26,7 @@ export default function Header() {
                 setTheme(theme === "light" ? "dark" : "light")
               }
             >
-              {/*{theme === "dark" ? <HiSun size={25} /> : <FaMoon size={20} />}*/}
+              {theme === "dark" ? <Sun /> : <Moon />}
             </Toggle>
 
             {isLoggedIn ? (

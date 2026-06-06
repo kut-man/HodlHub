@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import PortfolioItem from "./PortfolioItem";
-import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces"
+import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { GlobalContext } from "@/pages/Portfolio";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -30,7 +30,7 @@ export default function PortfolioList({
           <CardHeader>
             <CardTitle className="text-lg">My portfolios</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col py-2">
+          <CardContent className="flex flex-col gap-1 py-2">
             {data.map((portfolio) => (
               <PortfolioItem
                 onClick={switchPortfolio}

@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { Transaction } from "./TransactionCard"
-import type { FieldErrors, UseFormRegister } from "react-hook-form"
+import type { Transaction } from "./TransactionCard";
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
 
 type TransactionCardInputsProps = {
   register: UseFormRegister<Transaction>;
@@ -22,7 +22,7 @@ export default function TransactionCardInputs({
         <Input
           {...register("amount", {
             required: "Quantity is required!",
-            validate: value => value > 0 || "Quantity must be greater than 0",
+            validate: (value) => value > 0 || "Quantity must be greater than 0",
             pattern: {
               value: /^(?!0\d)\d{0,9}(\.\d{0,9})?$/,
               message: "Max 9 digits before & after decimal",
@@ -46,7 +46,8 @@ export default function TransactionCardInputs({
         <Input
           {...register("pricePerCoin", {
             required: "Price Per Coin is required!",
-            validate: value => value > 0 || "Price Per Coin must be greater than 0",
+            validate: (value) =>
+              value > 0 || "Price Per Coin must be greater than 0",
             pattern: {
               value: /^(?!0\d)\d{0,9}(\.\d{0,9})?$/,
               message: "Max 9 digits before & after decimal",
