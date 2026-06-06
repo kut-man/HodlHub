@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PortfolioHeader from "./PortfolioHeader/PortfolioHeader";
 import Charts from "./Charts/Charts";
-import { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces";
-import { Flex } from "@tremor/react";
+import type { PortfolioFields } from "./PortfolioDialog/PortfolioDialogInterfaces"
+import Flex from "@/components/ui/flex.tsx";
 import Tile from "./PerformanceTiles/Tile";
 import { cryptoAssets } from "./PortfolioHeader/TransactionCard/coinIconUrl";
 

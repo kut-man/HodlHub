@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import { useState } from "react";
 import { AuthAction } from "../HeaderTypes";
 import AuthenticationDialog from "./AuthenticationDialog";

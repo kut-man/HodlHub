@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsProps } from "@radix-ui/react-tabs";
+import type { TabsProps } from "@radix-ui/react-tabs"
 
 export default function TimeIntervalSelector(props: TabsProps) {
   return (

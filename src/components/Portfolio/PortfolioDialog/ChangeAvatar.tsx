@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import { Label } from "@/components/ui/label";
 import { emojis, avatarBackground } from "./AvatarAssets";
 import { useReducer } from "react";
 import {
   ACTIONS,
-  Action,
-  ChangeAvatarProps,
-  State,
-} from "./PortfolioDialogInterfaces";
+  type Action,
+  type ChangeAvatarProps,
+  type State,
+} from "./PortfolioDialogInterfaces"
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
 
 const reducer = (state: State, action: Action): State => {

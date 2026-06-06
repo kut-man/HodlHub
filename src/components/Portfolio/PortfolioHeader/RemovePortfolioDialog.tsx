@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
-import { ErrorResponse } from "@/layout/Header/HeaderTypes";
+import type { ErrorResponse } from "@/layout/Header/HeaderTypes"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { GlobalContext } from "@/pages/Portfolio";
 import { toast } from "sonner";

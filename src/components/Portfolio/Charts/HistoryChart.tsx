@@ -8,15 +8,15 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { ApiResponse } from "@/lib/AuthContextProvider";
+import type { ApiResponse } from "@/lib/AuthContextProvider"
 import { useQuery } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
-import { ChartTimeIntervals } from "./Chart";
+import type { ChartTimeIntervals } from "./Chart"
 import {
   ChartContainer,
   ChartTooltipContent,
-  CustomTooltipProps,
-} from "@/components/ui/chart";
+  type CustomTooltipProps,
+} from "@/components/ui/chart"
 
 export function formatTimestamp(
   timestamp: string,

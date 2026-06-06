@@ -2,11 +2,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { RegisterFields } from "../HeaderTypes";
+import type { RegisterFields } from "../HeaderTypes"
 import { registerUser } from "./AuthenticationFunctions";
 import VerifyEmail from "./VerifyEmail";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";

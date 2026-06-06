@@ -1,13 +1,13 @@
 import { Legend, Pie, PieChart, Tooltip } from "recharts";
 
 import {
-  ChartConfig,
+  type ChartConfig,
   ChartContainer,
   ChartLegendContent,
   ChartTooltipContent,
-  CustomTooltipProps,
-} from "@/components/ui/chart";
-import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+  type CustomTooltipProps,
+} from "@/components/ui/chart"
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
 import { cryptoAssets } from "../PortfolioHeader/TransactionCard/coinIconUrl";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext, useMemo, useState } from "react";

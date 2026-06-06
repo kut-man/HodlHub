@@ -1,6 +1,6 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import Logo from "../Header/Logo";
-import { FaTelegram, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
+// import { FaTelegram, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
 
 const socialLinks = {
@@ -28,20 +28,20 @@ export default function Footer() {
             </a>
           ))}
         </Flex>
-        <Flex className="sm:hidden w-2/5">
-          <a href={socialLinks.LinkedIn}>
-            <FaLinkedin size={22} />
-          </a>
-          <a href={socialLinks.GitHub}>
-            <FaGithub size={22} />
-          </a>
-          <a href={socialLinks.Telegram}>
-            <FaTelegram size={22} />
-          </a>
-          <a href={socialLinks.Instagram}>
-            <FaInstagram size={22} />
-          </a>
-        </Flex>
+        {/*<Flex className="sm:hidden w-2/5">*/}
+        {/*  <a href={socialLinks.LinkedIn}>*/}
+        {/*    <FaLinkedin size={22} />*/}
+        {/*  </a>*/}
+        {/*  <a href={socialLinks.GitHub}>*/}
+        {/*    <FaGithub size={22} />*/}
+        {/*  </a>*/}
+        {/*  <a href={socialLinks.Telegram}>*/}
+        {/*    <FaTelegram size={22} />*/}
+        {/*  </a>*/}
+        {/*  <a href={socialLinks.Instagram}>*/}
+        {/*    <FaInstagram size={22} />*/}
+        {/*  </a>*/}
+        {/*</Flex>*/}
       </Flex>
     </>
   );

@@ -1,4 +1,4 @@
-import { AvatarValues } from "./AvatarAssets";
+import type { AvatarValues } from "./AvatarAssets"
 
 type SelectColorAction = {
   type: typeof ACTIONS.SELECTED_COLOR;

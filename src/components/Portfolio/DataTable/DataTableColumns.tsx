@@ -1,5 +1,5 @@
-import { BsThreeDots } from "react-icons/bs";
-import { CellContext, ColumnDef } from "@tanstack/react-table";
+// import { BsThreeDots } from "react-icons/bs";
+import type { CellContext, ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -13,7 +13,7 @@ import SortableHeaderHOF from "./SortButton";
 import { Label } from "@/components/ui/label";
 import AddTransactionDialog from "../PortfolioHeader/AddTransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
-import { AssetsInfo, Coin } from "./DataTableInterfaces";
+import type { AssetsInfo, Coin } from "./DataTableInterfaces";
 import RemoveAssetDialog from "./RemoveAssetDialog";
 import { useState } from "react";
 import { Plus } from "lucide-react";
@@ -141,7 +141,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               className="rounded-full p-0 w-10 h-10"
               variant="ghost"
             >
-              <BsThreeDots size={18} />
+              {/*<BsThreeDots size={18} />*/}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-52 p-1 flex flex-col gap-1">

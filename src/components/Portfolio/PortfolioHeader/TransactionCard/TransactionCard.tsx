@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Coin, CoinSelect } from "./CoinSelect";
+import { type Coin, CoinSelect } from "./CoinSelect"
 import { DateTimePicker } from "./TimePicker/DateTimePicker";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
@@ -17,7 +17,7 @@ import TransactionCardInputs from "./TransactionCardInputs";
 import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
 import { TRANSACTION_URL } from "@/lib/api";
-import { ErrorResponse } from "@/layout/Header/HeaderTypes";
+import type { ErrorResponse } from "@/layout/Header/HeaderTypes"
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 

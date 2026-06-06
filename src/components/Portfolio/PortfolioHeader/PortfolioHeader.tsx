@@ -1,6 +1,5 @@
-import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+// import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import AddTransactionDialog from "./AddTransactionDialog";
@@ -9,10 +8,11 @@ import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
-import { PiEyeClosed } from "react-icons/pi";
+// import { PiEyeClosed } from "react-icons/pi";
 import { PortfolioActions } from "./PortfolioActions";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
-import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
+import type { AvatarValues } from "../PortfolioDialog/AvatarAssets";
+import Flex from "@/components/ui/flex.tsx"
 
 interface PortfolioHeaderProps {
   isEmptyPortfolio?: boolean;
@@ -59,15 +59,15 @@ export default function PortfolioHeader({
             onClick={changeVisibility}
             className={isEmptyPortfolio ? "hidden" : ""}
           >
-            {privacy ? (
-              <MdOutlineRemoveRedEye
-                color="gray"
-                className="mx-2 mt-1"
-                size={27}
-              />
-            ) : (
-              <PiEyeClosed color="gray" size={27} />
-            )}
+            {/*{privacy ? (*/}
+            {/*  <MdOutlineRemoveRedEye*/}
+            {/*    color="gray"*/}
+            {/*    className="mx-2 mt-1"*/}
+            {/*    size={27}*/}
+            {/*  />*/}
+            {/*) : (*/}
+            {/*  <PiEyeClosed color="gray" size={27} />*/}
+            {/*)}*/}
           </Button>
         </Flex>
         <Flex

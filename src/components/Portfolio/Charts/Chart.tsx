@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
 import TimeIntervalSelector from "./TimeIntervalSelector";
 import HistoryChart from "./HistoryChart";
 import { AllocationChart } from "./AllocationChart";

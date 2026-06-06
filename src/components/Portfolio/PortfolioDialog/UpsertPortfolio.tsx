@@ -2,17 +2,17 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PortfolioDialogProps } from "./PortfolioDialogInterfaces";
+import type { PortfolioDialogProps } from "./PortfolioDialogInterfaces"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import PortfolioIcon from "../PortfolioList/PortfolioIcon";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form"
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
 import {
   upsertPortfolioAsync,
-  UpsertPortfolioAsyncProps,
-} from "./PortfolioDialogFunctions";
+  type UpsertPortfolioAsyncProps,
+} from "./PortfolioDialogFunctions"
 
 type FormValues = {
   name: string;

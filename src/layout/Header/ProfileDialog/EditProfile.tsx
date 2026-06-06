@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form"
 import { editProfileAsync } from "./ProfileDialogFunctions";
 import { useAuthContext } from "@/lib/useAuthContext";
-import { Holder } from "@/lib/AuthContextProvider";
+import type { Holder } from "@/lib/AuthContextProvider"
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 
 type FormValues = {

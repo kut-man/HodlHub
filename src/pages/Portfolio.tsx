@@ -1,12 +1,12 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
 import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
 import { useState, createContext, useEffect } from "react";
 import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
-import { ApiResponse } from "@/lib/AuthContextProvider";
-import {
-  PortfolioFields,
-  PortfolioListFields,
+import type { ApiResponse } from "@/lib/AuthContextProvider";
+import type {
+    PortfolioFields,
+    PortfolioListFields,
 } from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
@@ -14,7 +14,7 @@ import EmptyDashboard from "@/components/Portfolio/EmptyDashboard";
 import { Loader2 } from "lucide-react";
 import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
 import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
-import { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
+import type { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
 import PortfolioListMobile from "@/components/Portfolio/PortfolioList/PortfolioListMobile";
 import useBreakpoint from "@/lib/useBreakpoint";
 

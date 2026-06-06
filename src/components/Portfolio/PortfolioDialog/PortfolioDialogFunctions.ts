@@ -1,7 +1,7 @@
-import { ErrorResponse } from "@/layout/Header/HeaderTypes";
+import type { ErrorResponse } from "@/layout/Header/HeaderTypes"
 import { PORTFOLIO_URL } from "@/lib/api";
-import { Colors } from "./AvatarAssets";
-import { PortfolioFields } from "./PortfolioDialogInterfaces";
+import type { Colors } from "./AvatarAssets"
+import type { PortfolioFields } from "./PortfolioDialogInterfaces"
 
 export interface UpsertPortfolioAsyncProps {
   data: {

@@ -1,6 +1,6 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import Chart from "./Chart";
-import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
 
 export default function Charts({ data } : { data: Holding[] }) {
   return (

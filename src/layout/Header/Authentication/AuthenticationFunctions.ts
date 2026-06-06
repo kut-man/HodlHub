@@ -1,10 +1,10 @@
-import {
+import type {
   ErrorResponse,
   LoginFields,
   LoginResponse,
   RegisterFields,
   VerifyEmailFields,
-} from "../HeaderTypes";
+} from "../HeaderTypes"
 import { LOGIN_URL, REGISTER_URL, VERIFY_URL } from "@/lib/api";
 
 export const loginUser = async (

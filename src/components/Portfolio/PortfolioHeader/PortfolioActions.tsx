@@ -1,4 +1,4 @@
-import { BsThreeDots } from "react-icons/bs";
+// import { BsThreeDots } from "react-icons/bs";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -16,7 +16,7 @@ export function PortfolioActions() {
     <Popover onOpenChange={(open) => setOpenPopover(open)} open={openPopover}>
       <PopoverTrigger asChild>
         <Button data-testid="portfolio-actions-menu-trigger" variant="outline">
-          <BsThreeDots />
+          {/*<BsThreeDots />*/}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-52 p-1 flex flex-col gap-1">

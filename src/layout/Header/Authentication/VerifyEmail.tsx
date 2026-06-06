@@ -16,7 +16,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { LoginFields, VerifyEmailFields } from "../HeaderTypes";
+import type { LoginFields, VerifyEmailFields } from "../HeaderTypes"
 import { verifyEmail } from "./AuthenticationFunctions";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";

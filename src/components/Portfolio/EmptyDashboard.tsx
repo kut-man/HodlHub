@@ -1,4 +1,4 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import PortfolioDialog from "./PortfolioDialog/PortfolioDialog";
 
 export default function EmptyDashboard() {

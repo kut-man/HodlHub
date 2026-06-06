@@ -1,4 +1,4 @@
-import { AvatarValues } from "../PortfolioDialog/AvatarAssets";
+import type { AvatarValues } from "../PortfolioDialog/AvatarAssets"
 
 type PortfolioIconProps = AvatarValues & {
   size?: "small" | "medium" | "large";

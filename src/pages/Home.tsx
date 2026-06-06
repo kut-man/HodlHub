@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import AuthenticationDialog from "@/layout/Header/Authentication/AuthenticationDialog";
 import { AuthAction } from "@/layout/Header/HeaderTypes";
 import { useAuthContext } from "@/lib/useAuthContext";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

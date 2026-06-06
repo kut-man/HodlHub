@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { Flex } from "@tremor/react";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { avatarUrls } from "./AvatarAssets";
 import { CloudUpload } from "lucide-react";
+import Flex from "@/components/ui/flex.tsx"
 
 export function ChangeAvatar({
   changeProfileAvatar,

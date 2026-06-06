@@ -9,11 +9,11 @@ import {
 import { useContext, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import PortfolioItem from "./PortfolioItem";
-import { PortfolioListProps } from "./PortfolioList";
+import type { PortfolioListProps } from "./PortfolioList"
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import { GlobalContext } from "@/pages/Portfolio";
 import { Button } from "@/components/ui/button";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import PortfolioIcon from "./PortfolioIcon";
 import { Label } from "@/components/ui/label";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";

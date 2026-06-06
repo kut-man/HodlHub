@@ -1,5 +1,5 @@
-import { FaMoon } from "react-icons/fa";
-import { HiSun } from "react-icons/hi";
+// import { FaMoon } from "react-icons/fa";
+// import { HiSun } from "react-icons/hi";
 import { useTheme } from "./Theme";
 import Logo from "./Logo";
 import AccountActions from "./AccountActions";
@@ -27,7 +27,7 @@ export default function Header() {
                 setTheme(theme === "light" ? "dark" : "light")
               }
             >
-              {theme === "dark" ? <HiSun size={25} /> : <FaMoon size={20} />}
+              {/*{theme === "dark" ? <HiSun size={25} /> : <FaMoon size={20} />}*/}
             </Toggle>
 
             {isLoggedIn ? (

@@ -8,7 +8,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { COIN_URL } from "@/lib/api";
-import { ApiResponse } from "@/lib/AuthContextProvider";
+import type { ApiResponse } from "@/lib/AuthContextProvider"
 import { useQuery } from "@tanstack/react-query";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";

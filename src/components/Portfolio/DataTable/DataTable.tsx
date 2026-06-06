@@ -1,13 +1,13 @@
 import { useState, useMemo } from "react";
 import { columns } from "./DataTableColumns";
 import {
-  SortingState,
-  VisibilityState,
+  type SortingState,
+  type VisibilityState,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from "@tanstack/react-table"
 import {
   Table,
   TableBody,
@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces"
 import { mapHoldingsToAssetsInfo } from "./mapHoldingsToAssetsInfo";
 
 export function DataTable({ data }: { data: Holding[] }) {

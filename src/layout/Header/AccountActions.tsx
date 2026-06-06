@@ -4,7 +4,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";

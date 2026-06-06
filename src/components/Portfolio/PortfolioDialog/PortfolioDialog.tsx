@@ -8,8 +8,8 @@ import {
 import { ChangeAvatar } from "./ChangeAvatar";
 import { UpsertPortfolio } from "./UpsertPortfolio";
 import { useContext, useState } from "react";
-import { GoArrowLeft } from "react-icons/go";
-import { avatarBackground, AvatarValues, emojis } from "./AvatarAssets";
+// import { GoArrowLeft } from "react-icons/go";
+import { avatarBackground, type AvatarValues, emojis } from "./AvatarAssets";
 import { Pencil, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlobalContext } from "@/pages/Portfolio";
@@ -78,7 +78,7 @@ export default function PortfolioDialog({
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
               <>
-                <GoArrowLeft onClick={changeCurrentDialogPage} />
+                {/*<GoArrowLeft onClick={changeCurrentDialogPage} />*/}
                 Change Avatar
               </>
             ) : editPortfolio ? (

@@ -1,7 +1,7 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PortfolioIcon from "./PortfolioIcon";
-import { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces"
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";

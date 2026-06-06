@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Transaction } from "./TransactionCard";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { Transaction } from "./TransactionCard"
+import type { FieldErrors, UseFormRegister } from "react-hook-form"
 
 type TransactionCardInputsProps = {
   register: UseFormRegister<Transaction>;

@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { type ReactNode, createContext, useEffect, useState } from "react";
 import { USER_URL } from "./api";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";

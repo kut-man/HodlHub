@@ -1,4 +1,4 @@
-import { Flex } from "@tremor/react";
+import Flex from "@/components/ui/flex.tsx";
 import AddTransactionDialog from "./PortfolioHeader/AddTransactionDialog";
 
 export default function EmptyTransaction() {

@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
-import {
-  NameType,
-  Payload,
-  ValueType,
+import type {
+    NameType,
+    Payload,
+    ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { TooltipContentProps } from "recharts/types/component/Tooltip";
+import type { TooltipContentProps } from "recharts/types/component/Tooltip";
 
 import { cn } from "@/lib/utils";
 

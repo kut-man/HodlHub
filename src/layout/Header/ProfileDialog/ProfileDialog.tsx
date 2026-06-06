@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { EditProfile } from "./EditProfile";
 import { useState } from "react";
-import { GoArrowLeft } from "react-icons/go";
+// import { GoArrowLeft } from "react-icons/go";
 import { Button } from "@/components/ui/button";
 import { ChangeAvatar } from "./ChangeAvatar";
 import { useAuthContext } from "@/lib/useAuthContext";
@@ -57,7 +57,7 @@ export default function ProfileDialog({
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
               <>
-                <GoArrowLeft onClick={changeCurrentDialogPage} />
+                {/*<GoArrowLeft onClick={changeCurrentDialogPage} />*/}
                 Change Avatar
               </>
             ) : (

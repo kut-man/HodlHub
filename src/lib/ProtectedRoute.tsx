@@ -1,4 +1,4 @@
-import { PropsWithChildren, useLayoutEffect } from "react";
+import { type PropsWithChildren, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "./useAuthContext";

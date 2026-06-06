@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Theme, ThemeProviderProps } from "./HeaderTypes";
+import type { Theme, ThemeProviderProps } from "./HeaderTypes";
 import { ThemeProviderContext } from "./Theme";
 
 export function ThemeProvider({

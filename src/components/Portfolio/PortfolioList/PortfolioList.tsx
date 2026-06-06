@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import PortfolioItem from "./PortfolioItem";
-import { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces"
 import { GlobalContext } from "@/pages/Portfolio";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

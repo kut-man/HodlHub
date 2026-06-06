@@ -2,8 +2,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginFields } from "../HeaderTypes";
+import { type SubmitHandler, useForm } from "react-hook-form"
+import type { LoginFields } from "../HeaderTypes"
 import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
