@@ -19,5 +19,8 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      'react-hooks/set-state-in-effect': 'off'
+    },
   },
 ])

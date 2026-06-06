@@ -35,15 +35,15 @@ export type CustomTooltipProps = TooltipContentProps<ValueType, NameType> & {
   nameKey?: string;
   labelKey?: string;
   labelFormatter?: (
-    label: TooltipContentProps<number, string>["label"],
-    payload: TooltipContentProps<number, string>["payload"]
+      label: TooltipContentProps<ValueType, NameType>["label"],
+      payload: TooltipContentProps<ValueType, NameType>["payload"]
   ) => React.ReactNode;
   formatter?: (
-    value: number | string,
-    name: string,
-    item: Payload<number | string, string>,
-    index: number,
-    payload: ReadonlyArray<Payload<number | string, string>>
+      value: ValueType,
+      name: NameType,
+      item: Payload<ValueType, NameType>,
+      index: number,
+      payload: ReadonlyArray<Payload<ValueType, NameType>>
   ) => React.ReactNode;
   labelClassName?: string;
   color?: string;
