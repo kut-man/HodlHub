@@ -159,14 +159,7 @@ export default function TransactionCard({
           size="lg"
           disabled={isPending}
         >
-          {isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
-          ) : (
-            "Add Transaction"
-          )}
+          {isPending ? <Loader2 className="animate-spin" /> : "Add Transaction"}
         </Button>
       </CardFooter>
     </Card>

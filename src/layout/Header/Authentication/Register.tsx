@@ -63,127 +63,120 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
 
   return (
     <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              {...register("name", {
-                required: "Name is required!",
-                minLength: {
-                  value: 2,
-                  message: "Name should be at least 6 characters!",
-                },
-              })}
-              id="name"
-              type="text"
-              autoFocus
-            />
-            {errors.name && (
-              <p className="font-normal text-red-600">
-                *{errors.name.message}
-              </p>
-            )}
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              {...register("email", {
-                required: "Email is required!",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address!",
-                },
-              })}
-              id="email"
-              type="email"
-            />
-            {errors.email && (
-              <p className="font-normal text-red-600">
-                *{errors.email.message}
-              </p>
-            )}
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              {...register("password", {
-                required: "Password is required!",
-                minLength: {
-                  value: 8,
-                  message: "Password should be at least 8 characters!",
-                },
-                pattern: {
-                  value: /^(?=.*\d).*$/,
-                  message: "Password must contain at least one number!",
-                },
-              })}
-              id="password"
-              type="password"
-            />
-            {errors.password && (
-              <p className="font-normal text-red-600">
-                *{errors.password.message}
-              </p>
-            )}
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="repeatPassword">Repeat Password</Label>
-            <Input
-              {...register("repeatPassword", {
-                required: "Repeat Password is required!",
-                validate: (val: string) => {
-                  if (watch("password") != val) {
-                    return "Your passwords do no match!";
-                  }
-                },
-              })}
-              id="repeatPassword"
-              type="password"
-            />
-            {errors.repeatPassword && (
-              <p className="font-normal text-red-600">
-                *{errors.repeatPassword.message}
-              </p>
-            )}
-          </div>
-        </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          {registrationError ? (
+      <CardContent className="space-y-2">
+        <div className="space-y-1">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            {...register("name", {
+              required: "Name is required!",
+              minLength: {
+                value: 2,
+                message: "Name should be at least 6 characters!",
+              },
+            })}
+            id="name"
+            type="text"
+            autoFocus
+          />
+          {errors.name && (
+            <p className="font-normal text-red-600">*{errors.name.message}</p>
+          )}
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            {...register("email", {
+              required: "Email is required!",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address!",
+              },
+            })}
+            id="email"
+            type="email"
+          />
+          {errors.email && (
+            <p className="font-normal text-red-600">*{errors.email.message}</p>
+          )}
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            {...register("password", {
+              required: "Password is required!",
+              minLength: {
+                value: 8,
+                message: "Password should be at least 8 characters!",
+              },
+              pattern: {
+                value: /^(?=.*\d).*$/,
+                message: "Password must contain at least one number!",
+              },
+            })}
+            id="password"
+            type="password"
+          />
+          {errors.password && (
             <p className="font-normal text-red-600">
-              *{registrationError}
-            </p>
-          ) : (
-            <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
-              This site is protected by reCAPTCHA and the Google
-              <a
-                href="https://policies.google.com/privacy"
-                className="text-blue-600 hover:underline"
-              >
-                Privacy Policy
-              </a>
-              and
-              <a
-                href="https://policies.google.com/terms"
-                className="text-blue-600 hover:underline"
-              >
-                Terms of Service
-              </a>
-              apply.
+              *{errors.password.message}
             </p>
           )}
-          <Button disabled={isPending} className="w-full">
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </>
-            ) : (
-              "Create an account"
-            )}
-          </Button>
-        </CardFooter>
-      </form>
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="repeatPassword">Repeat Password</Label>
+          <Input
+            {...register("repeatPassword", {
+              required: "Repeat Password is required!",
+              validate: (val: string) => {
+                if (watch("password") != val) {
+                  return "Your passwords do no match!";
+                }
+              },
+            })}
+            id="repeatPassword"
+            type="password"
+          />
+          {errors.repeatPassword && (
+            <p className="font-normal text-red-600">
+              *{errors.repeatPassword.message}
+            </p>
+          )}
+        </div>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-4">
+        {registrationError ? (
+          <p className="font-normal text-red-600">*{registrationError}</p>
+        ) : (
+          <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
+            This site is protected by reCAPTCHA and the Google
+            <a
+              href="https://policies.google.com/privacy"
+              className="text-blue-600 hover:underline"
+            >
+              Privacy Policy
+            </a>
+            and
+            <a
+              href="https://policies.google.com/terms"
+              className="text-blue-600 hover:underline"
+            >
+              Terms of Service
+            </a>
+            apply.
+          </p>
+        )}
+        <Button
+          disabled={isPending}
+          className="w-full"
+          onClick={handleSubmit(onSubmit)}
+        >
+          {isPending ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            "Create an account"
+          )}
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

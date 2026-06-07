@@ -25,7 +25,7 @@ export default function Tile({
   profitLoss,
 }: PortfolioHeaderProps) {
   return (
-    <Card className="min-w-40 md:shadow-charts! justify-between border-x-0 border-t-0 shadow-none max-md:flex max-md:w-full max-md:rounded-none md:border-none dark:bg-white/20">
+    <Card className="gap-0 min-w-40 md:shadow-charts! justify-between border-x-0 border-t-0 shadow-none max-md:flex max-md:w-full max-md:rounded-none md:border-none dark:bg-white/20">
       <CardHeader>
         <CardDescription className="text-sm font-medium">
           {description}

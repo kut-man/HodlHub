@@ -86,9 +86,7 @@ export function UpsertPortfolio({
           <p className="font-normal text-red-600">*{error.message}</p>
         )}
         {errors.name && (
-          <p className="font-normal text-red-600">
-            *{errors.name.message}
-          </p>
+          <p className="font-normal text-red-600">*{errors.name.message}</p>
         )}
         <Button
           disabled={isPending || errors.name ? true : false}
@@ -98,10 +96,7 @@ export function UpsertPortfolio({
           data-testid="upsert-portfolio-button"
         >
           {isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
+            <Loader2 className="animate-spin" />
           ) : editPortfolio ? (
             "Save"
           ) : (

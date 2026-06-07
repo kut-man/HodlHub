@@ -24,10 +24,6 @@ export function DateTimePicker({
   date: Date;
   setDate: (date?: Date) => void;
 }) {
-  /**
-   * carry over the current time when a user clicks a new day
-   * instead of resetting to 00:00
-   */
   const handleSelect = (newDay: Date | undefined) => {
     if (!newDay) return;
     if (!date) {
@@ -76,7 +72,7 @@ export function DateTimePicker({
           {date ? format(date, "PPP HH:mm") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent sideOffset={-250} side="right" className="w-auto p-0">
+      <PopoverContent sideOffset={-250} side="right" className="w-auto">
         <Calendar
           mode="single"
           selected={date}

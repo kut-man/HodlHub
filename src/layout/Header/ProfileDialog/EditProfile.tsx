@@ -84,9 +84,7 @@ export function EditProfile({
           <p className="font-normal text-red-600">*{error.message}</p>
         )}
         {errors.name && (
-          <p className="font-normal text-red-600">
-            *{errors.name.message}
-          </p>
+          <p className="font-normal text-red-600">*{errors.name.message}</p>
         )}
         <Button
           disabled={isPending || errors.name ? true : false}
@@ -94,14 +92,7 @@ export function EditProfile({
           className="w-full"
           size="lg"
         >
-          {isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
-          ) : (
-            "Save"
-          )}
+          {isPending ? <Loader2 className="animate-spin" /> : "Save"}
         </Button>
       </DialogFooter>
     </>

@@ -77,17 +77,9 @@ export default function VerifyEmail({
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
         {verificationError && (
-          <p className="font-normal text-red-600">
-            *{verificationError}
-          </p>
+          <p className="font-normal text-red-600">*{verificationError}</p>
         )}
-
-        {isPending ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Please wait
-          </>
-        ) : null}
+        {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
       </CardFooter>
     </Card>
   );

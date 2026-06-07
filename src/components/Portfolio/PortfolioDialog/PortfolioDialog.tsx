@@ -77,7 +77,11 @@ export default function PortfolioDialog({
           <DialogTitle className="flex gap-4">
             {isAvatarDialogPage ? (
               <>
-                <ArrowLeft size={18} />
+                <ArrowLeft
+                  className="cursor-pointer"
+                  onClick={changeCurrentDialogPage}
+                  size={18}
+                />
                 Change Avatar
               </>
             ) : editPortfolio ? (

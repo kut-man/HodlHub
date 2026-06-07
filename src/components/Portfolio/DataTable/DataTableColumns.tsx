@@ -154,6 +154,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               variant="ghost"
               defaultSelectedCoinTicker={(row.getValue("name") as Coin).ticker}
               onClose={() => setOpenPopover(false)}
+              size="sm"
             />
             {/* <Button size="sm" className="justify-start" variant="ghost">
               <File size={18} className="mr-4" />

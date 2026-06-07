@@ -80,7 +80,7 @@ export function AllocationChart({ data }: { data: Holding[] }) {
             <Legend
               wrapperStyle={{
                 width: "100%",
-                color: "hsl(var(--card-foreground))",
+                color: "var(--card-foreground)",
               }}
               content={
                 <ChartLegendContent

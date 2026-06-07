@@ -34,70 +34,58 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
 
   return (
     <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              {...register("email", {
-                required: "Email is required!",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address!",
-                },
-              })}
-              id="email"
-              type="email"
-              autoFocus
-            />
-            {errors.email && (
-              <p className="font-normal text-red-600">
-                *{errors.email.message}
-              </p>
-            )}
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              {...register("password", {
-                required: "Password is required!",
-                minLength: {
-                  value: 6,
-                  message: "Password should be at least 6 characters!",
-                },
-              })}
-              id="password"
-              type="password"
-            />
-            {errors.password && (
-              <p className="font-normal text-red-600">
-                *{errors.password.message}
-              </p>
-            )}
-          </div>
-        </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          {loginError && (
-            <p className="font-normal break-all text-red-600">
-              *{loginError}
+      <CardContent className="space-y-2">
+        <div className="space-y-1">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            {...register("email", {
+              required: "Email is required!",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address!",
+              },
+            })}
+            id="email"
+            type="email"
+            autoFocus
+          />
+          {errors.email && (
+            <p className="font-normal text-red-600">*{errors.email.message}</p>
+          )}
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            {...register("password", {
+              required: "Password is required!",
+              minLength: {
+                value: 6,
+                message: "Password should be at least 6 characters!",
+              },
+            })}
+            id="password"
+            type="password"
+          />
+          {errors.password && (
+            <p className="font-normal text-red-600">
+              *{errors.password.message}
             </p>
           )}
-          <Button
-            data-testid="login-button"
-            disabled={isPending}
-            className="w-full"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </>
-            ) : (
-              "Log In"
-            )}
-          </Button>
-        </CardFooter>
-      </form>
+        </div>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-4">
+        {loginError && (
+          <p className="font-normal break-all text-red-600">*{loginError}</p>
+        )}
+        <Button
+          data-testid="login-button"
+          disabled={isPending}
+          className="w-full"
+          onClick={handleSubmit(onSubmit)}
+        >
+          {isPending ? <Loader2 className="animate-spin" /> : "Log In"}
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
