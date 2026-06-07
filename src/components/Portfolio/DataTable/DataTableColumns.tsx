@@ -9,7 +9,6 @@ import ProfitLossLabel from "../PerformanceTiles/Labels/ProfitLossLabel";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import PerformanceLabel from "../PerformanceTiles/Labels/PerformanceLabel";
 import SortableHeaderHOF from "./SortButton";
-import { Label } from "@/components/ui/label";
 import AddTransactionDialog from "../PortfolioHeader/AddTransactionDialog";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import type { AssetsInfo, Coin } from "./DataTableInterfaces";
@@ -49,12 +48,12 @@ export const columns: ColumnDef<AssetsInfo>[] = [
           src={(row.getValue("name") as Coin).iconURL}
         />
         <div className="flex gap-2 max-md:flex-col md:items-center">
-          <Label className="font-semibold">
+          <span className="font-semibold">
             {(row.getValue("name") as Coin).name}
-          </Label>
-          <Label className="text-gray-500">
+          </span>
+          <span className="text-gray-500">
             {(row.getValue("name") as Coin).ticker}
-          </Label>
+          </span>
         </div>
       </div>
     ),

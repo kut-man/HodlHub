@@ -34,9 +34,9 @@ export default function TransactionCardInputs({
           className="col-span-3"
         />
         {errors.amount && (
-          <Label className="font-normal text-red-600">
+          <p className="font-normal text-red-600">
             *{errors.amount.message}
-          </Label>
+          </p>
         )}
       </div>
       <div className="w-1/2">
@@ -59,9 +59,9 @@ export default function TransactionCardInputs({
           className="col-span-3"
         />
         {errors.pricePerCoin && (
-          <Label className="font-normal text-red-600">
+          <p className="font-normal text-red-600">
             *{errors.pricePerCoin.message}
-          </Label>
+          </p>
         )}
       </div>
     </div>

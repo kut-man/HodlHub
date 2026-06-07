@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import Flex from "@/components/ui/flex.tsx";
-import { Label } from "@/components/ui/label";
 import { emojis, avatarBackground } from "./AvatarAssets";
 import { useReducer } from "react";
 import {
@@ -65,9 +64,9 @@ export function ChangeAvatar({
           ))}
         </Flex>
         <div className="mt-6 w-full">
-          <Label className="text-gray-500">
+          <p className="text-gray-500">
             How are you feeling about this portfolio?
-          </Label>
+          </p>
           <div className="flex flex-wrap justify-between gap-y-6">
             {emojis.map((emoji) => (
               <span

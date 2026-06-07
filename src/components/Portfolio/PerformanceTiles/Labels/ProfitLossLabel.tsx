@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
@@ -26,10 +25,10 @@ export default function ProfitLossLabel({
     return "+ " + formattedNumber;
   }
   return (
-    <Label
+    <span
       className={`text-${profitLoss >= 0 ? "green" : "red"}-500 ${className}`}
     >
       {formatCurrency()}
-    </Label>
+    </span>
   );
 }

@@ -18,7 +18,6 @@ import TransactionTypes from "../TransactionTypesEnum";
 import { GlobalContext } from "@/pages/Portfolio";
 import { TRANSACTION_URL } from "@/lib/api";
 import type { ErrorResponse } from "@/layout/Header/HeaderTypes";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 type TransactionCardProps = {
@@ -152,7 +151,7 @@ export default function TransactionCard({
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
         {isError && (
-          <Label className="font-normal text-red-600">*{error.message}</Label>
+          <p className="font-normal text-red-600">*{error.message}</p>
         )}
         <Button
           onClick={handleAddTransaction}

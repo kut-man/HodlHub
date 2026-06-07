@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 import CaretUp from "@/components/Portfolio/PerformanceTiles/Icons/CaretUp.tsx";
@@ -30,13 +29,13 @@ export default function PerformanceLabel({
       ) : (
         <CaretDown width={12} fill="var(--color-red-500)" />
       )}
-      <Label
+      <span
         className={`text-sm ${
           performance >= 0 ? "text-green-500" : "text-red-500"
         } ${className}`}
       >
         {formatAsPercentage()}
-      </Label>
+      </span>
     </div>
   );
 }

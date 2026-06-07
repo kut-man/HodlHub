@@ -5,7 +5,6 @@ import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInte
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { GlobalContext } from "@/pages/Portfolio";
-import { Label } from "@/components/ui/label";
 
 export default function PortfolioItem({
   id,
@@ -28,11 +27,11 @@ export default function PortfolioItem({
       <Flex justifyContent="start">
         <PortfolioIcon color={color} avatar={avatar} />
         <Flex justifyContent="start" alignItems="start" flexDirection="col">
-          <Label className="cursor-pointer text-left leading-2 text-base">
+          <span className="cursor-pointer text-left text-base">
             {name}
-          </Label>
+          </span>
           <BalanceLabel
-            className="cursor-pointer text-left leading-2 font-normal text-gray-500"
+            className="cursor-pointer text-left font-normal text-gray-500"
             balance={totalAmount}
           />
         </Flex>

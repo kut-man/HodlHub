@@ -7,7 +7,6 @@ import {
   DialogTrigger,
 } from "../../ui/dialog";
 import { useContext, useEffect, useState } from "react";
-import { Label } from "@/components/ui/label";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
 import type { ErrorResponse } from "@/layout/Header/HeaderTypes";
@@ -90,10 +89,10 @@ export default function RemoveAssetDialog({
         </VisuallyHidden.Root>
         <TriangleAlert color="rgb(234, 57, 67)" size={40} />
 
-        <Label className="text-xl">{`Remove ${assetTicker}?`}</Label>
-        <Label className="mb-4">
+        <p className="text-xl">{`Remove ${assetTicker}?`}</p>
+        <p className="mb-4">
           All transactions associated with this coin will be removed.
-        </Label>
+        </p>
         <Button
           disabled={isPending}
           className="w-full"
@@ -116,7 +115,7 @@ export default function RemoveAssetDialog({
         </DialogClose>
 
         {isError && (
-          <Label className="font-normal text-red-600">*{error.message}</Label>
+          <p className="font-normal text-red-600">*{error.message}</p>
         )}
       </DialogContent>
     </Dialog>

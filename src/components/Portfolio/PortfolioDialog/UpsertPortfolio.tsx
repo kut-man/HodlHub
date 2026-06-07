@@ -57,7 +57,7 @@ export function UpsertPortfolio({
   return (
     <>
       <div className="flex flex-col gap-4 py-4">
-        <Label>Portfolio Avatar</Label>
+        <p>Portfolio Avatar</p>
         <div className="mb-2 flex items-center justify-between">
           <PortfolioIcon
             size="large"
@@ -83,12 +83,12 @@ export function UpsertPortfolio({
       </div>
       <DialogFooter className="flex flex-col gap-6 sm:flex-col sm:space-x-0">
         {isError && (
-          <Label className="font-normal text-red-600">*{error.message}</Label>
+          <p className="font-normal text-red-600">*{error.message}</p>
         )}
         {errors.name && (
-          <Label className="font-normal text-red-600">
+          <p className="font-normal text-red-600">
             *{errors.name.message}
-          </Label>
+          </p>
         )}
         <Button
           disabled={isPending || errors.name ? true : false}

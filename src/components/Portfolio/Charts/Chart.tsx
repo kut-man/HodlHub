@@ -38,7 +38,7 @@ export default function Chart(props: ChartProps) {
         "shadow-charts! w-full border-none dark:bg-white/20 " + props?.className
       }
     >
-      <CardHeader className="pt-4 pb-2">
+      <CardHeader>
         <CardTitle className="h-8 max-md:hidden">
           <Flex flexDirection="row" alignItems="center">
             {titles[chart]}{" "}
@@ -52,7 +52,7 @@ export default function Chart(props: ChartProps) {
             ) : null}
           </Flex>
         </CardTitle>
-        <Card className="p-1 md:hidden">
+        <Card className="flex-row p-1 md:hidden gap-0">
           {Object.keys(titles).map((title) => (
             <Button
               key={title}
@@ -66,7 +66,7 @@ export default function Chart(props: ChartProps) {
           ))}
         </Card>
       </CardHeader>
-      <CardContent className="flex flex-row items-end pb-4 text-green-500">
+      <CardContent className="flex flex-row items-end text-green-500">
         {chart === "area" ? (
           <HistoryChart interval={selectedTimeInterval} />
         ) : (

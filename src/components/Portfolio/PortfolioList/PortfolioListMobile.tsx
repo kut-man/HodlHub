@@ -15,7 +15,6 @@ import { GlobalContext } from "@/pages/Portfolio";
 import { Button } from "@/components/ui/button";
 import Flex from "@/components/ui/flex.tsx";
 import PortfolioIcon from "./PortfolioIcon";
-import { Label } from "@/components/ui/label";
 import BalanceLabel from "../PerformanceTiles/Labels/BalanceLabel";
 import { ChevronDown } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -67,11 +66,11 @@ export default function PortfolioListMobile({
                   alignItems="start"
                   flexDirection="col"
                 >
-                  <Label className="cursor-pointer text-left text-base leading-2">
+                  <span className="cursor-pointer text-left text-base">
                     {activePortfolio.name}
-                  </Label>
+                  </span>
                   <BalanceLabel
-                    className="cursor-pointer text-left leading-2 font-normal text-gray-500"
+                    className="cursor-pointer text-left font-normal text-gray-500"
                     balance={activePortfolio.totalAmount}
                   />
                 </Flex>

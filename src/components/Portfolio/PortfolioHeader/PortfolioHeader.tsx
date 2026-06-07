@@ -47,7 +47,7 @@ export default function PortfolioHeader({
             avatar={avatar}
             className="ml-0"
           />
-          <Label className="text-lg">{name}</Label>
+          <span className="text-lg">{name}</span>
         </Flex>
         <Flex
           className="cursor-pointer gap-2"

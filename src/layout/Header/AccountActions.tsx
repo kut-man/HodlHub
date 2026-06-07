@@ -5,7 +5,6 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import Flex from "@/components/ui/flex.tsx";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { LOGOUT_URL } from "@/lib/api";
@@ -58,10 +57,10 @@ export default function AccountActions() {
             src={data.avatar}
           />
           <Flex justifyContent="start" alignItems="start" flexDirection="col">
-            <Label className="cursor-pointer text-left text-base leading-2">
+            <span className="cursor-pointer text-left text-base">
               Hi, {data.name}
-            </Label>
-            <Label>{data.email}</Label>
+            </span>
+            <span>{data.email}</span>
           </Flex>
         </Flex>
         <Separator orientation="horizontal" />

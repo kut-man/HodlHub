@@ -80,9 +80,9 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               autoFocus
             />
             {errors.name && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.name.message}
-              </Label>
+              </p>
             )}
           </div>
           <div className="space-y-1">
@@ -99,9 +99,9 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               type="email"
             />
             {errors.email && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.email.message}
-              </Label>
+              </p>
             )}
           </div>
           <div className="space-y-1">
@@ -122,9 +122,9 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               type="password"
             />
             {errors.password && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.password.message}
-              </Label>
+              </p>
             )}
           </div>
           <div className="space-y-1">
@@ -142,17 +142,17 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
               type="password"
             />
             {errors.repeatPassword && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.repeatPassword.message}
-              </Label>
+              </p>
             )}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           {registrationError ? (
-            <Label className="font-normal text-red-600">
+            <p className="font-normal text-red-600">
               *{registrationError}
-            </Label>
+            </p>
           ) : (
             <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
               This site is protected by reCAPTCHA and the Google

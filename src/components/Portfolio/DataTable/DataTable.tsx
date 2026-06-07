@@ -42,10 +42,10 @@ export function DataTable({ data }: { data: Holding[] }) {
   });
   return (
     <Card className="mb-6 w-full border-none shadow-none">
-      <CardHeader className="px-4 pt-4 pb-2">
+      <CardHeader>
         <CardTitle>Assets</CardTitle>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

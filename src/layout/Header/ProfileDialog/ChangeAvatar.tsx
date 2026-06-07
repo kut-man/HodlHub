@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
 import { avatarUrls } from "./AvatarAssets";
@@ -17,11 +16,11 @@ export function ChangeAvatar({
   const [avatar, setAvatar] = useState(avatarUrl);
   return (
     <>
-      <Label className="text-gray-500">
+      <p className="text-gray-500">
         Let's face it, we're all good lookin' people 😎 so upload your best
         profile photo. You can also redeem avatars from our Rewards page.
-      </Label>
-      <Label>Custom Avatar</Label>
+      </p>
+      <p>Custom Avatar</p>
       <Flex className="gap-8" flexDirection="col">
         <Flex className="items-center justify-start gap-4">
           <AvatarWithSkeleton

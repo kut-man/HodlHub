@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -78,9 +77,9 @@ export default function VerifyEmail({
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
         {verificationError && (
-          <Label className="font-normal text-red-600">
+          <p className="font-normal text-red-600">
             *{verificationError}
-          </Label>
+          </p>
         )}
 
         {isPending ? (

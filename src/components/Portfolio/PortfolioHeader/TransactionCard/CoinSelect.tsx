@@ -12,7 +12,6 @@ import type { ApiResponse } from "@/lib/AuthContextProvider";
 import { useQuery } from "@tanstack/react-query";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import AvatarWithSkeleton from "@/components/ui/AvatarWithSkeleton";
-import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLayoutEffect, useState } from "react";
@@ -86,9 +85,9 @@ export function CoinSelect({
                   className="mr-2 h-6 w-6"
                 />
                 {selectedItem.name}
-                <Label className="ml-2 text-slate-400">
+                <span className="ml-2 text-slate-400">
                   {selectedItem.ticker}
-                </Label>
+                </span>
               </div>
             );
           } else {
@@ -152,7 +151,7 @@ export function CoinSelect({
                     className="mr-2 h-8 w-8"
                   ></AvatarWithSkeleton>
                   {coin.name}
-                  <Label className="ml-2 text-slate-400">{coin.ticker}</Label>
+                  <span className="ml-2 text-slate-400">{coin.ticker}</span>
                 </CommandItem>
               ))}
         </CommandGroup>

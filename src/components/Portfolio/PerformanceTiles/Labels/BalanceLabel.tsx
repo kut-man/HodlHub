@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
@@ -23,5 +22,5 @@ export default function BalanceLabel({
 
     return formattedNumber;
   }
-  return <Label className={className}>{formatCurrency()}</Label>;
+  return <span className={className}>{formatCurrency()}</span>;
 }

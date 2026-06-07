@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import { GlobalContext } from "@/pages/Portfolio";
 import { useContext } from "react";
 
@@ -16,8 +15,8 @@ export default function AmountLabel({
   const { privacy } = useContext(GlobalContext);
 
   return (
-    <Label className={className}>
+    <span className={className}>
       {!privacy && hidable ? "*****" : amount}
-    </Label>
+    </span>
   );
 }

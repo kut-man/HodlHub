@@ -51,9 +51,9 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
               autoFocus
             />
             {errors.email && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.email.message}
-              </Label>
+              </p>
             )}
           </div>
           <div className="space-y-1">
@@ -70,17 +70,17 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
               type="password"
             />
             {errors.password && (
-              <Label className="font-normal text-red-600">
+              <p className="font-normal text-red-600">
                 *{errors.password.message}
-              </Label>
+              </p>
             )}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           {loginError && (
-            <Label className="font-normal break-all text-red-600">
+            <p className="font-normal break-all text-red-600">
               *{loginError}
-            </Label>
+            </p>
           )}
           <Button
             data-testid="login-button"
