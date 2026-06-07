@@ -1,15 +1,21 @@
-import { add, format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { add, format, set } from "date-fns";
+import { Calendar as CalendarIcon, Clock2Icon } from "lucide-react";
+import React from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { TimePickerDemo } from "./time-picker-demo";
+import { Calendar } from "@/components/ui/calendar.tsx";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field.tsx";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group.tsx";
 
 export function DateTimePicker({
   date,
@@ -34,6 +40,28 @@ export function DateTimePicker({
     setDate(newDateFull);
   };
 
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const timeString = e.target.value;
+    if (!timeString) return;
+
+    const [hours, minutes] = timeString.split(":").map(Number);
+
+    const baseDate = date || new Date();
+
+    const updatedDate = set(baseDate, {
+      hours: hours || 0,
+      minutes: minutes || 0,
+      seconds: 0,
+      milliseconds: 0,
+    });
+
+    setDate(updatedDate);
+  };
+
+  const timeInputValue = date
+    ? format(date, "HH:mm")
+    : format(new Date(), "HH:mm");
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -53,12 +81,26 @@ export function DateTimePicker({
           mode="single"
           selected={date}
           onSelect={(d) => handleSelect(d)}
-          initialFocus
           disabled={{ after: new Date() }}
+          className="p-0"
         />
-        <div className="border-t border-border p-3">
-          <TimePickerDemo setDate={setDate} date={date} />
-        </div>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="time-from">Time</FieldLabel>
+            <InputGroup>
+              <InputGroupInput
+                onChange={handleTimeChange}
+                value={timeInputValue}
+                id="time-from"
+                type="time"
+                className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+              />
+              <InputGroupAddon>
+                <Clock2Icon className="text-muted-foreground" />
+              </InputGroupAddon>
+            </InputGroup>
+          </Field>
+        </FieldGroup>
       </PopoverContent>
     </Popover>
   );
