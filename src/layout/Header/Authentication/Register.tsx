@@ -147,22 +147,22 @@ export default function Register({ onRegister }: { onRegister: () => void }) {
         {registrationError ? (
           <p className="font-normal text-red-600">*{registrationError}</p>
         ) : (
-          <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
-            This site is protected by reCAPTCHA and the Google
+          <p className="text-center text-xs leading-relaxed text-slate-500">
+            {"This site is protected by reCAPTCHA and the Google "}
             <a
               href="https://policies.google.com/privacy"
               className="text-blue-600 hover:underline"
             >
               Privacy Policy
             </a>
-            and
+            {" and "}
             <a
               href="https://policies.google.com/terms"
               className="text-blue-600 hover:underline"
             >
               Terms of Service
             </a>
-            apply.
+            {" apply."}
           </p>
         )}
         <Button
