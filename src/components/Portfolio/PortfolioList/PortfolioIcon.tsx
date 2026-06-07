@@ -19,7 +19,8 @@ export default function PortfolioIcon({
 }: PortfolioIconProps) {
   return (
     <div
-      className={`${sizeClasses[size]} m-2 flex aspect-square items-center justify-center rounded-full bg-${color}-500 ${className}`}
+      style={{ backgroundColor: color }}
+      className={`${sizeClasses[size]} m-2 flex aspect-square items-center justify-center rounded-full ${className}`}
     >
       <span>{avatar}</span>
     </div>

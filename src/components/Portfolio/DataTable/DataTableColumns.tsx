@@ -142,7 +142,7 @@ export const columns: ColumnDef<AssetsInfo>[] = [
               <Ellipsis size={18} />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="flex w-52 flex-col gap-1 p-1">
+          <PopoverContent className="flex w-auto flex-col gap-1 p-1">
             <AddTransactionDialog
               label={
                 <>

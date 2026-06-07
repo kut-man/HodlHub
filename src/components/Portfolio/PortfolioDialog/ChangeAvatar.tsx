@@ -59,7 +59,8 @@ export function ChangeAvatar({
                 })
               }
               data-selected={state.selectedColor === color}
-              className={`h-5 w-5 bg-${color}-600 rounded-full border-white hover:border-2 hover:outline-blue-500 hover:outline-solid data-[selected=true]:border-2 data-[selected=true]:outline-blue-500 data-[selected=true]:outline-solid`}
+              className={`h-5 w-5 rounded-full border-white hover:border-2 hover:outline-blue-500 hover:outline-solid data-[selected=true]:border-2 data-[selected=true]:outline-blue-500 data-[selected=true]:outline-solid`}
+              style={{ backgroundColor: color }}
             ></div>
           ))}
         </Flex>
