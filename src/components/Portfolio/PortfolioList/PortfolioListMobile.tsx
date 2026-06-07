@@ -7,7 +7,6 @@ import {
   DialogTrigger,
 } from "../../ui/dialog";
 import { useContext, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import PortfolioItem from "./PortfolioItem";
 import type { PortfolioListProps } from "./PortfolioList";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
@@ -86,23 +85,16 @@ export default function PortfolioListMobile({
           </DialogHeader>
 
           <ScrollArea className="h-96">
-            <Card
-              data-testid="portfolio-list-dialog"
-              className="h-full overflow-auto border-none shadow-none"
-            >
-              <CardContent className="flex flex-col gap-1 p-0">
-                {data.map((portfolio) => (
-                  <PortfolioItem
-                    onClick={() => {
-                      setIsDialogOpen(false);
-                      switchPortfolio(portfolio);
-                    }}
-                    key={portfolio.id}
-                    {...portfolio}
-                  />
-                ))}
-              </CardContent>
-            </Card>
+            {data.map((portfolio) => (
+              <PortfolioItem
+                onClick={() => {
+                  setIsDialogOpen(false);
+                  switchPortfolio(portfolio);
+                }}
+                key={portfolio.id}
+                {...portfolio}
+              />
+            ))}
           </ScrollArea>
 
           <DialogFooter>
