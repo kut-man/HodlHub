@@ -13,7 +13,13 @@ import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <>
+        <Header />
+        <Home />
+        <Footer />
+      </>
+    ),
   },
   {
     path: "portfolio",
@@ -35,9 +41,7 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <Header />
             <RouterProvider router={router} />
-            <Footer />
             <Toaster position="bottom-left" />
           </AuthProvider>
         </QueryClientProvider>

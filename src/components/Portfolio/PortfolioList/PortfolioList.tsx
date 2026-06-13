@@ -1,15 +1,17 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import PortfolioDialog from "../PortfolioDialog/PortfolioDialog";
 import PortfolioItem from "./PortfolioItem";
 import type { PortfolioListFields } from "../PortfolioDialog/PortfolioDialogInterfaces";
 import { GlobalContext } from "@/pages/Portfolio";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+} from "@/components/ui/sidebar.tsx";
 
 export interface PortfolioListProps {
   switchPortfolio: (portfolioValues: GlobalContext["portfolio"]) => void;
@@ -21,34 +23,31 @@ export default function PortfolioList({
   data,
 }: PortfolioListProps) {
   return (
-    <div style={{ position: "sticky", top: 0 }}>
-      <ScrollArea>
-        <Card
-          data-testid="portfolio-list-sidebar"
-          className="h-screen border-none shadow-none lg:min-w-[340px]"
-        >
-          <CardHeader>
-            <CardTitle className="text-lg">My portfolios</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-1 py-2">
-            {data.map((portfolio) => (
-              <PortfolioItem
-                onClick={switchPortfolio}
-                key={portfolio.id}
-                {...portfolio}
-              />
-            ))}
-          </CardContent>
+    <Sidebar collapsible="icon">
+      <SidebarHeader />
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Portfolios</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu className="gap-1">
+              {data.map((portfolio) => (
+                <PortfolioItem
+                  onClick={switchPortfolio}
+                  key={portfolio.id}
+                  {...portfolio}
+                />
+              ))}
 
-          <CardFooter className="text-blue-600">
-            <PortfolioDialog
-              className="h-fit p-0 text-base"
-              variant="ghost"
-              size="sm"
-            />
-          </CardFooter>
-        </Card>
-      </ScrollArea>
-    </div>
+              <PortfolioDialog
+                className="h-fit p-0 text-base"
+                variant="ghost"
+                size="sm"
+              />
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
   );
 }

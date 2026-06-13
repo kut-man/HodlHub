@@ -15,8 +15,7 @@ import { Loader2 } from "lucide-react";
 import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
 import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
 import type { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
-import PortfolioListMobile from "@/components/Portfolio/PortfolioList/PortfolioListMobile";
-import useBreakpoint from "@/lib/useBreakpoint";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export interface GlobalContext {
   privacy: boolean;
@@ -33,7 +32,6 @@ export default function Portfolio() {
   );
   const [portfolio, setPortfolio] = useState<GlobalContext["portfolio"]>();
   const [activePortfolio, setActivePortfolio] = useState<PortfolioFields>();
-  const { isTablet, isMobile } = useBreakpoint();
 
   const queryClient = useQueryClient();
 
@@ -132,51 +130,47 @@ export default function Portfolio() {
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
         ) : portfolioListData?.data?.length ? (
-          <>
-            {isTablet || isMobile ? (
-              <PortfolioListMobile
-                data={portfolioListData.data}
-                switchPortfolio={switchPortfolio}
-              />
-            ) : (
-              <PortfolioList
-                data={portfolioListData.data}
-                switchPortfolio={switchPortfolio}
-              />
-            )}
+          <SidebarProvider>
+            <PortfolioList
+              data={portfolioListData.data}
+              switchPortfolio={switchPortfolio}
+            />
 
-            <Flex
-              className="mt-6 w-full gap-8 overflow-auto px-6"
-              alignItems="start"
-              flexDirection="col"
-            >
-              {!activePortfolio || portfolio?.id !== activePortfolio.id ? (
-                <div className="flex h-[calc(100vh-173.8px)] w-full items-center justify-center">
-                  <Loader2 className="h-8 w-8 animate-spin" />
-                </div>
-              ) : activePortfolio.holdings ? (
-                <>
-                  <PortfolioInsights
-                    data={activePortfolio}
-                    changeVisibility={changeVisibility}
-                  />
-                  <DataTable data={activePortfolio.holdings} />
-                </>
-              ) : (
-                <>
-                  <PortfolioHeader
-                    isEmptyPortfolio={true}
-                    changeVisibility={changeVisibility}
-                    totalAmount={0}
-                    valueChange24h={0}
-                    valueChangePercentage24h={0}
-                  />
+            <main className="w-full">
+              <SidebarTrigger />
+              <Flex
+                className="mt-6 w-full gap-8 overflow-auto px-6"
+                alignItems="start"
+                flexDirection="col"
+              >
+                {!activePortfolio || portfolio?.id !== activePortfolio.id ? (
+                  <div className="flex h-[calc(100vh-173.8px)] w-full items-center justify-center">
+                    <Loader2 className="h-8 w-8 animate-spin" />
+                  </div>
+                ) : activePortfolio.holdings ? (
+                  <>
+                    <PortfolioInsights
+                      data={activePortfolio}
+                      changeVisibility={changeVisibility}
+                    />
+                    <DataTable data={activePortfolio.holdings} />
+                  </>
+                ) : (
+                  <>
+                    <PortfolioHeader
+                      isEmptyPortfolio={true}
+                      changeVisibility={changeVisibility}
+                      totalAmount={0}
+                      valueChange24h={0}
+                      valueChangePercentage24h={0}
+                    />
 
-                  <EmptyTransaction />
-                </>
-              )}
-            </Flex>
-          </>
+                    <EmptyTransaction />
+                  </>
+                )}
+              </Flex>
+            </main>
+          </SidebarProvider>
         ) : (
           <EmptyDashboard />
         )}
