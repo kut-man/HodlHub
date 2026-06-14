@@ -9,11 +9,11 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { Loader2, Trash2, TriangleAlert } from "lucide-react";
 import { PORTFOLIO_URL } from "@/lib/api";
-import type { ErrorResponse } from "@/layout/header/header-types";
 import { GlobalContext } from "@/pages/portfolio";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import type { ErrorResponse } from "@/components/home/header/header-types.ts";
 
 const removeAsset = async (portfolioId: number, assetTicker: string) => {
   const response = await fetch(

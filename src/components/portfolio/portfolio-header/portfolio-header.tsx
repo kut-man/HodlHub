@@ -33,7 +33,7 @@ export default function PortfolioHeader({
   const { privacy, portfolio } = useContext(GlobalContext);
   const { color, avatar, name } = portfolio as AvatarValues & { name: string };
   return (
-    <Flex className="flex-col items-start sm:flex-row sm:items-center">
+    <Flex style={{border: "1px solid red"}} className="flex-col items-start sm:flex-row sm:items-center">
       <div>
         <Flex
           className="max-md:hidden"

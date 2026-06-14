@@ -17,8 +17,8 @@ import TransactionCardInputs from "./transaction-card-inputs";
 import TransactionTypes from "../transaction-types-enum";
 import { GlobalContext } from "@/pages/portfolio";
 import { TRANSACTION_URL } from "@/lib/api";
-import type { ErrorResponse } from "@/layout/header/header-types";
 import { toast } from "sonner";
+import type { ErrorResponse } from "@/components/home/header/header-types.ts";
 
 type TransactionCardProps = {
   type: TransactionTypes;

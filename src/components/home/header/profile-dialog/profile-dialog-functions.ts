@@ -1,6 +1,6 @@
-import type { ErrorResponse } from "@/layout/header/header-types";
 import { USER_URL } from "@/lib/api";
 import type { Holder } from "@/lib/auth-context-provider";
+import type { ErrorResponse } from "../header-types.ts";
 
 export const editProfileAsync = async (data: Holder) => {
   const response = await fetch(USER_URL, {

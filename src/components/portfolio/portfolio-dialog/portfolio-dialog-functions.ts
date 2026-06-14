@@ -1,7 +1,7 @@
-import type { ErrorResponse } from "@/layout/header/header-types";
 import { PORTFOLIO_URL } from "@/lib/api";
 import type { Colors } from "./avatar-assets";
 import type { PortfolioFields } from "./portfolio-dialog-interfaces";
+import type { ErrorResponse } from "@/components/home/header/header-types.ts";
 
 export interface UpsertPortfolioAsyncProps {
   data: {
