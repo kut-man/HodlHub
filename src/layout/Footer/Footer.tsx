@@ -1,5 +1,5 @@
 import Flex from "@/components/ui/flex.tsx";
-import Logo from "../Header/Logo";
+import Logo from "../header/logo";
 import { Separator } from "@/components/ui/separator";
 
 const socialLinks = {

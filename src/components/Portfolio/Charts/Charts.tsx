@@ -1,6 +1,6 @@
 import Flex from "@/components/ui/flex.tsx";
-import Chart from "./Chart";
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
+import Chart from "./chart";
+import type { Holding } from "../portfolio-dialog/portfolio-dialog-interfaces";
 
 export default function Charts({ data }: { data: Holding[] }) {
   return (

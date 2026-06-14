@@ -6,9 +6,9 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import type { RegisterFields } from "../HeaderTypes";
-import { registerUser } from "./AuthenticationFunctions";
-import VerifyEmail from "./VerifyEmail";
+import type { RegisterFields } from "../header-types";
+import { registerUser } from "./authentication-functions";
+import VerifyEmail from "./verify-email";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Register({ onRegister }: { onRegister: () => void }) {

@@ -1,20 +1,20 @@
 import Flex from "@/components/ui/flex.tsx";
-import PortfolioList from "@/components/Portfolio/PortfolioList/PortfolioList";
-import { DataTable } from "@/components/Portfolio/DataTable/DataTable";
+import PortfolioList from "@/components/portfolio/portfolio-list/portfolio-list";
+import { DataTable } from "@/components/portfolio/data-table/data-table";
 import { useState, createContext, useEffect } from "react";
-import PortfolioInsights from "@/components/Portfolio/PortfolioInsights";
-import type { ApiResponse } from "@/lib/AuthContextProvider";
+import PortfolioInsights from "@/components/portfolio/portfolio-insights";
+import type { ApiResponse } from "@/lib/auth-context-provider";
 import type {
   PortfolioFields,
   PortfolioListFields,
-} from "@/components/Portfolio/PortfolioDialog/PortfolioDialogInterfaces";
+} from "@/components/portfolio/portfolio-dialog/portfolio-dialog-interfaces";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PORTFOLIO_URL } from "@/lib/api";
-import EmptyDashboard from "@/components/Portfolio/EmptyDashboard";
+import EmptyDashboard from "@/components/portfolio/empty-dashboard";
 import { Loader2 } from "lucide-react";
-import PortfolioHeader from "@/components/Portfolio/PortfolioHeader/PortfolioHeader";
-import EmptyTransaction from "@/components/Portfolio/EmptyTransaction";
-import type { AvatarValues } from "@/components/Portfolio/PortfolioDialog/AvatarAssets";
+import PortfolioHeader from "@/components/portfolio/portfolio-header/portfolio-header";
+import EmptyTransaction from "@/components/portfolio/empty-transaction";
+import type { AvatarValues } from "@/components/portfolio/portfolio-dialog/avatar-assets";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export interface GlobalContext {

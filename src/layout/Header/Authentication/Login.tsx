@@ -3,11 +3,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import type { LoginFields } from "../HeaderTypes";
+import type { LoginFields } from "../header-types";
 import { Loader2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { loginUser } from "./AuthenticationFunctions";
+import { loginUser } from "./authentication-functions";
 import { toast } from "sonner";
 
 export default function Login({ onLogin }: { onLogin: () => void }) {

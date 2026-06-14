@@ -1,0 +1,34 @@
+import { GlobalContext } from "@/pages/portfolio";
+import { useContext } from "react";
+
+interface ProfitLossLabelProps {
+  profitLoss: number;
+  className?: string;
+}
+
+export default function ProfitLossLabel({
+  profitLoss,
+  className = "",
+}: ProfitLossLabelProps) {
+  const { privacy } = useContext(GlobalContext);
+  function formatCurrency(number = profitLoss): string {
+    if (!privacy) return `${profitLoss >= 0 ? "+ " : "- "}****`;
+
+    const formattedNumber = number.toLocaleString(undefined, {
+      style: "currency",
+      currency: "USD",
+    });
+
+    if (formattedNumber.includes("+")) return `+ ${formattedNumber.slice(1)}`;
+    else if (formattedNumber.includes("-"))
+      return `- ${formattedNumber.slice(1)}`;
+    return "+ " + formattedNumber;
+  }
+  return (
+    <span
+      className={`text-${profitLoss >= 0 ? "green" : "red"}-500 ${className}`}
+    >
+      {formatCurrency()}
+    </span>
+  );
+}

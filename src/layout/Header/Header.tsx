@@ -1,8 +1,8 @@
-import { useTheme } from "./Theme";
-import Logo from "./Logo";
-import AccountActions from "./AccountActions";
-import Authentication from "./Authentication/Authentication";
-import { useAuthContext } from "@/lib/useAuthContext";
+import { useTheme } from "./theme";
+import Logo from "./logo";
+import AccountActions from "./account-actions";
+import Authentication from "./authentication/authentication";
+import { useAuthContext } from "@/lib/use-auth-context";
 import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
 import { Moon, Sun } from "lucide-react";

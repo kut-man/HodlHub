@@ -3,11 +3,11 @@ import Flex from "@/components/ui/flex.tsx";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
-import type { Holding } from "../PortfolioDialog/PortfolioDialogInterfaces";
-import TimeIntervalSelector from "./TimeIntervalSelector";
-import HistoryChart from "./HistoryChart";
-import { AllocationChart } from "./AllocationChart";
-import useBreakpoint from "@/lib/useBreakpoint";
+import type { Holding } from "../portfolio-dialog/portfolio-dialog-interfaces";
+import TimeIntervalSelector from "./time-interval-selector";
+import HistoryChart from "./history-chart";
+import { AllocationChart } from "./allocation-chart";
+import useBreakpoint from "@/lib/use-breakpoint";
 
 interface ChartProps {
   variant: "area" | "donut";

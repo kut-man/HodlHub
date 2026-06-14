@@ -1,8 +1,8 @@
-import InteractiveIcons from "@/components/Home/InteractiveIcons/InteractiveIcons";
+import InteractiveIcons from "@/components/home/interactive-icons/interactive-icons";
 import { Button } from "@/components/ui/button";
-import AuthenticationDialog from "@/layout/Header/Authentication/AuthenticationDialog";
-import { AuthAction } from "@/layout/Header/HeaderTypes";
-import { useAuthContext } from "@/lib/useAuthContext";
+import AuthenticationDialog from "@/layout/header/authentication/authentication-dialog";
+import { AuthAction } from "@/layout/header/header-types";
+import { useAuthContext } from "@/lib/use-auth-context";
 import Flex from "@/components/ui/flex.tsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

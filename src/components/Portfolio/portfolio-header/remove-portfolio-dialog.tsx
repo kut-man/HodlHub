@@ -1,0 +1,119 @@
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../../ui/dialog";
+import { useContext, useEffect, useState } from "react";
+import { Loader2, Trash2, TriangleAlert } from "lucide-react";
+import { PORTFOLIO_URL } from "@/lib/api";
+import type { ErrorResponse } from "@/layout/header/header-types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { GlobalContext } from "@/pages/portfolio";
+import { toast } from "sonner";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+
+const removePortfolio = async (portfolioId: number) => {
+  const response = await fetch(`${PORTFOLIO_URL}/${portfolioId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  if (!response.ok) {
+    const { message }: ErrorResponse = await response.json();
+    const errorMessage = message ? message : "Something went wrong!";
+    console.error("Failed to remove portfolio!");
+    throw Error(errorMessage);
+  }
+};
+
+export default function RemovePortfolioDialog({
+  onClose,
+  ...buttonProps
+}: {
+  onClose: () => void;
+} & React.ComponentProps<typeof Button>) {
+  const { portfolio } = useContext(GlobalContext) as {
+    portfolio: { id: number; name: string };
+  };
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending, error, isError, reset } = useMutation({
+    mutationFn: () => removePortfolio(portfolio.id),
+    onSuccess: () => {
+      onClose();
+      toast.success("Portfolio removed successfully!");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolio"] });
+    },
+  });
+
+  useEffect(() => {
+    return reset;
+  }, [open]);
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setIsDialogOpen(false);
+      if (onClose) {
+        onClose();
+      }
+    } else {
+      setIsDialogOpen(true);
+    }
+  };
+
+  return (
+    <Dialog onOpenChange={(open) => handleOpenChange(open)} open={isDialogOpen}>
+      <DialogTrigger asChild>
+        <Button
+          size="sm"
+          aria-label={`Remove Portfolio ${portfolio.name}`}
+          {...buttonProps}
+        >
+          <Trash2 size={18} className="mr-4" />
+          Remove
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="flex flex-col items-center gap-4 p-8 pt-12">
+        <VisuallyHidden.Root asChild>
+          <DialogTitle> Remove Portfolio </DialogTitle>
+        </VisuallyHidden.Root>
+        <TriangleAlert color="rgb(234, 57, 67)" size={40} />
+
+        <p className="text-xl">{`Remove ${portfolio.name} portfolio?`}</p>
+        <p className="mb-4">
+          All coins and transactions in this portfolio will be removed.
+        </p>
+        <Button
+          disabled={isPending}
+          className="w-full"
+          size="lg"
+          aria-label={`Remove Portfolio ${portfolio.name}`}
+          onClick={() => mutate()}
+        >
+          {isPending ? <Loader2 className="h-8 w-8 animate-spin" /> : "Remove"}
+        </Button>
+        <DialogClose className="w-full">
+          <Button
+            variant="secondary"
+            className="w-full"
+            size="lg"
+            aria-label={`Cancel Portfolio ${portfolio.name} removal`}
+            onClick={() => onClose()}
+          >
+            Cancel
+          </Button>
+        </DialogClose>
+
+        {isError && (
+          <p className="font-normal text-red-600">*{error.message}</p>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}

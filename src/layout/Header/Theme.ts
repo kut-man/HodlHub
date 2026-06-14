@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createContext } from "react";
-import type { ThemeProviderState } from "./HeaderTypes";
+import type { ThemeProviderState } from "./header-types";
 
 const initialState: ThemeProviderState = {
   theme: "system",

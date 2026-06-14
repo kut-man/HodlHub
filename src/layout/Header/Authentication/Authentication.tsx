@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Flex from "@/components/ui/flex.tsx";
 import { useState } from "react";
-import { AuthAction } from "../HeaderTypes";
-import AuthenticationDialog from "./AuthenticationDialog";
+import { AuthAction } from "../header-types";
+import AuthenticationDialog from "./authentication-dialog";
 
 export default function Authentication() {
   const [dialog, setDialog] = useState<{
